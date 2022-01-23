@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/appbar/appbar.dart';
+
+import 'appbar/appbar.dart';
+import 'sliders/sliders.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -7,7 +9,13 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [const Appbar(), Expanded(child: Stack())],
+      children: [
+        const Appbar(),
+        Expanded(
+            child: Stack(
+          children: [Sliders()],
+        ))
+      ],
     );
   }
 }
