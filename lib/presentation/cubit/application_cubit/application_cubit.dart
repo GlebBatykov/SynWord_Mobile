@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/update_screen_cubit/update_screen_cubit.dart';
+
+import '../page/update_screen_cubit/update_screen_cubit.dart';
 
 part 'application_state.dart';
 
