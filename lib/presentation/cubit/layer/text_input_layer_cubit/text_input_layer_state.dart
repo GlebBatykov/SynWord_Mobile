@@ -1,8 +1,21 @@
 part of 'text_input_layer_cubit.dart';
 
 @immutable
-abstract class TextInputLayerState {}
+class TextInputLayerState {
+  final Size size;
 
-class TextInputLayerEmpty extends TextInputLayerState {}
+  const TextInputLayerState(this.size);
+}
 
-class TextInputLayerNotEmpty extends TextInputLayerState {}
+class TextInputLyaerInitial extends TextInputLayerState {
+  const TextInputLyaerInitial(Size size) : super(size);
+}
+
+class TextInputLayerShow extends TextInputLayerState {
+  final TextInputLayerHeaderCubit headerCubit;
+
+  final TextInputLayerBodyCubit bodyCubit;
+
+  const TextInputLayerShow(Size size, this.headerCubit, this.bodyCubit)
+      : super(size);
+}

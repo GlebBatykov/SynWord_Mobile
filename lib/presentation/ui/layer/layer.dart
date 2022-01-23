@@ -29,7 +29,11 @@ class Layer extends StatelessWidget {
           ),
         );
       } else {
-        return Container();
+        return Container(
+            width: state.size.width,
+            height: state.size.height,
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(25)));
       }
     });
   }
