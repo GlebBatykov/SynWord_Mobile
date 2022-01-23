@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synword_flutter_cubit_application/presentation/cubit/update_screen_cubit/update_screen_cubit.dart';
 
 class UpdateScreen extends StatelessWidget {
   const UpdateScreen({Key? key}) : super(key: key);
@@ -35,26 +37,50 @@ class UpdateScreen extends StatelessWidget {
                     const Text(
                         'Synword recommends that you update to the last version.',
                         style: TextStyle(fontSize: 12, fontFamily: 'Cabrion')),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text('NOT NOW',
-                              style: TextStyle(
-                                  color: HexColor('#2D974D'),
-                                  fontSize: 14,
-                                  fontFamily: 'Roves-Sans-Reg-Rough')),
-                          style: ButtonStyle(
-                              padding:
-                                  MaterialStateProperty.all(EdgeInsets.zero),
-                              fixedSize:
-                                  MaterialStateProperty.all(const Size(88, 26)),
-                              elevation: MaterialStateProperty.all(0),
-                              backgroundColor: MaterialStateProperty.all(
-                                  Colors.transparent)),
-                        ),
-                        ElevatedButton(
+                    BlocBuilder<UpdateScreenCubit, UpdateScreenState>(
+                        builder: (context, state) {
+                      if (state is UpdateScreenUnforced) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text('NOT NOW',
+                                  style: TextStyle(
+                                      color: HexColor('#2D974D'),
+                                      fontSize: 14,
+                                      fontFamily: 'Roves-Sans-Reg-Rough')),
+                              style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      EdgeInsets.zero),
+                                  fixedSize: MaterialStateProperty.all(
+                                      const Size(88, 26)),
+                                  elevation: MaterialStateProperty.all(0),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.transparent)),
+                            ),
+                            ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('UPDATE',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: 'Roves-Sans-Reg-Rough')),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      HexColor('#2D974D'),
+                                    ),
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(2.5),
+                                    )),
+                                    fixedSize: MaterialStateProperty.all(
+                                        const Size(88, 26)),
+                                    elevation: MaterialStateProperty.all(0)))
+                          ],
+                        );
+                      } else if (state is UpdateScreenForced) {
+                        return ElevatedButton(
                             onPressed: () {},
                             child: const Text('UPDATE',
                                 style: TextStyle(
@@ -71,9 +97,11 @@ class UpdateScreen extends StatelessWidget {
                                 )),
                                 fixedSize: MaterialStateProperty.all(
                                     const Size(88, 26)),
-                                elevation: MaterialStateProperty.all(0)))
-                      ],
-                    )
+                                elevation: MaterialStateProperty.all(0)));
+                      } else {
+                        return Container();
+                      }
+                    }),
                   ],
                 )),
           ),

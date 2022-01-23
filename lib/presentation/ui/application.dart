@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:poseidon/poseidon.dart';
 import 'package:synword_flutter_cubit_application/presentation/cubit/application_cubit/application_cubit.dart';
+import 'package:synword_flutter_cubit_application/presentation/cubit/update_screen_cubit/update_screen_cubit.dart';
 import 'package:synword_flutter_cubit_application/presentation/ui/page/update_screen.dart';
 
 import 'home.dart';
@@ -23,7 +24,8 @@ class Application extends StatelessWidget {
             if (state is ApplicationLoad) {
               return const SplashScreen();
             } else if (state is ApplicationUpdate) {
-              return const UpdateScreen();
+              return BlocProvider<UpdateScreenCubit>.value(
+                  value: state.updateScreenCubit, child: const UpdateScreen());
             } else if (state is ApplicationWork) {
               return const Home();
             } else {
