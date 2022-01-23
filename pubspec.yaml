@@ -84,6 +84,7 @@ flutter:
     - assets/images/icons/upload.png
     - assets/images/icons/close.png
     - assets/images/icons/copy.png
+    - assets/images/icons/paste.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
