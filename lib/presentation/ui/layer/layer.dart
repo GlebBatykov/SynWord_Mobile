@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/layer/layer_cubit.dart';
+import 'package:synword_flutter_cubit_application/presentation/cubit/layer/layer_cubit/layer_cubit.dart';
 import 'package:synword_flutter_cubit_application/presentation/ui/layer/layer_body.dart';
 
 import 'layer_header/layer_header.dart';
