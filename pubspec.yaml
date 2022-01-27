@@ -87,6 +87,13 @@ flutter:
     - assets/images/icons/paste.png
     - assets/images/icons/error.png
 
+    - assets/images/icons/menu/clock.png
+    - assets/images/icons/menu/feedback.png
+    - assets/images/icons/menu/instagram.png
+    - assets/images/icons/menu/languages.png
+    - assets/images/icons/menu/premium.png
+    - assets/images/icons/menu/wallet.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -129,3 +136,6 @@ flutter:
     - family: Audrey
       fonts:
         - asset: assets/fonts/Audrey-Normal.otf
+    - family: Isidora-Soft-Alt
+      fonts:
+        - asset: assets/fonts/Isidora-Soft-Alt-SemiBold.otf
