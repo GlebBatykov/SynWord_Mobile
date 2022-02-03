@@ -86,6 +86,7 @@ flutter:
     - assets/images/icons/copy.png
     - assets/images/icons/paste.png
     - assets/images/icons/error.png
+    - assets/images/icons/info.png
 
     - assets/images/icons/menu/clock.png
     - assets/images/icons/menu/feedback.png
