@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LayerHeaderCloseButton extends StatelessWidget {
-  const LayerHeaderCloseButton({Key? key}) : super(key: key);
+class LayerCloseButton extends StatelessWidget {
+  const LayerCloseButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

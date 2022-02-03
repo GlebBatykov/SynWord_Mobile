@@ -14,6 +14,7 @@ class Home extends StatelessWidget {
       key: GetIt.instance<Poseidon>().scaffoldKey,
       drawer: const DrawerMenu(),
       backgroundColor: HexColor('#301B28'),
+      resizeToAvoidBottomInset: false,
       body: const Body(),
     );
   }
