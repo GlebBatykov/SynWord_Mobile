@@ -52,4 +52,9 @@ class Poseidon {
   void openDrawer() {
     scaffoldKey.currentState!.openDrawer();
   }
+
+  Future<T?> callDialog<T>(Widget Function(BuildContext) builder) async {
+    return await showDialog<T>(
+        context: scaffoldKey.currentContext!, builder: builder);
+  }
 }
