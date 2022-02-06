@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:poseidon/poseidon.dart';
+import 'package:synword_flutter_cubit_application/presentation/ui/dialog/upload_file_dialog.dart';
 
 class Appbar extends StatelessWidget {
   const Appbar({Key? key}) : super(key: key);
@@ -38,6 +39,11 @@ class Appbar extends StatelessWidget {
               ]),
         ),
         InkWell(
+          onTap: () {
+            GetIt.instance<Poseidon>().callDialog((context) {
+              return const UploadFileDialog();
+            });
+          },
           child: Container(
               decoration: const BoxDecoration(boxShadow: [
                 BoxShadow(
