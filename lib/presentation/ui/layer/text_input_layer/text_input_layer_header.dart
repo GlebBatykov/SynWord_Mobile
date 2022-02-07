@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:synword_flutter_cubit_application/presentation/cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
 import 'package:synword_flutter_cubit_application/presentation/cubit/layer/text_input_layer/text_input_layer_cubit.dart';

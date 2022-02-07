@@ -5,7 +5,6 @@ import 'package:synword_flutter_cubit_application/presentation/cubit/sliders/sli
 import 'package:synword_flutter_cubit_application/presentation/ui/sliders/right_slider.dart';
 
 import 'left_slider.dart';
-import 'slider_error_icon.dart';
 
 class Sliders extends StatelessWidget {
   const Sliders({Key? key}) : super(key: key);
