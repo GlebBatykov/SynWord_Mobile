@@ -90,6 +90,11 @@ flutter:
     - assets/images/icons/pdf.png
     - assets/images/icons/docx-file.png
 
+    - assets/images/icons/language-selection-dialog/radio-button-filled.png
+    - assets/images/icons/language-selection-dialog/radio-button-not-filled.png
+    - assets/images/icons/language-selection-dialog/russia.png
+    - assets/images/icons/language-selection-dialog/united-states.png
+
     - assets/images/icons/menu/clock.png
     - assets/images/icons/menu/feedback.png
     - assets/images/icons/menu/instagram.png
