@@ -44,7 +44,7 @@ class UploadFileDialog extends StatelessWidget {
                 width: 145,
                 height: 59,
                 decoration: BoxDecoration(
-                    color: HexColor('#C4C4C4'),
+                    color: HexColor('#C4C4C4').withOpacity(0.25),
                     borderRadius: BorderRadius.circular(5)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
