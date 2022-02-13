@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../page/update_screen_cubit/update_screen_cubit.dart';
+import '../page/update_screen/update_screen_cubit.dart';
 
 part 'application_state.dart';
 

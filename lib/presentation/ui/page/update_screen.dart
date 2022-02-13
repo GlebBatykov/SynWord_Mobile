@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/page/update_screen_cubit/update_screen_cubit.dart';
+import 'package:synword_flutter_cubit_application/presentation/cubit/page/update_screen/update_screen_cubit.dart';
 
 class UpdateScreen extends StatelessWidget {
   const UpdateScreen({Key? key}) : super(key: key);
