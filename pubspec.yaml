@@ -105,6 +105,7 @@ flutter:
     - assets/images/premium-page/coins.png
     - assets/images/premium-page/crown.png
     - assets/images/premium-page/point.png
+    - assets/images/premium-page/correct.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
