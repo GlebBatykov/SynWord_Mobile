@@ -27,8 +27,10 @@ class UpdateScreen extends StatelessWidget {
                       children: [
                         Padding(
                             padding: const EdgeInsets.only(right: 7),
-                            child: Image.asset('assets/images/logo2.png',
-                                width: 30.03, height: 30)),
+                            child: Image.asset(
+                                'assets/images/first_second_logo.png',
+                                width: 30.03,
+                                height: 30)),
                         const Text('Update Synword',
                             style: TextStyle(
                                 fontSize: 15, fontFamily: 'Araboto-Medium'))

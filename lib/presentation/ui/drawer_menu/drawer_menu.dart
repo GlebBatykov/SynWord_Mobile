@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:poseidon/poseidon.dart';
 import 'package:synword_flutter_cubit_application/presentation/ui/drawer_menu/drawer_menu_item.dart';
 
 class DrawerMenu extends StatelessWidget {
@@ -23,7 +25,9 @@ class DrawerMenu extends StatelessWidget {
               DrawerMenuItem(
                   imageName: 'assets/images/icons/menu/premium.png',
                   title: 'Premium',
-                  onPress: () {},
+                  onPress: () {
+                    GetIt.instance<Poseidon>().navigate('/premium');
+                  },
                   padding: const EdgeInsets.only(top: 42)),
               DrawerMenuItem(
                   imageName: 'assets/images/icons/menu/wallet.png',

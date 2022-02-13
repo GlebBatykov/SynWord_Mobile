@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: HexColor('#301B28'),
       body: const Center(
         child: Image(
-            image: AssetImage('assets/images/logo.png'),
+            image: AssetImage('assets/images/first_logo.png'),
             height: 150,
             width: 150),
       ),
