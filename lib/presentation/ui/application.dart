@@ -16,8 +16,8 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SynWord',
-      scaffoldMessengerKey: GetIt.instance<Poseidon>().scaffoldMessengerKey,
-      navigatorKey: GetIt.instance<Poseidon>().navigationKey,
+      scaffoldMessengerKey: Poseidon.scaffoldMessengerKey,
+      navigatorKey: Poseidon.navigationKey,
       home: BlocBuilder<ApplicationCubit, ApplicationState>(
           bloc: GetIt.instance<ApplicationCubit>(),
           builder: (context, state) {

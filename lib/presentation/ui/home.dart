@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:poseidon/poseidon.dart';
 import 'package:synword_flutter_cubit_application/presentation/ui/body.dart';
@@ -11,8 +10,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: GetIt.instance<Poseidon>().scaffoldKey,
+      key: Poseidon.scaffoldKey,
       drawer: const DrawerMenu(),
+      drawerEnableOpenDragGesture: false,
       backgroundColor: HexColor('#301B28'),
       resizeToAvoidBottomInset: false,
       body: const Body(),
