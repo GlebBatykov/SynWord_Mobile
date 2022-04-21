@@ -89,6 +89,8 @@ flutter:
     - assets/images/icons/info.png
     - assets/images/icons/pdf.png
     - assets/images/icons/docx-file.png
+    - assets/images/icons/back-button.png
+    - assets/images/icons/account.png
 
     - assets/images/icons/language-selection-dialog/radio-button-filled.png
     - assets/images/icons/language-selection-dialog/radio-button-not-filled.png
@@ -102,11 +104,16 @@ flutter:
     - assets/images/icons/menu/premium.png
     - assets/images/icons/menu/wallet.png
 
-    - assets/images/premium-page/back-button.png
     - assets/images/premium-page/coins.png
     - assets/images/premium-page/crown.png
     - assets/images/premium-page/point.png
     - assets/images/premium-page/correct.png
+
+    - assets/images/coin-page/coins.png
+    - assets/images/coin-page/cart.png
+    - assets/images/coin-page/info.png
+    - assets/images/coin-page/gift-box.png
+    - assets/images/coin-page/premium.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
