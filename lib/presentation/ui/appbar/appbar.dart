@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:poseidon/poseidon.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/dialog/upload_file_dialog.dart';
+
+import '../../asset/icon_asset.dart';
+import '../dialog/upload_file_dialog.dart';
 
 class Appbar extends StatelessWidget {
   const Appbar({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class Appbar extends StatelessWidget {
                   color: Colors.black, offset: Offset(0, 4), blurRadius: 5)
             ]),
             child: Image.asset(
-              'assets/images/icons/hamburger.png',
+              IconAsset.hamburger,
               width: 39.44,
               height: 20,
             ),
@@ -48,8 +50,7 @@ class Appbar extends StatelessWidget {
                 BoxShadow(
                     color: Colors.black, offset: Offset(0, 4), blurRadius: 5)
               ]),
-              child: Image.asset('assets/images/icons/upload.png',
-                  width: 30.69, height: 36)),
+              child: Image.asset(IconAsset.upload, width: 30.69, height: 36)),
         )
       ]),
     );

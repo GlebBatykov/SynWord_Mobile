@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:poseidon/poseidon.dart';
 
-class RoundedBackButton extends StatelessWidget {
-  const RoundedBackButton({Key? key}) : super(key: key);
+class RoundedButton extends StatelessWidget {
+  final Widget? icon;
+
+  final IconData? iconData;
+
+  final void Function()? onTap;
+
+  RoundedButton({Key? key, this.icon, this.iconData, this.onTap})
+      : super(key: key) {
+    if (icon != null && iconData != null) {
+      throw Exception(
+          'Parameters icon and iconData cannot be set at the same time.');
+    }
+  }
+
+  Widget _buildIcon() {
+    if (icon != null) {
+      return icon!;
+    } else if (iconData != null) {
+      return Icon(iconData!, color: Colors.black, size: 25);
+    } else {
+      return Container();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +45,7 @@ class RoundedBackButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20)),
             child: Material(
                 borderRadius: BorderRadius.circular(20),
-                child: InkWell(
-                    onTap: () {
-                      Poseidon.pop();
-                    },
-                    child: const Icon(Icons.arrow_back,
-                        color: Colors.black, size: 25))),
+                child: InkWell(onTap: onTap, child: _buildIcon())),
           )),
     );
   }

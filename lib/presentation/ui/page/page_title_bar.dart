@@ -1,13 +1,20 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import '../button/rounded_back_button.dart';
+import '../button/rounded/rounded_back_button.dart';
 
 class PageTitleBar extends StatelessWidget {
   final Widget? center;
 
   final Widget? right;
 
-  const PageTitleBar({Key? key, this.center, this.right}) : super(key: key);
+  final List<double>? ratio;
+
+  PageTitleBar({Key? key, this.center, this.right, this.ratio})
+      : super(key: key) {
+    if (ratio != null && ratio!.length != 3) {
+      throw Exception('If the ratio is set, it must contain 3 elements');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +28,15 @@ class PageTitleBar extends StatelessWidget {
             children: [
               Container(
                   alignment: Alignment.centerLeft,
-                  width: width * 0.33,
+                  width: width * (ratio != null ? ratio![0] : 0.33),
                   child: const RoundedBackButton()),
               Container(
-                width: width * 0.33,
+                width: width * (ratio != null ? ratio![1] : 0.33),
                 alignment: Alignment.center,
                 child: center ?? Container(),
               ),
               Container(
-                  width: width * 0.33,
+                  width: width * (ratio != null ? ratio![2] : 0.33),
                   alignment: Alignment.centerRight,
                   child: right ?? Container())
             ]);

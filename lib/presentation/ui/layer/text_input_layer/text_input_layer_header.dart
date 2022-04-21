@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/layer/text_input_layer/text_input_layer_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/layer/layer_close_button.dart';
+
+import '../../../asset/icon_asset.dart';
+import '../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
+import '../../../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
+import '../layer_close_button.dart';
 
 class TextInputLayerHeader extends StatelessWidget {
   const TextInputLayerHeader({Key? key}) : super(key: key);
@@ -29,7 +31,7 @@ class TextInputLayerHeader extends StatelessWidget {
                               fontWeight: FontWeight.w600, fontSize: 16)),
                       const SizedBox(width: 8),
                       Image.asset(
-                        'assets/images/icons/info.png',
+                        IconAsset.info,
                         width: 20,
                         height: 20,
                       )

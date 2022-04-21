@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/dialog/language_selection/item/language_selection_dialog_item_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/dialog/language_selection/language_selection_dialog_cubit.dart';
+
+import '../../../asset/dialog/language_selection_dialog_asset.dart';
+import '../../../cubit/dialog/language_selection/item/language_selection_dialog_item_cubit.dart';
+import '../../../cubit/dialog/language_selection/language_selection_dialog_cubit.dart';
 
 class LanguageSelectionDialogItem extends StatelessWidget {
   const LanguageSelectionDialogItem({Key? key}) : super(key: key);
@@ -20,11 +22,9 @@ class LanguageSelectionDialogItem extends StatelessWidget {
       var buttonAssetPath = '';
 
       if (state is LanguageSelectionDialogItemSelect) {
-        buttonAssetPath =
-            'assets/images/icons/language-selection-dialog/radio-button-filled.png';
+        buttonAssetPath = LanguageSelectionDialogAsset.radioButtonFilled;
       } else {
-        buttonAssetPath =
-            'assets/images/icons/language-selection-dialog/radio-button-not-filled.png';
+        buttonAssetPath = LanguageSelectionDialogAsset.radioButtonNotFilled;
       }
 
       return Padding(

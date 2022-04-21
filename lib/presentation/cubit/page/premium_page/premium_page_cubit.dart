@@ -9,6 +9,6 @@ class PremiumPageCubit extends Cubit<PremiumPageState> {
   }
 
   void _initialize() {
-    emit(PremiumPageGoldActive());
+    emit(PremiumPageShow());
   }
 }

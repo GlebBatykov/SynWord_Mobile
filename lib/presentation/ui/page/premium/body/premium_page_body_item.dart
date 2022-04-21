@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:synword_flutter_cubit_application/presentation/asset/premium_page_asset.dart';
 
 class PremiumPageBodyItem extends StatelessWidget {
   final String title;
@@ -12,7 +13,7 @@ class PremiumPageBodyItem extends StatelessWidget {
         child: Row(children: [
           Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: Image.asset('assets/images/premium-page/point.png')),
+              child: Image.asset(PremiumPageAsset.point)),
           Text(title, style: const TextStyle(fontSize: 13))
         ]));
   }

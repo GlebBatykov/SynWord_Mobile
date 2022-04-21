@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:synword_flutter_cubit_application/presentation/asset/premium_page_asset.dart';
 
 import '../premium_page_body_button.dart';
 import '../premium_page_body_item.dart';
@@ -19,7 +20,7 @@ class PremiumpageBodyGoldSection extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: HexColor('DDC5A2'), width: 1),
+          border: Border.all(color: HexColor('#DDC5A2'), width: 1),
           boxShadow: [
             BoxShadow(
                 offset: const Offset(0, 5),
@@ -58,13 +59,12 @@ class PremiumpageBodyGoldSection extends StatelessWidget {
                       children: [
                         Padding(
                             padding: const EdgeInsets.only(right: 8),
-                            child: Image.asset(
-                                'assets/images/premium-page/point.png')),
+                            child: Image.asset(PremiumPageAsset.point)),
                         const Text('50', style: TextStyle(fontSize: 13)),
                         Padding(
                             padding: const EdgeInsets.only(left: 3, right: 3),
-                            child: Image.asset(
-                                'assets/images/premium-page/coins.png')),
+                            child: Image.asset(PremiumPageAsset.coins,
+                                width: 13, height: 13)),
                         const Text('per day for free',
                             style: TextStyle(fontSize: 13))
                       ])),

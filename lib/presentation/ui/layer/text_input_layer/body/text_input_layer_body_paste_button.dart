@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/layer/text_input_layer/body/paste_button/text_input_layer_body_paste_button_cubit.dart';
+
+import '../../../../asset/icon_asset.dart';
+import '../../../../cubit/layer/text_input_layer/body/paste_button/text_input_layer_body_paste_button_cubit.dart';
 
 class TextInputLayerBodyPasteButton extends StatelessWidget {
   const TextInputLayerBodyPasteButton({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class TextInputLayerBodyPasteButton extends StatelessWidget {
                       constraints: const BoxConstraints(),
                       onPressed: () {},
                       icon: Image.asset(
-                        'assets/images/icons/paste.png',
+                        IconAsset.paste,
                         width: 25,
                         height: 25,
                         color: Colors.black.withOpacity(0.6),

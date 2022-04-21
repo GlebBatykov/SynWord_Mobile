@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/page/update_screen/update_screen_cubit.dart';
+
+import '../../asset/icon_asset.dart';
+import '../../cubit/page/update_screen/update_screen_cubit.dart';
 
 class UpdateScreen extends StatelessWidget {
   const UpdateScreen({Key? key}) : super(key: key);
@@ -27,10 +29,8 @@ class UpdateScreen extends StatelessWidget {
                       children: [
                         Padding(
                             padding: const EdgeInsets.only(right: 7),
-                            child: Image.asset(
-                                'assets/images/first_second_logo.png',
-                                width: 30.03,
-                                height: 30)),
+                            child: Image.asset(IconAsset.secondLogo,
+                                width: 30.03, height: 30)),
                         const Text('Update Synword',
                             style: TextStyle(
                                 fontSize: 15, fontFamily: 'Araboto-Medium'))

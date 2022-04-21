@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../../asset/icon_asset.dart';
+
 class UploadFileDialog extends StatelessWidget {
   const UploadFileDialog({Key? key}) : super(key: key);
 
@@ -54,12 +56,9 @@ class UploadFileDialog extends StatelessWidget {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Padding(
                           padding: const EdgeInsets.only(right: 11),
-                          child: Image.asset(
-                              'assets/images/icons/docx-file.png',
-                              width: 20,
-                              height: 20)),
-                      Image.asset('assets/images/icons/pdf.png',
-                          width: 20, height: 20)
+                          child: Image.asset(IconAsset.docxFile,
+                              width: 20, height: 20)),
+                      Image.asset(IconAsset.pdf, width: 20, height: 20)
                     ])
                   ],
                 ))
