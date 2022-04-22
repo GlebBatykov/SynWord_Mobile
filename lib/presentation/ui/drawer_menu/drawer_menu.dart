@@ -19,7 +19,9 @@ class DrawerMenu extends StatelessWidget {
               DrawerMenuItem(
                 imageName: 'assets/images/icons/menu/clock.png',
                 title: 'History',
-                onPress: () {},
+                onPress: () {
+                  Poseidon.navigate('/history');
+                },
               ),
               DrawerMenuItem(
                   imageName: 'assets/images/icons/menu/premium.png',
