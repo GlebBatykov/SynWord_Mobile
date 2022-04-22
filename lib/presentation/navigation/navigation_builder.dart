@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poseidon/poseidon.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/page/coin_page/coin_page_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/page/premium_page/premium_page_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/coin/coin_page.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/premium/premium_page.dart';
+
+import '../cubit/page/coin/coin_page_cubit.dart';
+import '../cubit/page/history/history_page_cubit.dart';
+import '../cubit/page/premium/premium_page_cubit.dart';
+import '../ui/page/coin/coin_page.dart';
+import '../ui/page/history/history_page.dart';
+import '../ui/page/premium/premium_page.dart';
 
 class NavigationBuilder {
   void build() {
@@ -24,6 +27,14 @@ class NavigationBuilder {
                 builder: (context) => BlocProvider(
                     create: (context) => CoinPageCubit(),
                     child: const CoinPage()));
+          }),
+      PoseidonRoute(
+          path: '/history',
+          builder: (context, argument) {
+            return MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                    create: (context) => HistoryPageCubit(),
+                    child: const HistoryPage()));
           })
     ]);
   }
