@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../cubit/page/coin_page/coin_page_cubit.dart';
+import '../../../../cubit/page/coin/coin_page_cubit.dart';
 import '../../../button/rounded/rounded_account_button.dart';
 import '../../page_title_bar.dart';
 import 'coin_page_balance_board.dart';

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class PageBody extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
   final EdgeInsets? padding;
 
-  const PageBody({Key? key, required this.child, this.padding})
-      : super(key: key);
+  const PageBody({Key? key, this.child, this.padding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
