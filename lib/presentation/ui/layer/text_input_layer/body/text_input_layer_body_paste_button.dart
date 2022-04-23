@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../asset/icon_asset.dart';
 import '../../../../cubit/layer/text_input_layer/body/paste_button/text_input_layer_body_paste_button_cubit.dart';
+import '../../../image_button.dart';
 
 class TextInputLayerBodyPasteButton extends StatelessWidget {
   const TextInputLayerBodyPasteButton({Key? key}) : super(key: key);
@@ -12,30 +13,14 @@ class TextInputLayerBodyPasteButton extends StatelessWidget {
     return BlocBuilder<TextInputLayerBodyPasteButtonCubit,
         TextInputLayerBodyPasteButtonState>(builder: (context, state) {
       return state is TextInputLayerBodyPasteButtonVisible
-          ? ClipRRect(
-              borderRadius: BorderRadius.circular(17.5),
-              child: Container(
-                padding: EdgeInsets.zero,
-                width: 40,
-                height: 40,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: Material(
-                  color: Colors.transparent,
-                  child: IconButton(
-                      splashRadius: 30,
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      onPressed: () {},
-                      icon: Image.asset(
-                        IconAsset.paste,
-                        width: 25,
-                        height: 25,
-                        color: Colors.black.withOpacity(0.6),
-                      )),
-                ),
-              ),
-            )
+          ? ImageButton(
+              assetPath: IconAsset.paste,
+              imageWidth: 25,
+              imageHeight: 25,
+              width: 40,
+              height: 40,
+              onTap: () {},
+              color: Colors.black.withOpacity(0.6))
           : Container();
     });
   }

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:synword_flutter_cubit_application/presentation/asset/dialog/language_selection_dialog_asset.dart';
 import 'package:synword_flutter_cubit_application/presentation/cubit/dialog/language_selection/item/language_selection_dialog_item_cubit.dart';
 
 import '../../../model/dialog/language_selection/language_item_data.dart';
@@ -15,10 +16,8 @@ class LanguageSelectionDialogCubit extends Cubit<LanguageSelectionDialogState> {
 
   void _initialize() {
     var items = [
-      LanguageItemData('English',
-          'assets/images/icons/language-selection-dialog/united-states.png'),
-      LanguageItemData(
-          'Russian', 'assets/images/icons/language-selection-dialog/russia.png')
+      LanguageItemData('English', LanguageSelectionDialogAsset.unitedStates),
+      LanguageItemData('Russian', LanguageSelectionDialogAsset.russia)
     ];
 
     for (var i = 0; i < items.length; i++) {
