@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:poseidon/poseidon.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/drawer_menu/drawer_menu_item.dart';
+
+import '../../asset/menu_asset.dart';
+import '../../navigation/navigation_routes.dart';
+import 'drawer_menu_item.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({Key? key}) : super(key: key);
@@ -17,39 +20,44 @@ class DrawerMenu extends StatelessWidget {
           child: Column(
             children: [
               DrawerMenuItem(
-                imageName: 'assets/images/icons/menu/clock.png',
+                imageName: MenuAsset.clock,
+                imagePadding: const EdgeInsets.only(top: 6),
                 title: 'History',
                 onPress: () {
-                  Poseidon.navigate('/history');
+                  Poseidon.navigate(NavigationRoutes.historyPage);
                 },
               ),
               DrawerMenuItem(
-                  imageName: 'assets/images/icons/menu/premium.png',
+                  imageName: MenuAsset.premium,
+                  imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Premium',
                   onPress: () {
-                    Poseidon.navigate('/premium');
+                    Poseidon.navigate(NavigationRoutes.premiumPage);
                   },
                   padding: const EdgeInsets.only(top: 42)),
               DrawerMenuItem(
-                  imageName: 'assets/images/icons/menu/wallet.png',
+                  imageName: MenuAsset.wallet,
+                  imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Balance',
                   onPress: () {
-                    Poseidon.navigate('/coin');
+                    Poseidon.navigate(NavigationRoutes.coinPage);
                   },
                   padding: const EdgeInsets.only(top: 20)),
               DrawerMenuItem(
-                  imageName: 'assets/images/icons/menu/languages.png',
+                  imageName: MenuAsset.languages,
+                  imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Language',
                   onPress: () {},
                   padding: const EdgeInsets.only(top: 42)),
               DrawerMenuItem(
-                  imageName: 'assets/images/icons/menu/feedback.png',
+                  imageName: MenuAsset.feedback,
+                  imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Feedback',
                   onPress: () {},
                   padding: const EdgeInsets.only(top: 20)),
               DrawerMenuItem(
-                  imageName: 'assets/images/icons/menu/instagram.png',
-                  title: 'Instagram',
+                  imageName: MenuAsset.website,
+                  title: 'Website',
                   onPress: () {},
                   padding: const EdgeInsets.only(top: 42))
             ],

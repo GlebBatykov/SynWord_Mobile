@@ -8,47 +8,54 @@ class DrawerMenuItem extends StatelessWidget {
 
   final void Function()? onPress;
 
-  final EdgeInsets padding;
+  final EdgeInsets? padding;
+
+  final EdgeInsets? imagePadding;
 
   const DrawerMenuItem(
       {Key? key,
       required this.imageName,
       required this.title,
       this.onPress,
-      this.padding = EdgeInsets.zero})
+      this.padding,
+      this.imagePadding})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding,
+      padding: padding ?? EdgeInsets.zero,
       child: Column(
         children: [
           Container(
+            alignment: Alignment.center,
             width: 50,
             height: 50,
-            padding: const EdgeInsets.only(bottom: 4),
+            margin: const EdgeInsets.only(bottom: 4),
             child: Container(
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                   color: HexColor('#b6452c'),
                   borderRadius: BorderRadius.circular(25)),
               child: Container(
+                alignment: Alignment.center,
                 margin: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
                     color: HexColor('#464646'),
                     borderRadius: BorderRadius.circular(25)),
-                child: IconButton(
-                    onPressed: onPress,
-                    icon: Container(
-                        decoration: const BoxDecoration(boxShadow: [
-                          BoxShadow(
-                              offset: Offset(0, 4),
-                              blurRadius: 3,
-                              spreadRadius: -3,
-                              color: Color.fromRGBO(0, 0, 0, 0.25))
-                        ]),
-                        child: Image.asset(imageName)),
-                    iconSize: 30),
+                child: InkWell(
+                  onTap: onPress,
+                  child: Container(
+                      padding: imagePadding,
+                      decoration: const BoxDecoration(boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 4),
+                            blurRadius: 4,
+                            spreadRadius: -3,
+                            color: Color.fromRGBO(0, 0, 0, 0.25))
+                      ]),
+                      child: Image.asset(imageName, width: 30, height: 30)),
+                ),
               ),
             ),
           ),
