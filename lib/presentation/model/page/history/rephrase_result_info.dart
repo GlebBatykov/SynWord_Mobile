@@ -1,4 +1,4 @@
-import 'result_log.dart';
+import 'result_info.dart';
 
 class RephraseResultInfo extends ResultInfo {
   final String rephrasedText;

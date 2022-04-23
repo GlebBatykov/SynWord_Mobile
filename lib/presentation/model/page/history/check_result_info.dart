@@ -1,4 +1,4 @@
-import 'result_log.dart';
+import 'result_info.dart';
 
 class CheckResultInfo extends ResultInfo {
   final int percentages;

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../model/page/history/check_result_log.dart';
+import '../../../../model/page/history/check_result_info.dart';
 
 part 'check_result_page_state.dart';
 
