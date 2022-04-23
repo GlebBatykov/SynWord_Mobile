@@ -3,7 +3,7 @@ abstract class MenuAsset {
 
   static const feedback = 'assets/images/icons/menu/feedback.png';
 
-  static const instagram = 'assets/images/icons/menu/instagram.png';
+  static const website = 'assets/images/icons/menu/website.png';
 
   static const languages = 'assets/images/icons/menu/languages.png';
 
