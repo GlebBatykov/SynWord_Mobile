@@ -7,4 +7,8 @@ class HistoryPageInitial extends HistoryPageState {}
 
 class HistoryPageSignIn extends HistoryPageState {}
 
-class HistoryPageShow extends HistoryPageState {}
+class HistoryPageShow extends HistoryPageState {
+  final List<HistoryPageBodyResultItemCubit> itemsCubits;
+
+  HistoryPageShow(this.itemsCubits);
+}
