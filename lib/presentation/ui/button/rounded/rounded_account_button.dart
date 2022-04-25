@@ -9,7 +9,10 @@ class RoundedAccountButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedButton(
-        icon: Image.asset(IconAsset.account, width: 25, height: 25),
+        icon: Padding(
+            padding:
+                const EdgeInsets.only(left: 8, bottom: 8, right: 7, top: 7),
+            child: Image.asset(IconAsset.account, width: 25, height: 25)),
         onTap: () {});
   }
 }

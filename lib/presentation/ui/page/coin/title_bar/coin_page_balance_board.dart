@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../asset/premium_page_asset.dart';
 import '../../page_title_bar_blured_board.dart';
@@ -23,6 +24,10 @@ class CoinPageBalanceBoard extends StatelessWidget {
 
     return PageTitleBarBluredBoard(
         width: width,
+        color: HexColor('#634357'),
+        blurOpacity: 0.12,
+        gradient:
+            LinearGradient(colors: [HexColor('#C0392B'), HexColor('#8E44AD')]),
         child: Container(
           margin: const EdgeInsets.only(left: 16, right: 16, bottom: 6, top: 8),
           child: Column(

@@ -1,13 +1,24 @@
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class PageTitleBarBluredBoard extends StatelessWidget {
   final double width;
 
   final Widget? child;
 
-  const PageTitleBarBluredBoard({Key? key, this.child, this.width = 136})
+  final Color? color;
+
+  final Gradient? gradient;
+
+  final double? blurOpacity;
+
+  const PageTitleBarBluredBoard(
+      {Key? key,
+      this.child,
+      this.width = 136,
+      this.color,
+      this.gradient,
+      this.blurOpacity})
       : super(key: key);
 
   @override
@@ -16,7 +27,7 @@ class PageTitleBarBluredBoard extends StatelessWidget {
         width: width,
         height: 80,
         decoration: BoxDecoration(
-            color: HexColor('#634357'),
+            color: color,
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
@@ -30,14 +41,13 @@ class PageTitleBarBluredBoard extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         left: 16, right: 16, bottom: 6, top: 8),
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [HexColor('#C0392B'), HexColor('#8E44AD')]),
+                        gradient: gradient,
                         borderRadius: BorderRadius.circular(15)))
                 .blurred(
                     blur: 15,
                     borderRadius: BorderRadius.circular(15),
                     blurColor: Colors.white,
-                    colorOpacity: 0.12),
+                    colorOpacity: blurOpacity ?? 0),
             child ?? Container()
           ],
         ));
