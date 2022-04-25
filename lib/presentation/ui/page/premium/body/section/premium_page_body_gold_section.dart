@@ -11,7 +11,7 @@ class PremiumpageBodyGoldSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 228,
+      width: 258,
       height: 227,
       padding: const EdgeInsets.only(left: 12, right: 12, top: 17),
       decoration: BoxDecoration(

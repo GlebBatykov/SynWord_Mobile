@@ -11,7 +11,7 @@ class PremiumPageBodySilverSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 228,
+      width: 258,
       height: 227,
       margin: const EdgeInsets.only(bottom: 27),
       padding: const EdgeInsets.only(left: 12, right: 12, top: 17),
