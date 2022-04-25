@@ -1,13 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/layer/text_input_layer/body/paste_button/text_input_layer_body_paste_button_cubit.dart';
+
+import 'paste_button/text_input_layer_body_paste_button_cubit.dart';
 
 part 'text_input_layer_body_state.dart';
 
 class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
   late final TextInputLayerBodyPasteButtonCubit _pasteButtonCubit;
 
-  late final TextEditingController _editingController = TextEditingController();
+  final TextEditingController _editingController = TextEditingController();
+
+  final FocusNode _focusNode = FocusNode();
 
   bool _isEmpty = false;
 
@@ -23,7 +26,12 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
   void toEmpty() {
     if (!_isEmpty) {
-      emit(TextInputLayerBodyEmpty(_editingController, _pasteButtonCubit));
+      _editingController.clear();
+
+      _focusNode.unfocus();
+
+      emit(TextInputLayerBodyEmpty(
+          _editingController, _focusNode, _pasteButtonCubit));
 
       _pasteButtonCubit.enableVisible();
 
@@ -33,7 +41,8 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
   void toNotEmpty() {
     if (_isEmpty) {
-      emit(TextInputLayerBodyNotEmpty(_editingController, _pasteButtonCubit));
+      emit(TextInputLayerBodyNotEmpty(
+          _editingController, _focusNode, _pasteButtonCubit));
 
       _pasteButtonCubit.disableVisible();
 
@@ -42,7 +51,10 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
   }
 
   void toBackground() {
-    emit(TextInputLayerBodyBackground(_editingController));
+    emit(TextInputLayerBodyBackground(
+      _editingController,
+      _focusNode,
+    ));
   }
 
   void toForeground() {

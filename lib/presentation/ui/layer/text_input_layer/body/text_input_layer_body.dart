@@ -31,6 +31,7 @@ class TextInputLayerBody extends StatelessWidget {
                   margin: margin,
                   child: TextFormField(
                     controller: state.editingController,
+                    focusNode: state.focusNode,
                     expands: true,
                     maxLines: null,
                     minLines: null,

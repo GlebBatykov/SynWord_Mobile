@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:synword_flutter_cubit_application/presentation/ui/image_button.dart';
 
 import '../../../asset/icon_asset.dart';
 import '../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
@@ -36,12 +37,9 @@ class TextInputLayerHeader extends StatelessWidget {
                         height: 20,
                       )
                     ]),
-                    InkWell(
-                      onTap: () {
-                        textInputLayerCubit.toBackground();
-                      },
-                      child: const LayerCloseButton(),
-                    )
+                    LayerCloseButton(onTap: () {
+                      textInputLayerCubit.toEmpty();
+                    }),
                   ]),
             );
           } else {
