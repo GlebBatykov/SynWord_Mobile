@@ -15,6 +15,8 @@ class ImageButton extends StatelessWidget {
 
   final Color? color;
 
+  final Color? imageColor;
+
   const ImageButton(
       {Key? key,
       required this.assetPath,
@@ -23,7 +25,8 @@ class ImageButton extends StatelessWidget {
       this.imageHeight,
       this.imageWidth,
       this.onTap,
-      this.color})
+      this.color,
+      this.imageColor})
       : super(key: key);
 
   @override
@@ -34,7 +37,8 @@ class ImageButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         width: width,
         height: height,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        decoration: BoxDecoration(
+            color: color, borderRadius: BorderRadius.circular(20)),
         child: Material(
           color: Colors.transparent,
           child: IconButton(
@@ -46,7 +50,7 @@ class ImageButton extends StatelessWidget {
                 assetPath,
                 width: imageWidth,
                 height: imageHeight,
-                color: color,
+                color: imageColor,
               )),
         ),
       ),

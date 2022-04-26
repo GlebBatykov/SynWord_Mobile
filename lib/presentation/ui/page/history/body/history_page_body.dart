@@ -62,11 +62,16 @@ class HistoryPageBody extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         itemCount: state.itemsCubits.length,
                         itemBuilder: (context, index) {
+                          var margin = index < state.itemsCubits.length - 1
+                              ? const EdgeInsets.only(bottom: 20)
+                              : const EdgeInsets.only(bottom: 10);
+
                           return Align(
                             alignment: Alignment.center,
                             child: BlocProvider.value(
                                 value: state.itemsCubits[index],
-                                child: const HistoryPageBodyResultItem()),
+                                child:
+                                    HistoryPageBodyResultItem(margin: margin)),
                           );
                         }),
                   )))),

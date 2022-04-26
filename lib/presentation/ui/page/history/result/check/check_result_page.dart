@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../../cubit/page/history/result/check/check_result_page_cubit.dart';
+import '../../../pages_properties.dart';
 import 'body/check_result_page_body.dart';
 import 'title_bar/check_result_page_title_bar.dart';
 
@@ -16,11 +17,14 @@ class CheckResultPage extends StatelessWidget {
       if (state is CheckResultPageShow) {
         return Scaffold(
           backgroundColor: HexColor('#301B28'),
-          body: Column(
-            children: [
-              CheckResultPageTitleBar(percentages: state.percentages),
-              const Expanded(child: CheckResultPageBody())
-            ],
+          body: Container(
+            margin: PagesProperties.margin,
+            child: Column(
+              children: [
+                CheckResultPageTitleBar(percentages: state.percentages),
+                const Expanded(child: CheckResultPageBody())
+              ],
+            ),
           ),
         );
       } else {

@@ -8,5 +8,9 @@ class CheckResultPageInitial extends CheckResultPageState {}
 class CheckResultPageShow extends CheckResultPageState {
   final int percentages;
 
-  CheckResultPageShow(this.percentages);
+  final String text;
+
+  final List<CheckResultLink> links;
+
+  CheckResultPageShow(this.percentages, this.text, this.links);
 }

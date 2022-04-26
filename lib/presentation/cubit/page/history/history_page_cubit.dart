@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/page/history/body/item/history_page_body_result_item_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/model/page/history/check_result_info.dart';
-import 'package:synword_flutter_cubit_application/presentation/model/page/history/rephrase_result_info.dart';
 
+import '../../../model/page/history/result/check/check_result_info.dart';
+import '../../../model/page/history/rephrase_result_info.dart';
+import '../../../model/page/history/result/check/check_result_link.dart';
 import '../../../model/page/history/result_info.dart';
+import 'body/item/history_page_body_result_item_cubit.dart';
 
 part 'history_page_state.dart';
 
@@ -18,27 +21,22 @@ class HistoryPageCubit extends Cubit<HistoryPageState> {
   }
 
   void _initialize() {
+    var text =
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisis volutpat est velit egestas. Ut consequat semper viverra nam libero. Morbi tristique senectus et netus. Tristique senectus et netus et malesuada fames ac. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Urna nec tincidunt praesent semper. Sit amet mauris commodo quis imperdiet massa tincidunt nunc. Tristique senectus et netus et. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Purus semper eget duis at. Gravida arcu ac tortor dignissim convallis aenean et tortor. Pulvinar mattis nunc sed blandit libero volutpat sed. Et malesuada fames ac turpis. Aliquet enim tortor at auctor.';
+
+    var links = List.generate(
+        15,
+        (index) => CheckResultLink(
+            'https://stackoverflow.com/questions/49638499/how-to-make-scrollable-text-in-flutter',
+            Random().nextInt(101)))
+      ..sort((a, b) => b.percentages.compareTo(a.percentages));
+
     _results.addAll([
-      CheckResultInfo(
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-          TextSource.docx,
-          100),
-      RephraseResultInfo(
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-          TextSource.pdf,
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'),
-      CheckResultInfo(
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-          TextSource.userInput,
-          50),
-      RephraseResultInfo(
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-          TextSource.userInput,
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'),
-      CheckResultInfo(
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-          TextSource.docx,
-          25),
+      CheckResultInfo(text, TextSource.docx, 100, links),
+      RephraseResultInfo(text, TextSource.pdf, text),
+      CheckResultInfo(text, TextSource.userInput, 50, links),
+      RephraseResultInfo(text, TextSource.userInput, text),
+      CheckResultInfo(text, TextSource.docx, 25, links),
     ]);
 
     for (var info in _results) {

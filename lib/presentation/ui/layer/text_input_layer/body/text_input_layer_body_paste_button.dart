@@ -20,7 +20,7 @@ class TextInputLayerBodyPasteButton extends StatelessWidget {
               width: 40,
               height: 40,
               onTap: () {},
-              color: Colors.black.withOpacity(0.6))
+              imageColor: Colors.black.withOpacity(0.6))
           : Container();
     });
   }

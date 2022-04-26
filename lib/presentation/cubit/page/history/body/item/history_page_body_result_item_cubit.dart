@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:poseidon/poseidon.dart';
-import 'package:synword_flutter_cubit_application/presentation/model/page/history/check_result_info.dart';
+import 'package:synword_flutter_cubit_application/presentation/model/page/history/result/check/check_result_info.dart';
 import 'package:synword_flutter_cubit_application/presentation/model/page/history/rephrase_result_info.dart';
 import 'package:synword_flutter_cubit_application/presentation/navigation/check_result_page_arguments.dart';
 import 'package:synword_flutter_cubit_application/presentation/navigation/navigation_routes.dart';

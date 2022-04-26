@@ -9,7 +9,9 @@ import '../../../image_button.dart';
 import '../../../material_container.dart';
 
 class HistoryPageBodyResultItem extends StatelessWidget {
-  const HistoryPageBodyResultItem({Key? key}) : super(key: key);
+  final EdgeInsets? margin;
+
+  const HistoryPageBodyResultItem({Key? key, this.margin}) : super(key: key);
 
   Widget _buildPercentagesBox(HistoryPageBodyResultItemCheck state) {
     var color = state.percentages >= 70
@@ -47,7 +49,7 @@ class HistoryPageBodyResultItem extends StatelessWidget {
           height: 104,
           width: 310,
           borderRadius: BorderRadius.circular(5),
-          margin: const EdgeInsets.only(bottom: 20),
+          margin: margin,
           color: HexColor('#eeeeee'),
           onTap: state.onTap,
           boxShadow: [
@@ -89,7 +91,7 @@ class HistoryPageBodyResultItem extends StatelessWidget {
                   right: 8,
                   child: ImageButton(
                       assetPath: IconAsset.close,
-                      color: Colors.black,
+                      imageColor: Colors.black,
                       imageHeight: 15,
                       imageWidth: 15,
                       onTap: state.onTap))
