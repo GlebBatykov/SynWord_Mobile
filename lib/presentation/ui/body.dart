@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/layer/text_input_layer/text_input_layer_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/sliders/sliders_cubit/sliders_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/layer/text_input_layer/text_input_layer.dart';
+import '../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
+import '../cubit/sliders/sliders_cubit/sliders_cubit.dart';
 import 'appbar/appbar.dart';
+import 'layer/text_input_layer/text_input_layer.dart';
+import 'page/pages_properties.dart';
 import 'sliders/sliders.dart';
 
 class Body extends StatelessWidget {
@@ -11,20 +12,23 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Appbar(),
-        Expanded(
-            child: Stack(
-          children: [
-            BlocProvider(
-                create: (context) => TextInputLayerCubit(),
-                child: const TextInputLayer()),
-            BlocProvider(
-                create: (context) => SlidersCubit(), child: const Sliders())
-          ],
-        ))
-      ],
+    return Container(
+      margin: PagesProperties.margin,
+      child: Column(
+        children: [
+          const Appbar(),
+          Expanded(
+              child: Stack(
+            children: [
+              BlocProvider(
+                  create: (context) => TextInputLayerCubit(),
+                  child: const TextInputLayer()),
+              BlocProvider(
+                  create: (context) => SlidersCubit(), child: const Sliders())
+            ],
+          ))
+        ],
+      ),
     );
   }
 }

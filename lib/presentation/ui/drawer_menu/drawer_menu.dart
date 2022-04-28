@@ -3,6 +3,7 @@ import 'package:poseidon/poseidon.dart';
 
 import '../../asset/menu_asset.dart';
 import '../../navigation/navigation_routes.dart';
+import '../page/pages_properties.dart';
 import 'drawer_menu_item.dart';
 
 class DrawerMenu extends StatelessWidget {
@@ -15,7 +16,8 @@ class DrawerMenu extends StatelessWidget {
       child: Drawer(
         child: Container(
           padding:
-              const EdgeInsets.only(left: 25, right: 25, top: 28, bottom: 28),
+              const EdgeInsets.only(left: 25, right: 25, top: 28, bottom: 28)
+                  .add(PagesProperties.margin),
           color: Colors.black,
           child: Column(
             children: [
