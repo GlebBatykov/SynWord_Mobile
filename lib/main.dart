@@ -10,7 +10,9 @@ void main() async {
 
   NavigationBuilder().build();
 
-  SystemChromeConfiguration().configure();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChromeConfiguration().configure();
 
   runApp(const Application());
 }
