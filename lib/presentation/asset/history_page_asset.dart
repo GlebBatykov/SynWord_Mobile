@@ -6,4 +6,8 @@ abstract class HistoryPageAsset {
   static const website = 'assets/images/history-page/website.png';
 
   static const show = 'assets/images/history-page/show.png';
+
+  static const copy = 'assets/images/history-page/copy.png';
+
+  static const downloadFile = 'assets/images/history-page/download-file.png';
 }

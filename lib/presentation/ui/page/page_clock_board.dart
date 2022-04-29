@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../../../../asset/history_page_asset.dart';
-import '../../page_title_bar_blured_board.dart';
+import '../../asset/history_page_asset.dart';
+import 'page_title_bar_blured_board.dart';
 
-class HistoryPageClockBoard extends StatelessWidget {
-  const HistoryPageClockBoard({Key? key}) : super(key: key);
+class PageClockBoard extends StatelessWidget {
+  const PageClockBoard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
