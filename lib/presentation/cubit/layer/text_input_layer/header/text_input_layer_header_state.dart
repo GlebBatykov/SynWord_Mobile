@@ -11,10 +11,23 @@ class TextInputLayerHeaderForeground extends TextInputLayerHeaderShow {}
 
 class TextInputLayerHeaderEmpty extends TextInputLayerHeaderForeground {}
 
-class TextInputLayerHeaderNotEmpty extends TextInputLayerHeaderForeground {
+abstract class TextInputLayerHeaderNotEmpty
+    extends TextInputLayerHeaderForeground {
   final int textLength;
 
-  TextInputLayerHeaderNotEmpty(this.textLength);
+  final LengthBorders lengthBorders;
+
+  TextInputLayerHeaderNotEmpty(this.textLength, this.lengthBorders);
+}
+
+class TextInputLayerHeaderNotEmptyShow extends TextInputLayerHeaderNotEmpty {
+  TextInputLayerHeaderNotEmptyShow(int textLength, LengthBorders lengthBorders)
+      : super(textLength, lengthBorders);
+}
+
+class TextInputLayerHeaderEditing extends TextInputLayerHeaderNotEmpty {
+  TextInputLayerHeaderEditing(int textLength, LengthBorders lengthBorders)
+      : super(textLength, lengthBorders);
 }
 
 class TextInputLayerHeaderBackground extends TextInputLayerHeaderShow {}

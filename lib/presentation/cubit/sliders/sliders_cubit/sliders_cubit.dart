@@ -37,6 +37,46 @@ class SlidersCubit extends Cubit<SlidersState> {
     _show();
   }
 
+  void disableSliders() {
+    _isLeftSliderEnabled = false;
+    _isRightSliderEnabled = false;
+
+    _show();
+  }
+
+  void enableSliders() {
+    _isLeftSliderEnabled = true;
+    _isRightSliderEnabled = true;
+
+    _show();
+  }
+
+  void lockLeftSlider() {
+    _leftSliderCubit.lock();
+  }
+
+  void unlockLeftSlider() {
+    _leftSliderCubit.unlock();
+  }
+
+  void lockRightSlider() {
+    _rightSliderCubit.lock();
+  }
+
+  void unlockRightSlider() {
+    _rightSliderCubit.unlock();
+  }
+
+  void lockSliders() {
+    _leftSliderCubit.lock();
+    _rightSliderCubit.lock();
+  }
+
+  void unlockSliders() {
+    _leftSliderCubit.unlock();
+    _rightSliderCubit.unlock();
+  }
+
   void _show() {
     emit(SlidersShow(_leftSliderCubit, _rightSliderCubit, _isLeftSliderEnabled,
         _isRightSliderEnabled));

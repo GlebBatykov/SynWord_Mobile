@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
-import '../cubit/sliders/sliders_cubit/sliders_cubit.dart';
+import 'package:get_it/get_it.dart';
+import 'package:synword_flutter_cubit_application/presentation/cubit/body/body_cubit.dart';
 import 'appbar/appbar.dart';
 import 'layer/text_input_layer/text_input_layer.dart';
 import 'page/pages_properties.dart';
@@ -17,16 +17,24 @@ class Body extends StatelessWidget {
       child: Column(
         children: [
           const Appbar(),
-          Expanded(
-              child: Stack(
-            children: [
-              BlocProvider(
-                  create: (context) => TextInputLayerCubit(),
-                  child: const TextInputLayer()),
-              BlocProvider(
-                  create: (context) => SlidersCubit(), child: const Sliders())
-            ],
-          ))
+          BlocBuilder<BodyCubit, BodyState>(
+              bloc: GetIt.instance<BodyCubit>(),
+              builder: (context, state) {
+                if (state is BodyShow) {
+                  return Expanded(
+                      child: Stack(
+                    children: [
+                      BlocProvider.value(
+                          value: state.inputLayerCubit,
+                          child: const TextInputLayer()),
+                      BlocProvider.value(
+                          value: state.slidersCubit, child: const Sliders())
+                    ],
+                  ));
+                } else {
+                  return Container();
+                }
+              })
         ],
       ),
     );

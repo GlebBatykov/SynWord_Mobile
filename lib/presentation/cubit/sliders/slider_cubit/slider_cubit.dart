@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 part 'slider_state.dart';
 
 class SliderCubit extends Cubit<SliderState> {
-  SliderCubit() : super(SliderUnlock());
+  SliderCubit() : super(SliderLock());
 
   void lock() {
     emit(SliderLock());

@@ -11,9 +11,12 @@ class LayerCloseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ImageButton(
-        onTap: onTap,
-        assetPath: IconAsset.close,
-        imageWidth: 20,
-        imageHeight: 20);
+      onTap: onTap,
+      assetPath: IconAsset.close,
+      imageWidth: 20,
+      imageHeight: 20,
+      width: 30,
+      height: 30,
+    );
   }
 }

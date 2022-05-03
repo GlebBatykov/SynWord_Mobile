@@ -14,23 +14,27 @@ class TextInputLayerBodyShow extends TextInputLayerBodyState {
 }
 
 class TextInputLayerBodyForeground extends TextInputLayerBodyShow {
-  final TextInputLayerBodyPasteButtonCubit pasteButtonCubit;
-
-  TextInputLayerBodyForeground(TextEditingController editingController,
-      FocusNode focusNode, this.pasteButtonCubit)
+  TextInputLayerBodyForeground(
+      TextEditingController editingController, FocusNode focusNode)
       : super(editingController, focusNode);
 }
 
 class TextInputLayerBodyEmpty extends TextInputLayerBodyForeground {
-  TextInputLayerBodyEmpty(TextEditingController editingController,
-      FocusNode focusNode, TextInputLayerBodyPasteButtonCubit pasteButtonCubit)
-      : super(editingController, focusNode, pasteButtonCubit);
+  TextInputLayerBodyEmpty(
+      TextEditingController editingController, FocusNode focusNode)
+      : super(editingController, focusNode);
 }
 
 class TextInputLayerBodyNotEmpty extends TextInputLayerBodyForeground {
-  TextInputLayerBodyNotEmpty(TextEditingController editingController,
-      FocusNode focusNode, TextInputLayerBodyPasteButtonCubit pasteButtonCubit)
-      : super(editingController, focusNode, pasteButtonCubit);
+  TextInputLayerBodyNotEmpty(
+      TextEditingController editingController, FocusNode focusNode)
+      : super(editingController, focusNode);
+}
+
+class TextInpuLayerBodyNotEmptyShow extends TextInputLayerBodyForeground {
+  TextInpuLayerBodyNotEmptyShow(
+      TextEditingController editingController, FocusNode focusNode)
+      : super(editingController, focusNode);
 }
 
 class TextInputLayerBodyBackground extends TextInputLayerBodyShow {

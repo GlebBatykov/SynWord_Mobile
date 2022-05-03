@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:poseidon/poseidon.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/application_cubit/application_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/page/update_screen/update_screen_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/update_screen.dart';
 
+import '../cubit/application/application_cubit.dart';
+import '../cubit/page/update_screen/update_screen_cubit.dart';
 import 'home.dart';
 import 'page/splash_screen.dart';
+import 'page/update_screen.dart';
 
 class Application extends StatelessWidget {
   const Application({Key? key}) : super(key: key);
