@@ -2,9 +2,10 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:synword_flutter_cubit_application/presentation/model/page/history/result/rephrase/rephrased_word.dart';
 
 import '../../../model/page/history/result/check/check_result_info.dart';
-import '../../../model/page/history/rephrase_result_info.dart';
+import '../../../model/page/history/result/rephrase/rephrase_result_info.dart';
 import '../../../model/page/history/result/check/check_result_link.dart';
 import '../../../model/page/history/result_info.dart';
 import 'body/item/history_page_body_result_item_cubit.dart';
@@ -33,9 +34,13 @@ class HistoryPageCubit extends Cubit<HistoryPageState> {
 
     _results.addAll([
       CheckResultInfo(text, TextSource.docx, 100, links),
-      RephraseResultInfo(text, TextSource.pdf, text),
+      RephraseResultInfo(text, TextSource.pdf, text, [
+        RephrasedWord(1, 'ipsum', ['apple', 'word'])
+      ]),
       CheckResultInfo(text, TextSource.userInput, 50, links),
-      RephraseResultInfo(text, TextSource.userInput, text),
+      RephraseResultInfo(text, TextSource.userInput, text, [
+        RephrasedWord(2, 'dolor', ['apple', 'word'])
+      ]),
       CheckResultInfo(text, TextSource.docx, 25, links),
     ]);
 
