@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:synword_flutter_cubit_application/presentation/cubit/body/body_cubit.dart';
+import 'package:synword_flutter_cubit_application/presentation/cubit/layer/layer_cubit/layer_cubit.dart';
+import 'package:synword_flutter_cubit_application/presentation/ui/layer/layer.dart';
 import 'appbar/appbar.dart';
+import 'layer/layers_canvas.dart';
 import 'layer/text_input_layer/text_input_layer.dart';
 import 'page/pages_properties.dart';
 import 'sliders/sliders.dart';
@@ -25,8 +28,8 @@ class Body extends StatelessWidget {
                       child: Stack(
                     children: [
                       BlocProvider.value(
-                          value: state.inputLayerCubit,
-                          child: const TextInputLayer()),
+                          value: state.canvasCubit,
+                          child: const LayersCanvas()),
                       BlocProvider.value(
                           value: state.slidersCubit, child: const Sliders())
                     ],

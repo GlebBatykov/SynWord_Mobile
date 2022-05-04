@@ -11,6 +11,7 @@ class TextInputLayerBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textInputLayerCubit = context.watch<TextInputLayerCubit>();
+
     var textInputLayerHeaderCubit = context.watch<TextInputLayerHeaderCubit>();
 
     return BlocBuilder<TextInputLayerBodyCubit, TextInputLayerBodyState>(

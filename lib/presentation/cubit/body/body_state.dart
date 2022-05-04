@@ -6,9 +6,9 @@ abstract class BodyState {}
 class BodyInitial extends BodyState {}
 
 class BodyShow extends BodyState {
-  final TextInputLayerCubit inputLayerCubit;
+  final LayersCanvasCubit canvasCubit;
 
   final SlidersCubit slidersCubit;
 
-  BodyShow(this.inputLayerCubit, this.slidersCubit);
+  BodyShow(this.canvasCubit, this.slidersCubit);
 }

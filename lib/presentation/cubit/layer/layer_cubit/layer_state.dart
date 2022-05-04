@@ -2,13 +2,15 @@ part of 'layer_cubit.dart';
 
 @immutable
 abstract class LayerState {
+  final Offset offset;
+
   final Size size;
 
-  const LayerState(this.size);
+  const LayerState(this.offset, this.size);
 }
 
 class LayerInitial extends LayerState {
-  const LayerInitial(Size size) : super(size);
+  const LayerInitial(Offset offset, Size size) : super(offset, size);
 }
 
 class LayerShow extends LayerState {
@@ -16,5 +18,6 @@ class LayerShow extends LayerState {
 
   final LayerBodyCubit bodyCubit;
 
-  const LayerShow(Size size, this.headerCubit, this.bodyCubit) : super(size);
+  const LayerShow(this.headerCubit, this.bodyCubit, Offset offset, Size size)
+      : super(offset, size);
 }
