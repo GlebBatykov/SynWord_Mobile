@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/body/body_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/layer/layer_cubit/layer_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/layer/layer.dart';
+import '../cubit/body/body_cubit.dart';
 import 'appbar/appbar.dart';
 import 'layer/layers_canvas.dart';
-import 'layer/text_input_layer/text_input_layer.dart';
 import 'page/pages_properties.dart';
 import 'sliders/sliders.dart';
 
@@ -15,31 +12,41 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var appbarHeight = 60.0;
+
     return Container(
       margin: PagesProperties.margin,
-      child: Column(
-        children: [
-          const Appbar(),
-          BlocBuilder<BodyCubit, BodyState>(
-              bloc: GetIt.instance<BodyCubit>(),
-              builder: (context, state) {
-                if (state is BodyShow) {
-                  return Expanded(
-                      child: Stack(
-                    children: [
-                      BlocProvider.value(
-                          value: state.canvasCubit,
-                          child: const LayersCanvas()),
-                      BlocProvider.value(
-                          value: state.slidersCubit, child: const Sliders())
-                    ],
-                  ));
-                } else {
-                  return Container();
-                }
-              })
-        ],
-      ),
+      child: LayoutBuilder(builder: ((context, constraints) {
+        var bodyHeight = constraints.maxHeight - appbarHeight;
+
+        var bodySize = Size(constraints.maxWidth, bodyHeight);
+
+        return Column(
+          children: [
+            SizedBox(height: appbarHeight, child: const Appbar()),
+            SizedBox(
+              height: constraints.maxHeight - appbarHeight,
+              child: BlocBuilder<BodyCubit, BodyState>(
+                  bloc: BodyCubit(bodySize),
+                  builder: (context, state) {
+                    if (state is BodyShow) {
+                      return Stack(
+                        children: [
+                          BlocProvider.value(
+                              value: state.canvasCubit,
+                              child: const LayersCanvas()),
+                          BlocProvider.value(
+                              value: state.slidersCubit, child: const Sliders())
+                        ],
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }),
+            )
+          ],
+        );
+      })),
     );
   }
 }

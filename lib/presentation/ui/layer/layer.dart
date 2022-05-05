@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/layer/layer_cubit/layer_cubit.dart';
+import '../../cubit/layer/layer/layer_cubit.dart';
 import 'layer_body.dart';
 import 'layer_header/layer_header.dart';
+import 'layer_properties.dart';
 
 class Layer extends StatelessWidget {
   const Layer({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class Layer extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-                height: 55,
+                height: LayerProperties.headerHeight,
                 child: BlocProvider.value(
                     value: state.headerCubit, child: const LayerHeader())),
             BlocProvider.value(value: state.bodyCubit, child: const LayerBody())
@@ -35,10 +36,12 @@ class Layer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LayerCubit, LayerState>(builder: (context, state) {
-      return Positioned(
+      return AnimatedPositioned(
           left: state.offset.dx,
           top: state.offset.dy,
-          width: MediaQuery.of(context).size.width,
+          width: state.size.width,
+          height: state.size.height,
+          duration: const Duration(),
           child: _buildLayer(state));
     });
   }

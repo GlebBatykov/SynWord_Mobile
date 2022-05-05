@@ -7,6 +7,7 @@ import '../../../cubit/layer/text_input_layer/body/text_input_layer_body_cubit.d
 import '../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
 import '../../../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
 import '../layer_close_button.dart';
+import '../layer_properties.dart';
 import 'body/text_input_layer_body_paste_button.dart';
 
 class TextInputLayerHeader extends StatelessWidget {
@@ -15,6 +16,7 @@ class TextInputLayerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textInputLayerCubit = context.watch<TextInputLayerCubit>();
+
     var textInputLayerBodyCubit = context.watch<TextInputLayerBodyCubit>();
 
     return BlocBuilder<TextInputLayerHeaderCubit, TextInputLayerHeaderState>(
@@ -76,7 +78,7 @@ class TextInputLayerHeader extends StatelessWidget {
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(25), topRight: Radius.circular(25)),
             child: Container(
-              height: 55,
+              height: LayerProperties.headerHeight,
               color: HexColor('B6452C'),
               child: const Center(
                 child: Text('Source text',

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/layer/layer_header/layer_header_cubit.dart';
 
+import '../../../cubit/layer/layer_header/layer_header_cubit.dart';
+import '../../../cubit/layer/layers_canvas/layers_canvas_cubit.dart';
 import '../layer_close_button.dart';
 
 class LayerHeader extends StatelessWidget {
@@ -36,7 +37,7 @@ class LayerHeader extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 25),
                   alignment: Alignment.centerRight,
                   width: constraints.maxWidth * 0.20,
-                  child: InkWell(onTap: () {}, child: const LayerCloseButton()))
+                  child: LayerCloseButton(onTap: () {}))
             ],
           );
         });

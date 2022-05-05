@@ -16,7 +16,10 @@ class LayerHeaderForeground extends LayerHeaderState {
 
   final bool isActionsVisible;
 
-  const LayerHeaderForeground(String title, this.actions, this.isActionsVisible)
+  final void Function()? onClose;
+
+  const LayerHeaderForeground(
+      String title, this.actions, this.isActionsVisible, this.onClose)
       : super(title);
 }
 

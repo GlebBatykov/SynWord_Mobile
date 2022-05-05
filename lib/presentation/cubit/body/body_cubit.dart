@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 import '../../model/layer/text_input_layer/length_borders.dart';
 import '../layer/layers_canvas/layers_canvas_cubit.dart';
@@ -9,13 +9,17 @@ import '../sliders/sliders_cubit/sliders_cubit.dart';
 part 'body_state.dart';
 
 class BodyCubit extends Cubit<BodyState> {
+  final Size _size;
+
   late final LengthBorders _textLengthBorders;
 
   late final LayersCanvasCubit _canvasCubit;
 
   final SlidersCubit _slidersCubit = SlidersCubit();
 
-  BodyCubit() : super(BodyInitial()) {
+  BodyCubit(Size size)
+      : _size = size,
+        super(BodyInitial()) {
     _initialize();
   }
 
@@ -24,7 +28,7 @@ class BodyCubit extends Cubit<BodyState> {
 
     var inputLayerCubit = TextInputLayerCubit(_textLengthBorders);
 
-    _canvasCubit = LayersCanvasCubit(inputLayerCubit);
+    _canvasCubit = LayersCanvasCubit(_size, inputLayerCubit);
 
     _canvasCubit.textChanges.listen(_handleTextChange);
 
