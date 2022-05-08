@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../cubit/layer/layer_header/layer_header_cubit.dart';
-import '../../../cubit/layer/layers_canvas/layers_canvas_cubit.dart';
 import '../layer_close_button.dart';
 
 class LayerHeader extends StatelessWidget {
