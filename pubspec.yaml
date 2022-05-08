@@ -31,7 +31,7 @@ dependencies:
     sdk: flutter
 
   poseidon:
-    path: ./local_packages/poseidon/
+    git: https://github.com/GlebBatykov/poseidon.git
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
