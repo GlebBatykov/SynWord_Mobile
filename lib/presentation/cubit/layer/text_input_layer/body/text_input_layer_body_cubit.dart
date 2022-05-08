@@ -4,10 +4,19 @@ import 'package:bloc/bloc.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../model/layer/text_input_layer/editing_change_details.dart';
+import '../../../../model/layer/text_input_layer/text_change_details.dart';
+
 part 'text_input_layer_body_state.dart';
 
 class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
-  final StreamController<int> _textChangeController =
+  final StreamController<TextChangeDetails> _textChangeController =
+      StreamController.broadcast();
+
+  final StreamController<int> _pasteTextController =
+      StreamController.broadcast();
+
+  final StreamController<EditingChangeDetails> _editingChangeController =
       StreamController.broadcast();
 
   final TextEditingController _editingController = TextEditingController();
@@ -16,7 +25,12 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
   bool _isEmpty = false;
 
-  Stream<int> get textChanges => _textChangeController.stream;
+  Stream<TextChangeDetails> get textChanges => _textChangeController.stream;
+
+  Stream<int> get pasteText => _pasteTextController.stream;
+
+  Stream<EditingChangeDetails> get editingChanges =>
+      _editingChangeController.stream;
 
   TextInputLayerBodyCubit() : super(TextInputLayerBodyInitial()) {
     _initialize();
@@ -24,7 +38,13 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
   void _initialize() {
     _editingController.addListener(() {
-      _textChangeController.sink.add(_editingController.text.length);
+      _textChangeController.sink.add(TextChangeDetails(
+          _editingController.text.length, _focusNode.hasFocus));
+    });
+
+    _focusNode.addListener(() {
+      _editingChangeController.sink.add(EditingChangeDetails(
+          _editingController.text.length, _focusNode.hasFocus));
     });
 
     toEmpty();
@@ -46,6 +66,10 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
     _focusNode.unfocus();
   }
 
+  void focus() {
+    _focusNode.requestFocus();
+  }
+
   void toNotEmpty() {
     if (_isEmpty) {
       emit(TextInputLayerBodyNotEmpty(_editingController, _focusNode));
@@ -65,6 +89,12 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
     await FlutterClipboard.copy(_editingController.text);
   }
 
+  Future<void> paste() async {
+    _editingController.text = await FlutterClipboard.paste();
+
+    _pasteTextController.sink.add(_editingController.text.length);
+  }
+
   void toForeground() {
     if (_editingController.text.isEmpty) {
       toEmpty();
@@ -76,6 +106,8 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
   @override
   Future<void> close() async {
     await _textChangeController.close();
+    await _pasteTextController.close();
+    await _editingChangeController.close();
 
     return super.close();
   }

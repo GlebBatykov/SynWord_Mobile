@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword_flutter_cubit_application/presentation/asset/history_page_asset.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/image_button.dart';
+import 'package:synword/presentation/asset/history_page_asset.dart';
+import 'package:synword/presentation/ui/button/image_button.dart';
 
 class CheckedLink extends StatelessWidget {
   final String url;

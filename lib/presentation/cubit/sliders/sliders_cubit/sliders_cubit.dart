@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/sliders/slider_cubit/slider_cubit.dart';
+
+import '../slider_cubit/slider_cubit.dart';
 
 part 'sliders_state.dart';
 

@@ -1,4 +1,4 @@
-import 'package:synword_flutter_cubit_application/presentation/model/page/history/result/check/check_result_link.dart';
+import 'package:synword/presentation/model/page/history/result/check/check_result_link.dart';
 
 import '../../result_info.dart';
 

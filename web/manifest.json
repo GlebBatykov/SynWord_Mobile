@@ -1,6 +1,6 @@
 {
-    "name": "synword_flutter_cubit_application",
-    "short_name": "synword_flutter_cubit_application",
+    "name": "synword",
+    "short_name": "synword",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

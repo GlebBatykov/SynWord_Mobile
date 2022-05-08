@@ -5,7 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../../../asset/icon_asset.dart';
 import '../../../../cubit/page/history/body/item/history_page_body_result_item_cubit.dart';
 import '../../../../model/page/history/result_info.dart';
-import '../../../image_button.dart';
+import '../../../button/image_button.dart';
 import '../../../material_container.dart';
 
 class HistoryPageBodyResultItem extends StatelessWidget {

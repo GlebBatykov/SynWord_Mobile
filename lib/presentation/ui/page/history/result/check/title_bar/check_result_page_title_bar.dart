@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/history/result/check/title_bar/check_result_page_percentages_board.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/page_title_bar.dart';
+import 'package:synword/presentation/ui/page/history/result/check/title_bar/check_result_page_percentages_board.dart';
+import 'package:synword/presentation/ui/page/page_title_bar.dart';
 
 class CheckResultPageTitleBar extends StatelessWidget {
   final int percentages;

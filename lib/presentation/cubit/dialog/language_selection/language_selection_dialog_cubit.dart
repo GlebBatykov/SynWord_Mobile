@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:synword_flutter_cubit_application/presentation/asset/dialog/language_selection_dialog_asset.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/dialog/language_selection/item/language_selection_dialog_item_cubit.dart';
 
+import '../../../asset/dialog/language_selection_dialog_asset.dart';
 import '../../../model/dialog/language_selection/language_item_data.dart';
+import 'item/language_selection_dialog_item_cubit.dart';
 
 part 'language_selection_dialog_state.dart';
 

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:synword_flutter_cubit_application/presentation/model/page/history/result/check/check_result_link.dart';
+import 'package:synword/presentation/model/page/history/result/check/check_result_link.dart';
 
 import '../../../../../model/page/history/result/check/check_result_info.dart';
 

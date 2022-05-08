@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/pages_properties.dart';
+import 'package:synword/presentation/ui/page/pages_properties.dart';
 
 import 'body/coin_page_body.dart';
 import 'title_bar/coin_page_title_bar.dart';

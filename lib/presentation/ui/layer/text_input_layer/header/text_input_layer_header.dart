@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:synword/presentation/ui/button/language_select_button.dart';
 
-import '../../../asset/icon_asset.dart';
-import '../../../cubit/layer/text_input_layer/body/text_input_layer_body_cubit.dart';
-import '../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
-import '../../../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
-import '../layer_close_button.dart';
-import '../layer_properties.dart';
-import 'body/text_input_layer_body_paste_button.dart';
+import '../../../../asset/icon_asset.dart';
+import '../../../../cubit/layer/text_input_layer/body/text_input_layer_body_cubit.dart';
+import '../../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
+import '../../../../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
+import '../../layer_close_button.dart';
+import '../../layer_properties.dart';
+import 'text_input_layer_header_copy_button.dart';
 
 class TextInputLayerHeader extends StatelessWidget {
   const TextInputLayerHeader({Key? key}) : super(key: key);
@@ -52,20 +53,20 @@ class TextInputLayerHeader extends StatelessWidget {
                         IconAsset.info,
                         width: 20,
                         height: 20,
-                      )
+                      ),
+                      const LanguageSelectButton()
                     ]),
                     Row(
                       children: [
                         if (state.textLength > 0)
-                          TextInputLayerBodyPasteButton(
+                          TextInputLayerHeaderCopyButton(
                             onTap: () async {
-                              textInputLayerBodyCubit.copy();
+                              await textInputLayerBodyCubit.copy();
                             },
                           ),
-                        if (state is TextInputLayerHeaderEditing)
-                          LayerCloseButton(onTap: () {
-                            textInputLayerCubit.toEmpty();
-                          }),
+                        LayerCloseButton(onTap: () {
+                          textInputLayerCubit.toEmpty();
+                        })
                       ],
                     )
                   ]),

@@ -92,10 +92,10 @@ BEGIN
             VALUE "CompanyName", "com.example" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "synword_flutter_cubit_application" "\0"
+            VALUE "InternalName", "synword" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "synword_flutter_cubit_application.exe" "\0"
-            VALUE "ProductName", "synword_flutter_cubit_application" "\0"
+            VALUE "OriginalFilename", "synword.exe" "\0"
+            VALUE "ProductName", "synword" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

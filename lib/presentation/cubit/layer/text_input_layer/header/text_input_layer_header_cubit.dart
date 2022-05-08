@@ -21,13 +21,15 @@ class TextInputLayerHeaderCubit extends Cubit<TextInputLayerHeaderState> {
   }
 
   void changeTextLegnth(int length) {
-    _textLength = length;
+    if (length != _textLength) {
+      _textLength = length;
 
-    if (!_isEmpty) {
-      if (_isEditing) {
-        emit(TextInputLayerHeaderEditing(_textLength, _lengthBorders));
-      } else {
-        emit(TextInputLayerHeaderNotEmptyShow(_textLength, _lengthBorders));
+      if (!_isEmpty) {
+        if (_isEditing) {
+          emit(TextInputLayerHeaderEditing(_textLength, _lengthBorders));
+        } else {
+          emit(TextInputLayerHeaderNotEmptyShow(_textLength, _lengthBorders));
+        }
       }
     }
   }

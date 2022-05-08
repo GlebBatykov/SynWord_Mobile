@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../model/layer/text_input_layer/editing_change_details.dart';
+import '../../../model/layer/text_input_layer/text_change_details.dart';
 import '../layer/layer_cubit.dart';
 import '../operation_layer/check/check_layer_cubit.dart';
 import '../text_input_layer/text_input_layer_cubit.dart';
@@ -14,7 +16,10 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
   final List<LayerCubit> _layersCubits = [];
 
-  Stream<int> get textChanges => _inputLayerCubit.textChanges;
+  Stream<TextChangeDetails> get textChanges => _inputLayerCubit.textChanges;
+
+  Stream<EditingChangeDetails> get editingChanges =>
+      _inputLayerCubit.editingChanges;
 
   LayersCanvasCubit(Size size, TextInputLayerCubit inputLayerCubit)
       : _size = size,
@@ -24,7 +29,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   }
 
   void _initialize() {
-    addCheckLayer();
+    //addCheckLayer();
 
     _show();
   }

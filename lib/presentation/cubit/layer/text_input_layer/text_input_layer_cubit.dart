@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../../model/layer/text_input_layer/length_borders.dart';
+import '../../../model/layer/text_input_layer/text_change_details.dart';
 import 'body/text_input_layer_body_cubit.dart';
 import 'header/text_input_layer_header_cubit.dart';
 
@@ -14,7 +16,9 @@ class TextInputLayerCubit extends Cubit<TextInputLayerState> {
 
   late final TextInputLayerBodyCubit _bodyCubit;
 
-  Stream<int> get textChanges => _bodyCubit.textChanges;
+  Stream<TextChangeDetails> get textChanges => _bodyCubit.textChanges;
+
+  Stream<EditingChangeDetails> get editingChanges => _bodyCubit.editingChanges;
 
   TextInputLayerCubit(LengthBorders textLengthBorders)
       : _textLengthBorders = textLengthBorders,
@@ -26,7 +30,17 @@ class TextInputLayerCubit extends Cubit<TextInputLayerState> {
     _headerCubit = TextInputLayerHeaderCubit(_textLengthBorders);
     _bodyCubit = TextInputLayerBodyCubit();
 
+    _bodyCubit.pasteText.listen(_handlePastText);
+
     emit(TextInputLayerShow(_headerCubit, _bodyCubit));
+  }
+
+  void _handlePastText(int length) {
+    if (length > 0) {
+      toEditing();
+      _headerCubit.changeTextLegnth(length);
+      _bodyCubit.focus();
+    }
   }
 
   void toEmpty() {

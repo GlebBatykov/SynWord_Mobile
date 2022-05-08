@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword_flutter_cubit_application/presentation/asset/premium_page_asset.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/premium/body/premium_page_body_button.dart';
+import 'package:synword/presentation/asset/premium_page_asset.dart';
+import 'package:synword/presentation/ui/page/premium/body/premium_page_body_button.dart';
 
 import '../premium_page_body_item.dart';
 

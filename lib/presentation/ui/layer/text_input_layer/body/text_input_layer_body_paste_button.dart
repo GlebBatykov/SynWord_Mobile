@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../asset/icon_asset.dart';
-import '../../../image_button.dart';
+import '../../../button/image_button.dart';
 
 class TextInputLayerBodyPasteButton extends StatelessWidget {
   final void Function()? onTap;
@@ -12,11 +12,11 @@ class TextInputLayerBodyPasteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ImageButton(
         assetPath: IconAsset.paste,
-        imageWidth: 20,
-        imageHeight: 20,
-        width: 30,
-        height: 30,
-        onTap: onTap,
-        imageColor: Colors.black);
+        imageWidth: 25,
+        imageHeight: 25,
+        width: 40,
+        height: 40,
+        imageColor: Colors.black.withOpacity(0.6),
+        onTap: onTap);
   }
 }

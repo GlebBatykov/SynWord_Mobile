@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.synword_flutter_cubit_application">
+    package="com.example.synword">
    <application
-        android:label="synword_flutter_cubit_application"
+        android:label="synword"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

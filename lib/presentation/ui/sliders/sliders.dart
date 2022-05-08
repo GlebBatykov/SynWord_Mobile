@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/sliders/slider_cubit/slider_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/cubit/sliders/sliders_cubit/sliders_cubit.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/sliders/right_slider.dart';
+import 'package:synword/presentation/cubit/sliders/slider_cubit/slider_cubit.dart';
+import 'package:synword/presentation/cubit/sliders/sliders_cubit/sliders_cubit.dart';
+import 'package:synword/presentation/ui/sliders/right_slider.dart';
 
 import 'left_slider.dart';
 

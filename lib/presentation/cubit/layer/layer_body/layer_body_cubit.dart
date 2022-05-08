@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:synword_flutter_cubit_application/presentation/model/layer/body/layer_body_content_data.dart';
+
+import '../../../model/layer/body/layer_body_content_data.dart';
 
 part 'layer_body_state.dart';
 

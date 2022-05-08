@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -14,24 +12,27 @@ class LayerHeaderCubit extends Cubit<LayerHeaderState> {
 
   final bool _isActionsVisible;
 
-  final void Function()? onClose;
+  final void Function()? _onClose;
 
   LayerHeaderCubit(String title, Color color,
-      {List<Widget>? actions, bool isActionsVisible = true, this.onClose})
+      {List<Widget>? actions,
+      bool isActionsVisible = true,
+      void Function()? onClose})
       : _title = title,
         _color = color,
         _actions = actions ?? [],
         _isActionsVisible = isActionsVisible,
+        _onClose = onClose,
         super(LayerHeaderInitial(title)) {
     _initialize();
   }
 
   void _initialize() {
-    emit(LayerHeaderForeground(_title, _actions, _isActionsVisible));
+    emit(LayerHeaderForeground(_title, _actions, _isActionsVisible, _onClose));
   }
 
   void toForeground() {
-    emit(LayerHeaderForeground(_title, _actions, _isActionsVisible));
+    emit(LayerHeaderForeground(_title, _actions, _isActionsVisible, _onClose));
   }
 
   void toBackground() {

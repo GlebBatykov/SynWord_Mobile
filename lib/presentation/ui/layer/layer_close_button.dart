@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../asset/icon_asset.dart';
-import '../image_button.dart';
+import '../button/image_button.dart';
 
 class LayerCloseButton extends StatelessWidget {
   final void Function()? onTap;

@@ -1,4 +1,4 @@
-package com.example.synword_flutter_cubit_application
+package com.example.synword
 
 import io.flutter.embedding.android.FlutterActivity
 

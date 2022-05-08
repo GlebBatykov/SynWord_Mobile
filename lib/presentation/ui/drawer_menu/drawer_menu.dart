@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poseidon/poseidon.dart';
+import 'package:synword/presentation/ui/dialog/language_selection/language_selection_dialog.dart';
 
 import '../../asset/menu_asset.dart';
 import '../../navigation/navigation_routes.dart';
@@ -49,7 +50,10 @@ class DrawerMenu extends StatelessWidget {
                   imageName: MenuAsset.languages,
                   imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Language',
-                  onPress: () {},
+                  onPress: () {
+                    Poseidon.callDialog(
+                        (context) => const LanguageSelectionDialog());
+                  },
                   padding: const EdgeInsets.only(top: 42)),
               DrawerMenuItem(
                   imageName: MenuAsset.feedback,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/material_container.dart';
+import 'package:synword/presentation/ui/material_container.dart';
 
 import '../../cubit/sliders/slider_cubit/slider_cubit.dart';
 import 'slider_error_icon.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
 import 'body/text_input_layer_body.dart';
-import 'text_input_layer_header.dart';
+import 'header/text_input_layer_header.dart';
 
 class TextInputLayer extends StatelessWidget {
   const TextInputLayer({Key? key}) : super(key: key);

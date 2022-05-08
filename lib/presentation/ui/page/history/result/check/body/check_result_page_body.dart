@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/history/result/result_page_initial_text.dart';
+import 'package:synword/presentation/ui/page/history/result/result_page_initial_text.dart';
 
 import '../../../../../../asset/history_page_asset.dart';
 import '../../../../../../cubit/page/history/result/check/check_result_page_cubit.dart';

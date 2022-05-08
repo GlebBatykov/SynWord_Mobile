@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword_flutter_cubit_application/presentation/ui/page/history/result/result_page_initial_text.dart';
+import 'package:synword/presentation/ui/page/history/result/result_page_initial_text.dart';
 
 import '../../../../../../cubit/page/history/result/rephrase/rephrase_result_page_cubit.dart';
 import '../../../../../../model/page/history/result/rephrase/rephrased_word.dart';
