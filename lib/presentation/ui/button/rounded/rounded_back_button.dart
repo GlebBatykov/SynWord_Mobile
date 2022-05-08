@@ -11,7 +11,7 @@ class RoundedBackButton extends StatelessWidget {
     return RoundedButton(
         iconData: Icons.arrow_back,
         onTap: () {
-          Poseidon.pop();
+          Poseidon.instance.pop();
         });
   }
 }

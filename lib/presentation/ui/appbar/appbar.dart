@@ -25,7 +25,7 @@ class Appbar extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Poseidon.openDrawer();
+            Poseidon.instance.openDrawer();
           },
         ),
         const Text(
@@ -41,7 +41,7 @@ class Appbar extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            Poseidon.callDialog((context) {
+            Poseidon.instance.callDialog((context) {
               return const UploadFileDialog();
             });
           },

@@ -27,7 +27,7 @@ class DrawerMenu extends StatelessWidget {
                 imagePadding: const EdgeInsets.only(top: 6),
                 title: 'History',
                 onPress: () {
-                  Poseidon.navigate(NavigationRoutes.historyPage);
+                  Poseidon.instance.navigate(NavigationRoutes.historyPage);
                 },
               ),
               DrawerMenuItem(
@@ -35,7 +35,7 @@ class DrawerMenu extends StatelessWidget {
                   imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Premium',
                   onPress: () {
-                    Poseidon.navigate(NavigationRoutes.premiumPage);
+                    Poseidon.instance.navigate(NavigationRoutes.premiumPage);
                   },
                   padding: const EdgeInsets.only(top: 42)),
               DrawerMenuItem(
@@ -43,7 +43,7 @@ class DrawerMenu extends StatelessWidget {
                   imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Balance',
                   onPress: () {
-                    Poseidon.navigate(NavigationRoutes.coinPage);
+                    Poseidon.instance.navigate(NavigationRoutes.coinPage);
                   },
                   padding: const EdgeInsets.only(top: 20)),
               DrawerMenuItem(
@@ -51,7 +51,7 @@ class DrawerMenu extends StatelessWidget {
                   imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Language',
                   onPress: () {
-                    Poseidon.callDialog(
+                    Poseidon.instance.callDialog(
                         (context) => const LanguageSelectionDialog());
                   },
                   padding: const EdgeInsets.only(top: 42)),

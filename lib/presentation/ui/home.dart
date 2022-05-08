@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: Poseidon.scaffoldKey,
+      key: Poseidon.instance.scaffoldKey,
       drawer: const DrawerMenu(),
       drawerEnableOpenDragGesture: false,
       backgroundColor: HexColor('#301B28'),

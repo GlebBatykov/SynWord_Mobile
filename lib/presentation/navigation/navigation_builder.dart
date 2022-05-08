@@ -18,7 +18,7 @@ import 'rephrase_result_page_arguments.dart';
 
 class NavigationBuilder {
   void build() {
-    Poseidon.createRoutes(routes: [
+    Poseidon.instance.createRoutes(routes: [
       PoseidonRoute(
           path: NavigationRoutes.premiumPage,
           builder: (context, arguments) {

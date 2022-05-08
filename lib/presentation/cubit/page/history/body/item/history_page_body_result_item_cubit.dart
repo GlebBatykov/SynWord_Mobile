@@ -22,13 +22,13 @@ class HistoryPageBodyResultItemCubit
     if (info is CheckResultInfo) {
       emit(HistoryPageBodyResultItemCheck(
           'Plagiarism check', info.text, info.source, () {
-        Poseidon.navigate(NavigationRoutes.checkResultPage,
+        Poseidon.instance.navigate(NavigationRoutes.checkResultPage,
             arguments: CheckResultPageArguments(info));
       }, info.percentages));
     } else if (info is RephraseResultInfo) {
       emit(HistoryPageBodyResultItemRephrase(
           'Rephrased', info.text, info.source, () {
-        Poseidon.navigate(NavigationRoutes.rephraseResultPage,
+        Poseidon.instance.navigate(NavigationRoutes.rephraseResultPage,
             arguments: RephraseResultPageArguments(info));
       }));
     }
