@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +9,8 @@ import '../layer_header/layer_header_cubit.dart';
 
 part 'layer_state.dart';
 
-class LayerCubit<T extends LayerBodyContentData> extends Cubit<LayerState> {
+abstract class LayerCubit<T extends LayerBodyContentData>
+    extends Cubit<LayerState> {
   final ContentBuilder<T>? _bodyBuilder;
 
   final List<Widget>? _actions;
@@ -37,20 +40,26 @@ class LayerCubit<T extends LayerBodyContentData> extends Cubit<LayerState> {
 
     load();
 
-    show();
+    _show();
   }
 
   void move(Offset offset) {
     _offset += offset;
 
-    show();
+    _show();
   }
 
   void load() {
     _bodyCubit.load();
   }
 
-  void show() {
+  void _show() {
     emit(LayerShow(_headerCubit, _bodyCubit, _offset, _size));
+  }
+
+  FutureOr<void> work();
+
+  void show(T data) {
+    _bodyCubit.show(data);
   }
 }

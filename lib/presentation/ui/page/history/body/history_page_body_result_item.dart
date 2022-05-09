@@ -4,7 +4,6 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../asset/icon_asset.dart';
 import '../../../../cubit/page/history/body/item/history_page_body_result_item_cubit.dart';
-import '../../../../model/page/history/result_info.dart';
 import '../../../button/image_button.dart';
 import '../../../material_container.dart';
 
@@ -29,15 +28,6 @@ class HistoryPageBodyResultItem extends StatelessWidget {
       child: Text(state.percentages.toString(),
           style: TextStyle(color: color, fontWeight: FontWeight.w400)),
     );
-  }
-
-  Widget _buildSourceIcon(TextSource source) {
-    var assetPath =
-        source == TextSource.docx ? IconAsset.docxFile : IconAsset.pdf;
-
-    return Container(
-        margin: const EdgeInsets.only(left: 13),
-        child: Image.asset(assetPath, width: 20, height: 20));
   }
 
   @override
@@ -73,9 +63,7 @@ class HistoryPageBodyResultItem extends StatelessWidget {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w500)),
                             if (state is HistoryPageBodyResultItemCheck)
-                              _buildPercentagesBox(state),
-                            if (state.source != TextSource.userInput)
-                              _buildSourceIcon(state.source)
+                              _buildPercentagesBox(state)
                           ],
                         ),
                       ),

@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../asset/premium_page_asset.dart';
 import '../../../../cubit/page/premium/premium_page_cubit.dart';
+import '../../../load_screen.dart';
 import '../../page_body.dart';
 import 'premium_page_body_button.dart';
 import 'section/premium_page_body_gold_section.dart';
@@ -19,22 +20,6 @@ class PremiumPageBody extends StatelessWidget {
       children: const [
         PremiumPageBodySilverSection(),
         PremiumpageBodyGoldSection(),
-      ],
-    );
-  }
-
-  Widget _buildLoadState() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: 100,
-          height: 100,
-          margin: const EdgeInsets.only(bottom: 17),
-          color: HexColor('#C4C4C4').withOpacity(0.7),
-        ),
-        const Text('Please wait...',
-            style: TextStyle(fontFamily: 'Araboto-Medium'))
       ],
     );
   }
@@ -173,7 +158,7 @@ class PremiumPageBody extends StatelessWidget {
               if (state is PremiumPageShow) {
                 return _buildShowState();
               } else if (state is PremiumPageLoad) {
-                return _buildLoadState();
+                return const LoadScreen();
               } else if (state is PremiumPageActive) {
                 return _buildActiveState(state);
               } else {

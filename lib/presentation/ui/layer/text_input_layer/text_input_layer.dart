@@ -15,6 +15,7 @@ class TextInputLayer extends StatelessWidget {
       if (state is TextInputLayerShow) {
         return Container(
           margin: const EdgeInsets.all(15),
+          height: state.size.height - MediaQuery.of(context).viewInsets.bottom,
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(25)),
           child: MultiBlocProvider(

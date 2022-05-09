@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword/presentation/ui/page/history/result/result_page_initial_text.dart';
+import 'package:synword/presentation/ui/check_result_links/check_result_links.dart';
 
 import '../../../../../../cubit/page/history/result/check/check_result_page_cubit.dart';
-import '../../../../../checked_link.dart';
 import '../../../../page_body.dart';
+import '../../result_page_initial_text.dart';
 import '../../result_page_tab_controller.dart';
 
 class CheckResultPageBody extends StatelessWidget {
@@ -20,25 +20,7 @@ class CheckResultPageBody extends StatelessWidget {
           second: Center(
             child: Container(
               margin: const EdgeInsets.only(top: 17, bottom: 17),
-              child: MediaQuery.removePadding(
-                  context: context,
-                  removeTop: true,
-                  child: RawScrollbar(
-                      thickness: 1,
-                      isAlwaysShown: true,
-                      thumbColor: Colors.black.withOpacity(0.7),
-                      crossAxisMargin: 5,
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 24, right: 24),
-                        child: ListView.builder(
-                            padding: EdgeInsets.zero,
-                            itemCount: state.links.length,
-                            itemBuilder: (context, index) {
-                              return CheckedLink(
-                                  url: state.links[index].url,
-                                  percentages: state.links[index].percentages);
-                            }),
-                      ))),
+              child: CheckResultLinks(links: state.links),
             ),
           ),
         );

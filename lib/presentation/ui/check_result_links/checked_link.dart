@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword/presentation/asset/history_page_asset.dart';
-import 'package:synword/presentation/ui/button/image_button.dart';
+
+import '../../asset/history_page_asset.dart';
+import '../button/image_button.dart';
 
 class CheckedLink extends StatelessWidget {
   final String url;
@@ -25,19 +26,20 @@ class CheckedLink extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Flexible(
+              child: Container(
+                  alignment: Alignment.center,
+                  height: 40,
+                  child: Text(url,
+                      textAlign: TextAlign.center,
+                      style:
+                          const TextStyle(decoration: TextDecoration.underline),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis))),
           Container(
               alignment: Alignment.center,
-              width: constraints.maxWidth * 0.7,
               height: 40,
-              child: Text(url,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(decoration: TextDecoration.underline),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis)),
-          Container(
-              alignment: Alignment.center,
-              width: constraints.maxWidth * 0.25,
-              height: 40,
+              margin: const EdgeInsets.only(left: 25),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

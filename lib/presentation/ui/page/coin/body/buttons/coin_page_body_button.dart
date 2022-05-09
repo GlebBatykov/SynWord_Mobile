@@ -9,14 +9,16 @@ class CoinPageBodyButton extends StatelessWidget {
 
   final EdgeInsets? margin;
 
+  final void Function()? onTap;
+
   const CoinPageBodyButton(
-      {Key? key, required this.imageAsset, this.color, this.margin})
+      {Key? key, required this.imageAsset, this.color, this.margin, this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialContainer(
-      onTap: () {},
+      onTap: onTap,
       margin: margin,
       boxShadow: [
         BoxShadow(

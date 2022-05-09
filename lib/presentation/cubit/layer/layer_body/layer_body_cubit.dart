@@ -24,6 +24,14 @@ class LayerBodyCubit<T extends LayerBodyContentData>
   }
 
   void show(T data) {
-    emit(LayerBodyShow<T>(_builder, data));
+    late Widget content;
+
+    if (_builder != null) {
+      content = _builder!.call(data);
+    } else {
+      content = Container();
+    }
+
+    emit(LayerBodyShow(content));
   }
 }

@@ -7,10 +7,8 @@ class LayerBodyInitial extends LayerBodyState {}
 
 class LayerBodyLoad extends LayerBodyState {}
 
-class LayerBodyShow<T extends LayerBodyContentData> extends LayerBodyState {
-  final ContentBuilder<T>? builder;
+class LayerBodyShow extends LayerBodyState {
+  final Widget content;
 
-  final T data;
-
-  LayerBodyShow(this.builder, this.data);
+  LayerBodyShow(this.content);
 }

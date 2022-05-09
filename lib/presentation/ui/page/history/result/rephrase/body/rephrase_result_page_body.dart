@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synword/presentation/ui/custom_scrollbar.dart';
 import 'package:synword/presentation/ui/page/history/result/result_page_initial_text.dart';
 
 import '../../../../../../cubit/page/history/result/rephrase/rephrase_result_page_cubit.dart';
@@ -31,19 +32,15 @@ class RephraseResultPageBody extends StatelessWidget {
               child: MediaQuery.removePadding(
                   context: context,
                   removeTop: true,
-                  child: RawScrollbar(
-                      thickness: 1,
-                      isAlwaysShown: true,
-                      thumbColor: Colors.black.withOpacity(0.7),
-                      crossAxisMargin: 5,
+                  child: CustomScrollbar(
                       child: Container(
-                        margin: const EdgeInsets.only(left: 13, right: 13),
-                        child: SingleChildScrollView(
-                            child: SelectableText.rich(TextSpan(
-                                style: const TextStyle(fontSize: 16),
-                                children: _buildTextSpans(state.rephrasedText,
-                                    state.rephrasedWord)))),
-                      ))),
+                    margin: const EdgeInsets.only(left: 13, right: 13),
+                    child: SingleChildScrollView(
+                        child: SelectableText.rich(TextSpan(
+                            style: const TextStyle(fontSize: 16),
+                            children: _buildTextSpans(
+                                state.rephrasedText, state.rephrasedWord)))),
+                  ))),
             ));
       } else {
         return const PageBody();

@@ -12,7 +12,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appbarHeight = 60.0;
+    var appbarHeight = 78.0;
 
     return Container(
       margin: PagesProperties.margin,

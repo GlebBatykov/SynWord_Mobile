@@ -54,7 +54,9 @@ class TextInputLayerHeader extends StatelessWidget {
                         width: 20,
                         height: 20,
                       ),
-                      const LanguageSelectButton()
+                      const Padding(
+                          padding: EdgeInsets.only(left: 14),
+                          child: LanguageSelectButton())
                     ]),
                     Row(
                       children: [

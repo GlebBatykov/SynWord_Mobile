@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../cubit/layer/text_input_layer/body/text_input_layer_body_cubit.dart';
 import '../../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
 import '../../../../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
+import '../../../custom_scrollbar.dart';
 import 'text_input_layer_body_paste_button.dart';
 
 class TextInputLayerBody extends StatelessWidget {
@@ -30,40 +31,50 @@ class TextInputLayerBody extends StatelessWidget {
                 margin = const EdgeInsets.only(left: 16, right: 16, bottom: 16);
               }
 
-              return Stack(children: [
-                Container(
-                  margin: margin,
-                  child: TextFormField(
-                    controller: state.editingController,
-                    focusNode: state.focusNode,
-                    expands: true,
-                    maxLines: null,
-                    minLines: null,
-                    onTap: () {
-                      inputLayerCubit.toEditing();
-                    },
-                    onChanged: (value) {
-                      headerCubit.changeTextLegnth(value.length);
+              var scrollController = ScrollController();
 
-                      if (value.isNotEmpty) {
-                        inputLayerCubit.toEditing();
-                      }
-                    },
-                    onEditingComplete: () {
-                      if (state.editingController.text.isEmpty) {
-                        inputLayerCubit.toEmpty();
-                      } else {
-                        inputLayerCubit.toNotEmptyShow();
-                      }
-                    },
-                    textInputAction: TextInputAction.done,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: state is TextInputLayerBodyEmpty
-                            ? 'Text or website address'
-                            : '',
-                        hintStyle: const TextStyle(
-                            fontFamily: 'Audrey', fontSize: 18)),
+              return Stack(children: [
+                MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: CustomScrollbar(
+                    controller: scrollController,
+                    child: Container(
+                      margin: margin,
+                      child: TextFormField(
+                        scrollController: scrollController,
+                        controller: state.editingController,
+                        focusNode: state.focusNode,
+                        expands: true,
+                        maxLines: null,
+                        minLines: null,
+                        onTap: () {
+                          inputLayerCubit.toEditing();
+                        },
+                        onChanged: (value) {
+                          headerCubit.changeTextLegnth(value.length);
+
+                          if (value.isNotEmpty) {
+                            inputLayerCubit.toEditing();
+                          }
+                        },
+                        onEditingComplete: () {
+                          if (state.editingController.text.isEmpty) {
+                            inputLayerCubit.toEmpty();
+                          } else {
+                            inputLayerCubit.toNotEmptyShow();
+                          }
+                        },
+                        textInputAction: TextInputAction.done,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: state is TextInputLayerBodyEmpty
+                                ? 'Text or website address'
+                                : '',
+                            hintStyle: const TextStyle(
+                                fontFamily: 'Audrey', fontSize: 18)),
+                      ),
+                    ),
                   ),
                 ),
                 if (state is TextInputLayerBodyEmpty)

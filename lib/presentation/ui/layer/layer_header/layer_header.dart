@@ -30,6 +30,7 @@ class LayerHeader extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 20,
                         fontFamily: 'Audrey',
+                        fontWeight: FontWeight.w700,
                         fontStyle: FontStyle.normal)),
               )),
               Container(

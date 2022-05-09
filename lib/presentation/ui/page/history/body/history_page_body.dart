@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:synword/presentation/ui/custom_scrollbar.dart';
 import 'package:synword/presentation/ui/page/history/body/history_page_body_result_item.dart';
 
 import '../../../../cubit/page/history/history_page_cubit.dart';
@@ -51,30 +52,25 @@ class HistoryPageBody extends StatelessWidget {
               removeBottom: true,
               removeTop: true,
               context: context,
-              child: RawScrollbar(
-                  thumbColor: HexColor('##4d4d4d'),
-                  isAlwaysShown: true,
-                  thickness: 2,
-                  crossAxisMargin: 5,
+              child: CustomScrollbar(
                   child: Container(
-                    padding: const EdgeInsets.only(left: 26, right: 26),
-                    child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: state.itemsCubits.length,
-                        itemBuilder: (context, index) {
-                          var margin = index < state.itemsCubits.length - 1
-                              ? const EdgeInsets.only(bottom: 20)
-                              : const EdgeInsets.only(bottom: 10);
+                padding: const EdgeInsets.only(left: 26, right: 26),
+                child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: state.itemsCubits.length,
+                    itemBuilder: (context, index) {
+                      var margin = index < state.itemsCubits.length - 1
+                          ? const EdgeInsets.only(bottom: 20)
+                          : const EdgeInsets.only(bottom: 10);
 
-                          return Align(
-                            alignment: Alignment.center,
-                            child: BlocProvider.value(
-                                value: state.itemsCubits[index],
-                                child:
-                                    HistoryPageBodyResultItem(margin: margin)),
-                          );
-                        }),
-                  )))),
+                      return Align(
+                        alignment: Alignment.center,
+                        child: BlocProvider.value(
+                            value: state.itemsCubits[index],
+                            child: HistoryPageBodyResultItem(margin: margin)),
+                      );
+                    }),
+              )))),
     );
   }
 

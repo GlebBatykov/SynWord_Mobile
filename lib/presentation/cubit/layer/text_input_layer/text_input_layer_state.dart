@@ -10,9 +10,11 @@ class TextInputLyaerInitial extends TextInputLayerState {
 }
 
 class TextInputLayerShow extends TextInputLayerState {
+  final Size size;
+
   final TextInputLayerHeaderCubit headerCubit;
 
   final TextInputLayerBodyCubit bodyCubit;
 
-  const TextInputLayerShow(this.headerCubit, this.bodyCubit);
+  const TextInputLayerShow(this.size, this.headerCubit, this.bodyCubit);
 }

@@ -10,6 +10,8 @@ import 'header/text_input_layer_header_cubit.dart';
 part 'text_input_layer_state.dart';
 
 class TextInputLayerCubit extends Cubit<TextInputLayerState> {
+  final Size _size;
+
   final LengthBorders _textLengthBorders;
 
   late final TextInputLayerHeaderCubit _headerCubit;
@@ -20,8 +22,9 @@ class TextInputLayerCubit extends Cubit<TextInputLayerState> {
 
   Stream<EditingChangeDetails> get editingChanges => _bodyCubit.editingChanges;
 
-  TextInputLayerCubit(LengthBorders textLengthBorders)
+  TextInputLayerCubit(LengthBorders textLengthBorders, Size size)
       : _textLengthBorders = textLengthBorders,
+        _size = size,
         super(const TextInputLyaerInitial()) {
     _initialize();
   }
@@ -32,7 +35,7 @@ class TextInputLayerCubit extends Cubit<TextInputLayerState> {
 
     _bodyCubit.pasteText.listen(_handlePastText);
 
-    emit(TextInputLayerShow(_headerCubit, _bodyCubit));
+    emit(TextInputLayerShow(_size, _headerCubit, _bodyCubit));
   }
 
   void _handlePastText(int length) {

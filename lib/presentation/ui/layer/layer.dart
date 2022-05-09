@@ -21,7 +21,9 @@ class Layer extends StatelessWidget {
                 height: LayerProperties.headerHeight,
                 child: BlocProvider.value(
                     value: state.headerCubit, child: const LayerHeader())),
-            BlocProvider.value(value: state.bodyCubit, child: const LayerBody())
+            Expanded(
+                child: BlocProvider.value(
+                    value: state.bodyCubit, child: const LayerBody()))
           ],
         ),
       );

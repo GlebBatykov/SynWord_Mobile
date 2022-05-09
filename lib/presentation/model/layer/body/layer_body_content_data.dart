@@ -1,1 +1,1 @@
-class LayerBodyContentData {}
+abstract class LayerBodyContentData {}

@@ -28,7 +28,7 @@ class BodyCubit extends Cubit<BodyState> {
   void _initialize() {
     _textLengthBorders = LengthBorders(100, 10000);
 
-    var inputLayerCubit = TextInputLayerCubit(_textLengthBorders);
+    var inputLayerCubit = TextInputLayerCubit(_textLengthBorders, _size);
 
     _canvasCubit = LayersCanvasCubit(_size, inputLayerCubit);
 
