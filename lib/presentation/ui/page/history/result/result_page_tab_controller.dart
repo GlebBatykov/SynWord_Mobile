@@ -45,16 +45,19 @@ class _ResultPageTabControllerState extends State<ResultPageTabController>
           children: [
             Container(
               margin: const EdgeInsets.only(left: 33, right: 33, bottom: 4),
-              child: TabBar(indicatorColor: HexColor('B6452C'), tabs: [
-                Tab(
-                  child:
-                      Image.asset(HistoryPageAsset.note, width: 30, height: 30),
-                ),
-                Tab(
-                  child: Image.asset(HistoryPageAsset.website,
-                      width: 30, height: 30),
-                )
-              ]),
+              child: TabBar(
+                  controller: _tabController,
+                  indicatorColor: HexColor('B6452C'),
+                  tabs: [
+                    Tab(
+                      child: Image.asset(HistoryPageAsset.note,
+                          width: 30, height: 30),
+                    ),
+                    Tab(
+                      child: Image.asset(HistoryPageAsset.website,
+                          width: 30, height: 30),
+                    )
+                  ]),
             ),
             Expanded(
                 child: PageBody(
