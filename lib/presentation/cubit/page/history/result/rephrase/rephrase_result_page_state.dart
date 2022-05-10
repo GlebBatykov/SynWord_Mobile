@@ -8,12 +8,7 @@ class RephraseResultPageInitial extends RephraseResultPageState {}
 class RephraseResultPageShow extends RephraseResultPageState {
   final String text;
 
-  final String rephrasedText;
+  final RephrasedTextCubit rephrasedTextCubit;
 
-  final TextSource source;
-
-  final List<RephrasedWord> rephrasedWord;
-
-  RephraseResultPageShow(
-      this.text, this.rephrasedText, this.source, this.rephrasedWord);
+  RephraseResultPageShow(this.text, this.rephrasedTextCubit);
 }

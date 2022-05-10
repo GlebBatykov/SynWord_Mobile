@@ -11,17 +11,24 @@ class RephraseResultPageTitleBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var pageCubit = context.watch<RephraseResultPageCubit>();
+
     return PageTitleBar(
       ratio: const [0.2, 0.6, 0.2],
       center: const PageClockBoard(),
       right: BlocBuilder<RephraseResultPageCubit, RephraseResultPageState>(
+          bloc: pageCubit,
           builder: (context, state) {
-        if (state is RephraseResultPageShow) {
-          return const RoundedCopyButton();
-        } else {
-          return Container();
-        }
-      }),
+            if (state is RephraseResultPageShow) {
+              return RoundedCopyButton(
+                onTap: () {
+                  pageCubit.copy();
+                },
+              );
+            } else {
+              return Container();
+            }
+          }),
     );
   }
 }

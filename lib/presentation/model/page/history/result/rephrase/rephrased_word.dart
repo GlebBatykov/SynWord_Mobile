@@ -1,9 +1,11 @@
 class RephrasedWord {
-  final int index;
+  String sourceWord;
 
-  final String sourceWord;
+  int startIndex;
 
-  final List<String> synonyms;
+  int endIndex;
 
-  RephrasedWord(this.index, this.sourceWord, this.synonyms);
+  List<String> synonyms;
+
+  RephrasedWord(this.sourceWord, this.startIndex, this.endIndex, this.synonyms);
 }

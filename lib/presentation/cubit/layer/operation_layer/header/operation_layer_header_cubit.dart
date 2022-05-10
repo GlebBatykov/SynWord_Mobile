@@ -1,9 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
+part of '../operation_layer.dart';
 
-part 'layer_header_state.dart';
-
-class LayerHeaderCubit extends Cubit<LayerHeaderState> {
+class OperationLayerHeaderCubit extends Cubit<OperationLayerHeaderState> {
   final String _title;
 
   final Color _color;
@@ -14,7 +11,7 @@ class LayerHeaderCubit extends Cubit<LayerHeaderState> {
 
   final void Function()? _onClose;
 
-  LayerHeaderCubit(String title, Color color,
+  OperationLayerHeaderCubit(String title, Color color,
       {List<Widget>? actions,
       bool isActionsVisible = true,
       void Function()? onClose})
@@ -23,19 +20,21 @@ class LayerHeaderCubit extends Cubit<LayerHeaderState> {
         _actions = actions ?? [],
         _isActionsVisible = isActionsVisible,
         _onClose = onClose,
-        super(LayerHeaderInitial(title)) {
+        super(OperationLayerHeaderInitial(title)) {
     _initialize();
   }
 
   void _initialize() {
-    emit(LayerHeaderForeground(_title, _actions, _isActionsVisible, _onClose));
+    emit(OperationLayerHeaderForeground(
+        _title, _actions, _isActionsVisible, _onClose));
   }
 
   void toForeground() {
-    emit(LayerHeaderForeground(_title, _actions, _isActionsVisible, _onClose));
+    emit(OperationLayerHeaderForeground(
+        _title, _actions, _isActionsVisible, _onClose));
   }
 
   void toBackground() {
-    emit(LayerHeaderBackground(_title, _color));
+    emit(OperationLayerHeaderBackground(_title, _color));
   }
 }

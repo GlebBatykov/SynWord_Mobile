@@ -33,15 +33,17 @@ class HistoryPageCubit extends Cubit<HistoryPageState> {
       ..sort((a, b) => b.percentages.compareTo(a.percentages));
 
     _results.addAll([
-      CheckResultInfo(text, TextSource.docx, 100, links),
-      RephraseResultInfo(text, TextSource.pdf, text, [
-        RephrasedWord(1, 'ipsum', ['apple', 'word'])
+      CheckResultInfo(text, 100, links),
+      RephraseResultInfo(text, text, [
+        RephrasedWord(
+            'ipsum', 6, 10, ['apple', 'word', 'man', 'second', 'first'])
       ]),
-      CheckResultInfo(text, TextSource.userInput, 50, links),
-      RephraseResultInfo(text, TextSource.userInput, text, [
-        RephrasedWord(2, 'dolor', ['apple', 'word'])
+      CheckResultInfo(text, 50, links),
+      RephraseResultInfo(text, text, [
+        RephrasedWord(
+            'dolor', 12, 16, ['apple', 'word', 'man', 'second', 'first'])
       ]),
-      CheckResultInfo(text, TextSource.docx, 25, links),
+      CheckResultInfo(text, 25, links),
     ]);
 
     for (var info in _results) {

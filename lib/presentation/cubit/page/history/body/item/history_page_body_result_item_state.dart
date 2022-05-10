@@ -10,23 +10,21 @@ class HistoryPageBodyResultItemShow extends HistoryPageBodyResultItemState {
 
   final String text;
 
-  final TextSource source;
-
   final void Function() onTap;
 
-  HistoryPageBodyResultItemShow(this.title, this.text, this.source, this.onTap);
+  HistoryPageBodyResultItemShow(this.title, this.text, this.onTap);
 }
 
 class HistoryPageBodyResultItemCheck extends HistoryPageBodyResultItemShow {
   final int percentages;
 
-  HistoryPageBodyResultItemCheck(String title, String text, TextSource source,
-      void Function() onTap, this.percentages)
-      : super(title, text, source, onTap);
+  HistoryPageBodyResultItemCheck(
+      String title, String text, void Function() onTap, this.percentages)
+      : super(title, text, onTap);
 }
 
 class HistoryPageBodyResultItemRephrase extends HistoryPageBodyResultItemShow {
   HistoryPageBodyResultItemRephrase(
-      String title, String text, TextSource source, void Function() onTap)
-      : super(title, text, source, onTap);
+      String title, String text, void Function() onTap)
+      : super(title, text, onTap);
 }

@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../../model/layer/text_input_layer/text_change_details.dart';
-import '../layer/layer_cubit.dart';
-import '../operation_layer/check/check_layer_cubit.dart';
-import '../operation_layer/check/second_check_layer_cubit.dart';
-import '../operation_layer/rephrase/rephrase_layer_cubit.dart';
+import '../operation_layer/operation_layer.dart';
 import '../text_input_layer/text_input_layer_cubit.dart';
 
 part 'layers_canvas_state.dart';
@@ -16,7 +13,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
   late final TextInputLayerCubit _inputLayerCubit;
 
-  final List<LayerCubit> _layersCubits = [];
+  final List<OperationLayerCubit> _layersCubits = [];
 
   Stream<TextChangeDetails> get textChanges => _inputLayerCubit.textChanges;
 
@@ -33,7 +30,9 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   void _initialize() {
     //addCheckLayer();
 
-    addSecondCheckLayer();
+    //addSecondCheckLayer();
+
+    addRephraseLayer();
 
     _show();
   }
@@ -62,7 +61,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     _layersCubits.add(cubit);
   }
 
-  void removeLayer(LayerCubit cubit) {
+  void removeLayer(OperationLayerCubit cubit) {
     _layersCubits.remove(cubit);
 
     _show();

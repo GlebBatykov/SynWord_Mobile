@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../cubit/layer/layer_header/layer_header_cubit.dart';
+import '../../../cubit/layer/operation_layer/operation_layer.dart';
 import '../layer_close_button.dart';
 
 class LayerHeader extends StatelessWidget {
@@ -9,9 +9,9 @@ class LayerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LayerHeaderCubit, LayerHeaderState>(
+    return BlocBuilder<OperationLayerHeaderCubit, OperationLayerHeaderState>(
         builder: (context, state) {
-      if (state is LayerHeaderForeground) {
+      if (state is OperationLayerHeaderForeground) {
         return LayoutBuilder(builder: (context, constraints) {
           return Row(
             children: [
@@ -41,7 +41,7 @@ class LayerHeader extends StatelessWidget {
             ],
           );
         });
-      } else if (state is LayerHeaderBackground) {
+      } else if (state is OperationLayerHeaderBackground) {
         return Container();
       } else {
         return Container();

@@ -10,7 +10,7 @@ class LayersCanvasShow extends LayersCanvasState {
 
   final TextInputLayerCubit inputLayerCubit;
 
-  final List<LayerCubit> layersCubits;
+  final List<OperationLayerCubit> layersCubits;
 
   LayersCanvasShow(this.size, this.inputLayerCubit, this.layersCubits);
 }

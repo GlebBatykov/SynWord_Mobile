@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:synword/presentation/ui/layer/layer.dart';
 
-import '../../cubit/layer/layer/layer_cubit.dart';
 import '../../cubit/layer/layers_canvas/layers_canvas_cubit.dart';
+import '../../cubit/layer/operation_layer/operation_layer.dart';
 import 'text_input_layer/text_input_layer.dart';
 
 class LayersCanvas extends StatelessWidget {
@@ -20,7 +20,7 @@ class LayersCanvas extends StatelessWidget {
     return content;
   }
 
-  List<Widget> _buildLayers(List<LayerCubit> layersCubits) {
+  List<Widget> _buildLayers(List<OperationLayerCubit> layersCubits) {
     var layers = <Widget>[];
 
     for (var cubit in layersCubits) {

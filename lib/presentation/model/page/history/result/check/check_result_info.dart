@@ -7,6 +7,5 @@ class CheckResultInfo extends ResultInfo {
 
   final List<CheckResultLink> links;
 
-  CheckResultInfo(String text, TextSource source, this.percentages, this.links)
-      : super(text, source);
+  CheckResultInfo(String text, this.percentages, this.links) : super(text);
 }

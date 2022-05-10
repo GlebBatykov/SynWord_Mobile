@@ -5,9 +5,8 @@ import '../../result_info.dart';
 class RephraseResultInfo extends ResultInfo {
   final String rephrasedText;
 
-  final List<RephrasedWord> rephrasedWord;
+  final List<RephrasedWord> rephrasedWords;
 
-  RephraseResultInfo(
-      String text, TextSource source, this.rephrasedText, this.rephrasedWord)
-      : super(text, source);
+  RephraseResultInfo(String text, this.rephrasedText, this.rephrasedWords)
+      : super(text);
 }
