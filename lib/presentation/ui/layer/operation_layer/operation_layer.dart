@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/layer/operation_layer/operation_layer.dart';
-import 'layer_body.dart';
-import 'layer_header/layer_header.dart';
-import 'layer_properties.dart';
+import '../../../cubit/layer/operation_layer/operation_layer.dart';
+import 'operation_layer_body.dart';
+import '../layer_properties.dart';
+import 'header/operation_layer_header.dart';
 
-class Layer extends StatelessWidget {
-  const Layer({Key? key}) : super(key: key);
+class OperationLayer extends StatelessWidget {
+  const OperationLayer({Key? key}) : super(key: key);
 
   Widget _buildLayer(OperationLayerState state) {
     if (state is OperationLayerShow) {
@@ -20,10 +20,11 @@ class Layer extends StatelessWidget {
             SizedBox(
                 height: LayerProperties.headerHeight,
                 child: BlocProvider.value(
-                    value: state.headerCubit, child: const LayerHeader())),
+                    value: state.headerCubit,
+                    child: const OperationLayerHeader())),
             Expanded(
                 child: BlocProvider.value(
-                    value: state.bodyCubit, child: const LayerBody()))
+                    value: state.bodyCubit, child: const OperationLayerBody()))
           ],
         ),
       );

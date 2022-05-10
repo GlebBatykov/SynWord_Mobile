@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/layer/operation_layer/operation_layer.dart';
-import '../load_screen.dart';
+import '../../../cubit/layer/operation_layer/operation_layer.dart';
+import '../../load_screen.dart';
 
-class LayerBody extends StatelessWidget {
-  const LayerBody({Key? key}) : super(key: key);
+class OperationLayerBody extends StatelessWidget {
+  const OperationLayerBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +17,8 @@ class LayerBody extends StatelessWidget {
         );
       } else if (state is OperationLayerBodyShow) {
         return state.content;
+      } else if (state is OperationLayerBodyPreparation) {
+        return Container();
       } else {
         return Container();
       }

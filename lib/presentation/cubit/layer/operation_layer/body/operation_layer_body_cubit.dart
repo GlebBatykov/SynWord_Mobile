@@ -18,6 +18,10 @@ class OperationLayerBodyCubit<T extends OperationLayerBodyContentData>
     emit(OperationLayerBodyLoad());
   }
 
+  void preparation() {
+    emit(OperationLayerBodyPreparation());
+  }
+
   void show(T data) {
     late Widget content;
 

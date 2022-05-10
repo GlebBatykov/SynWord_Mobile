@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../cubit/layer/operation_layer/operation_layer.dart';
-import '../layer_close_button.dart';
+import '../../../../cubit/layer/operation_layer/operation_layer.dart';
+import '../../layer_close_button.dart';
 
-class LayerHeader extends StatelessWidget {
-  const LayerHeader({Key? key}) : super(key: key);
+class OperationLayerHeader extends StatelessWidget {
+  const OperationLayerHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

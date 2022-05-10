@@ -31,6 +31,10 @@ abstract class OperationLayerCubit<T extends OperationLayerBodyContentData>
     _show();
   }
 
+  void preparation() {
+    _bodyCubit.preparation();
+  }
+
   void load() {
     _bodyCubit.load();
   }

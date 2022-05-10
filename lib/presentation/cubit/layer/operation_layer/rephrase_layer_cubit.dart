@@ -17,7 +17,7 @@ class RephraseLayerCubit
     _bodyCubit = OperationLayerBodyCubit<RephraseLayerBodyContentData>(
         builder: _buildContent);
 
-    load();
+    preparation();
 
     _show();
   }
@@ -34,7 +34,5 @@ class RephraseLayerCubit
     show(RephraseLayerBodyContentData());
   }
 
-  Future<void> copy() async {
-    //await FlutterClipboard.copy('1');
-  }
+  Future<void> copy() async {}
 }

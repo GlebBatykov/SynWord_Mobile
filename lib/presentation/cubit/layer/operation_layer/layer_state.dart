@@ -13,11 +13,6 @@ class OperationLayerInitial extends OperationLayerState {
   const OperationLayerInitial(Offset offset, Size size) : super(offset, size);
 }
 
-class OperationLayerPreparation extends OperationLayerState {
-  const OperationLayerPreparation(Offset offset, Size size)
-      : super(offset, size);
-}
-
 class OperationLayerShow extends OperationLayerState {
   final OperationLayerHeaderCubit headerCubit;
 

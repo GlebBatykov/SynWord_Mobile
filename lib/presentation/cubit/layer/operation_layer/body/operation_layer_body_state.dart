@@ -7,6 +7,8 @@ class OperationLayerBodyInitial extends OperationLayerBodyState {}
 
 class OperationLayerBodyLoad extends OperationLayerBodyState {}
 
+class OperationLayerBodyPreparation extends OperationLayerBodyState {}
+
 class OperationLayerBodyShow extends OperationLayerBodyState {
   final Widget content;
 

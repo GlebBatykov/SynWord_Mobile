@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../../model/layer/operation_layer/check/check_layer_body_content_data.dart';
-import '../../../check_result_links/check_result_links.dart';
-import '../../../wave_bar/wave_bar.dart';
+import '../../../model/layer/operation_layer/check/second_check_layer_body_content_data.dart';
+import '../../check_result_links/check_result_links.dart';
+import '../../wave_bar/wave_bar.dart';
 
-class CheckLayerBody extends StatelessWidget {
-  final CheckLayerBodyContentData data;
+class SecondCheckLayerBody extends StatelessWidget {
+  final SecondCheckLayerBodyContentData data;
 
-  const CheckLayerBody({Key? key, required this.data}) : super(key: key);
+  const SecondCheckLayerBody({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,15 @@ class CheckLayerBody extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 16)),
           Container(
-            margin: const EdgeInsets.only(top: 19, bottom: 20),
-            child: WaveBar(progress: data.progress),
+            margin:
+                const EdgeInsets.only(top: 19, bottom: 20, left: 31, right: 31),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                WaveBar(progress: data.sourceProgress),
+                WaveBar(progress: data.newProgress)
+              ],
+            ),
           ),
           Container(
             height: 1,
