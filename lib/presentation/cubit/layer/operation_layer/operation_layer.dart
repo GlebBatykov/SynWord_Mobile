@@ -13,6 +13,7 @@ import '../../../model/page/history/result/check/check_result_link.dart';
 import '../../../ui/layer/operation_layer/check_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_cubit_copy_button.dart';
+import '../../../ui/layer/operation_layer/second_check_layer_body.dart';
 
 part 'body/operation_layer_body_cubit.dart';
 part 'body/operation_layer_body_state.dart';

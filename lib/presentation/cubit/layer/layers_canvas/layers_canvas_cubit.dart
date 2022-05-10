@@ -32,7 +32,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
     //addSecondCheckLayer();
 
-    addRephraseLayer();
+    //addRephraseLayer();
 
     _show();
   }
