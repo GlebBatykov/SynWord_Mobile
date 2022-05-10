@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -15,11 +16,11 @@ import '../../../ui/layer/operation_layer/check/second_check_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_cubit_copy_button.dart';
 
-part 'body/layer_body_cubit.dart';
-part 'body/layer_body_state.dart';
+part 'body/operation_layer_body_cubit.dart';
+part 'body/operation_layer_body_state.dart';
 
-part 'header/layer_header_cubit.dart';
-part 'header/layer_header_state.dart';
+part 'header/operation_layer_header_cubit.dart';
+part 'header/operation_layer_header_state.dart';
 
 part 'layer_cubit.dart';
 part 'layer_state.dart';
