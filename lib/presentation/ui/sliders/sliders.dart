@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword/presentation/cubit/sliders/slider_cubit/slider_cubit.dart';
-import 'package:synword/presentation/cubit/sliders/sliders_cubit/sliders_cubit.dart';
-import 'package:synword/presentation/ui/sliders/right_slider.dart';
 
+import '../../cubit/sliders/slider_cubit/slider_cubit.dart';
+import '../../cubit/sliders/sliders_cubit/sliders_cubit.dart';
 import 'left_slider.dart';
+import 'right_slider.dart';
 
 class Sliders extends StatelessWidget {
   const Sliders({Key? key}) : super(key: key);
@@ -17,22 +17,10 @@ class Sliders extends StatelessWidget {
           children: [
             if (state.isLeftSliderEnabled)
               BlocProvider<SliderCubit>.value(
-                  value: state.leftSliderCubit,
-                  child: const Positioned(
-                      left: -36,
-                      bottom: 50,
-                      child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: LeftSlider()))),
+                  value: state.leftSliderCubit, child: const LeftSlider()),
             if (state.isRightSliderEnabled)
               BlocProvider<SliderCubit>.value(
-                  value: state.rightSliderCubit,
-                  child: const Positioned(
-                      right: -36,
-                      bottom: 50,
-                      child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: RightSlider())))
+                  value: state.rightSliderCubit, child: const RightSlider())
           ],
         );
       } else {

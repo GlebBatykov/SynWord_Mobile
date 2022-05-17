@@ -1,14 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../model/sliders/slider_coordinate.dart';
 import '../slider_cubit/slider_cubit.dart';
 
 part 'sliders_state.dart';
 
 class SlidersCubit extends Cubit<SlidersState> {
-  final SliderCubit _leftSliderCubit = SliderCubit();
+  final SliderCubit _leftSliderCubit =
+      SliderCubit(SliderCoordinate(left: -36, bottom: 50));
 
-  final SliderCubit _rightSliderCubit = SliderCubit();
+  final SliderCubit _rightSliderCubit =
+      SliderCubit(SliderCoordinate(right: -36, bottom: 50));
 
   bool _isLeftSliderEnabled = true;
 
