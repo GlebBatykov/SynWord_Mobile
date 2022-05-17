@@ -14,7 +14,14 @@ class OperationLayer extends StatelessWidget {
       return Container(
         margin: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(25)),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.4),
+                  offset: const Offset(0, -10),
+                  blurRadius: 15)
+            ]),
         child: Column(
           children: [
             SizedBox(
@@ -30,7 +37,11 @@ class OperationLayer extends StatelessWidget {
       );
     } else {
       return Container(
-          margin: const EdgeInsets.all(15),
+          margin: const EdgeInsets.only(
+              top: LayerProperties.marginTop,
+              bottom: LayerProperties.marginBottom,
+              left: LayerProperties.marginLeft,
+              right: LayerProperties.marginRight),
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(25)));
     }
@@ -40,13 +51,19 @@ class OperationLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OperationLayerCubit, OperationLayerState>(
         builder: (context, state) {
-      return AnimatedPositioned(
-          left: state.offset.dx,
-          top: state.offset.dy,
-          width: state.size.width,
-          height: state.size.height,
-          duration: const Duration(),
-          child: _buildLayer(state));
+      if (state is OperationLayerShow) {
+        return AnimatedPositioned(
+            left: state.offset.dx,
+            top: state.offset.dy,
+            width: state.size.width,
+            height: state.size.height,
+            curve: Curves.easeOut,
+            onEnd: state.onAnimationEnd,
+            duration: state.duration,
+            child: _buildLayer(state));
+      } else {
+        return Container();
+      }
     });
   }
 }

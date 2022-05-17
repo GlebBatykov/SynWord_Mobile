@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synword/presentation/ui/body/body_properties.dart';
 
-import '../cubit/body/body_cubit.dart';
-import 'appbar/appbar.dart';
-import 'layer/layers_canvas.dart';
-import 'page/pages_properties.dart';
-import 'sliders/sliders.dart';
+import '../../cubit/body/body_cubit.dart';
+import '../appbar/appbar.dart';
+import '../layer/layers_canvas.dart';
+import '../page/pages_properties.dart';
+import '../sliders/sliders.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var appbarHeight = 78.0;
+    var appbarHeight = BodyProperties.appbarHeight;
 
     return Container(
       margin: PagesProperties.margin,

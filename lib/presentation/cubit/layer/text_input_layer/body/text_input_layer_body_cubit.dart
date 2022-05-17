@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:synword/domain/use_case/clipboard_paste/clipboard_paste_use_case.dart';
 
+import '../../../../../domain/use_case/clipboard_copy/clipboard_copy_use_case.dart';
 import '../../../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../../../model/layer/text_input_layer/text_change_details.dart';
 
@@ -86,11 +89,12 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
   }
 
   Future<void> copy() async {
-    await FlutterClipboard.copy(_editingController.text);
+    await GetIt.instance<ClipboardCopyUserCase>().copy(_editingController.text);
   }
 
   Future<void> paste() async {
-    _editingController.text = await FlutterClipboard.paste();
+    _editingController.text =
+        await GetIt.instance<ClipboardPasteUseCase>().paste();
 
     _pasteTextController.sink.add(_editingController.text.length);
   }

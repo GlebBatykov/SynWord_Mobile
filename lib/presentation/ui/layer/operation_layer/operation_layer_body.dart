@@ -15,10 +15,10 @@ class OperationLayerBody extends StatelessWidget {
         return const LoadScreen(
           subtitle: 'The average waiting time is 15 seconds',
         );
-      } else if (state is OperationLayerBodyShow) {
+      } else if (state is OperationLayerBodyResult) {
         return state.content;
       } else if (state is OperationLayerBodyPreparation) {
-        return Container();
+        return state.content;
       } else {
         return Container();
       }

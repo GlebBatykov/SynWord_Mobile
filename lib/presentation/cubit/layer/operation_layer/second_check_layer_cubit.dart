@@ -1,23 +1,24 @@
 part of 'operation_layer.dart';
 
-class SecondCheckLayerCubit
-    extends OperationLayerCubit<SecondCheckLayerBodyContentData> {
+class SecondCheckLayerCubit extends OperationLayerCubit<
+    SecondCheckLayerBodyContentData, LayerBodyPreparationData> {
   SecondCheckLayerCubit(Offset offset, Size size) : super(offset, size);
 
   @override
   void _initialize() {
-    _headerCubit =
-        OperationLayerHeaderCubit('Plagiarism Checker', HexColor('DDC5A2'));
+    _headerCubit = OperationLayerHeaderCubit(
+        'Plagiarism Checker', HexColor('DDC5A2'),
+        onClose: _onClose);
 
-    _bodyCubit = OperationLayerBodyCubit<SecondCheckLayerBodyContentData>(
-        builder: _buildContent);
+    _bodyCubit = OperationLayerBodyCubit<SecondCheckLayerBodyContentData,
+        LayerBodyPreparationData>(resultBuilder: _buildResult);
 
     load();
 
     _show();
   }
 
-  Widget _buildContent(SecondCheckLayerBodyContentData data) =>
+  Widget _buildResult(SecondCheckLayerBodyContentData data) =>
       SecondCheckLayerBody(data: data);
 
   @override
@@ -29,6 +30,6 @@ class SecondCheckLayerCubit
             Random().nextInt(101)))
       ..sort((a, b) => b.percentages.compareTo(a.percentages));
 
-    show(SecondCheckLayerBodyContentData(0.4, 0.6, links));
+    showResult(SecondCheckLayerBodyContentData(_size, 0.4, 0.6, links));
   }
 }

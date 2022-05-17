@@ -8,7 +8,7 @@ abstract class OperationLayerHeaderState {
 }
 
 class OperationLayerHeaderInitial extends OperationLayerHeaderState {
-  const OperationLayerHeaderInitial(String title) : super(title);
+  const OperationLayerHeaderInitial(super.title);
 }
 
 class OperationLayerHeaderForeground extends OperationLayerHeaderState {
@@ -18,13 +18,26 @@ class OperationLayerHeaderForeground extends OperationLayerHeaderState {
 
   final void Function()? onClose;
 
+  final void Function(DragUpdateDetails) onVerticalDragUpdate;
+
+  final void Function(DragEndDetails) onVerticalDragEnd;
+
   const OperationLayerHeaderForeground(
-      String title, this.actions, this.isActionsVisible, this.onClose)
-      : super(title);
+      super.title,
+      this.actions,
+      this.isActionsVisible,
+      this.onClose,
+      this.onVerticalDragUpdate,
+      this.onVerticalDragEnd);
 }
 
 class OperationLayerHeaderBackground extends OperationLayerHeaderState {
   final Color color;
 
-  const OperationLayerHeaderBackground(String title, this.color) : super(title);
+  final void Function(DragUpdateDetails) onVerticalDragUpdate;
+
+  final void Function(DragEndDetails) onVerticalDragEnd;
+
+  const OperationLayerHeaderBackground(super.title, this.color,
+      this.onVerticalDragUpdate, this.onVerticalDragEnd);
 }

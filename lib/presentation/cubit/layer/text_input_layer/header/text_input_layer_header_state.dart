@@ -7,7 +7,8 @@ class TextInputLayerHeaderInitial extends TextInputLayerHeaderState {}
 
 class TextInputLayerHeaderShow extends TextInputLayerHeaderState {}
 
-class TextInputLayerHeaderForeground extends TextInputLayerHeaderShow {}
+abstract class TextInputLayerHeaderForeground extends TextInputLayerHeaderShow {
+}
 
 class TextInputLayerHeaderEmpty extends TextInputLayerHeaderForeground {}
 

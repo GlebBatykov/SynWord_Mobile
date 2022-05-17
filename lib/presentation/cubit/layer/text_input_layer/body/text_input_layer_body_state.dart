@@ -13,7 +13,7 @@ class TextInputLayerBodyShow extends TextInputLayerBodyState {
   TextInputLayerBodyShow(this.editingController, this.focusNode);
 }
 
-class TextInputLayerBodyForeground extends TextInputLayerBodyShow {
+abstract class TextInputLayerBodyForeground extends TextInputLayerBodyShow {
   TextInputLayerBodyForeground(
       TextEditingController editingController, FocusNode focusNode)
       : super(editingController, focusNode);

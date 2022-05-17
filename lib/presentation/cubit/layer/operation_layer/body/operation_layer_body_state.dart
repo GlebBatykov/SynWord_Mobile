@@ -7,10 +7,14 @@ class OperationLayerBodyInitial extends OperationLayerBodyState {}
 
 class OperationLayerBodyLoad extends OperationLayerBodyState {}
 
-class OperationLayerBodyPreparation extends OperationLayerBodyState {}
-
-class OperationLayerBodyShow extends OperationLayerBodyState {
+class OperationLayerBodyPreparation extends OperationLayerBodyState {
   final Widget content;
 
-  OperationLayerBodyShow(this.content);
+  OperationLayerBodyPreparation(this.content);
+}
+
+class OperationLayerBodyResult extends OperationLayerBodyState {
+  final Widget content;
+
+  OperationLayerBodyResult(this.content);
 }

@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../../domain/use_case/clipboard_copy/clipboard_copy_use_case.dart';
 import '../../../../../model/page/history/result/rephrase/rephrase_result_info.dart';
 import '../../../../rephrased_text/rephrased_text_cubit.dart';
 
@@ -36,7 +38,7 @@ class RephraseResultPageCubit extends Cubit<RephraseResultPageState> {
       text = _rephrasedTextCubit.text;
     }
 
-    await FlutterClipboard.copy(text);
+    await GetIt.instance<ClipboardCopyUserCase>().copy(text);
   }
 
   void changeSelectedTab(int index) {

@@ -2,12 +2,19 @@ part of '../operation_layer.dart';
 
 typedef ContentBuilder<T> = Widget Function(T);
 
-class OperationLayerBodyCubit<T extends OperationLayerBodyContentData>
-    extends Cubit<OperationLayerBodyState> {
-  final ContentBuilder<T>? _builder;
+typedef PreparationPageBuilder<T> = Widget Function(T);
 
-  OperationLayerBodyCubit({ContentBuilder<T>? builder})
-      : _builder = builder,
+class OperationLayerBodyCubit<T extends OperationLayerBodyContentData,
+    P extends LayerBodyPreparationData> extends Cubit<OperationLayerBodyState> {
+  final ContentBuilder<T>? _resultBuilder;
+
+  final PreparationPageBuilder<P>? _preparationPageBuilder;
+
+  OperationLayerBodyCubit(
+      {ContentBuilder<T>? resultBuilder,
+      PreparationPageBuilder<P>? preparationPageBuilder})
+      : _resultBuilder = resultBuilder,
+        _preparationPageBuilder = preparationPageBuilder,
         super(OperationLayerBodyInitial()) {
     _initialize();
   }
@@ -18,19 +25,27 @@ class OperationLayerBodyCubit<T extends OperationLayerBodyContentData>
     emit(OperationLayerBodyLoad());
   }
 
-  void preparation() {
-    emit(OperationLayerBodyPreparation());
-  }
-
-  void show(T data) {
+  void showPreparationPage(P data) {
     late Widget content;
 
-    if (_builder != null) {
-      content = _builder!.call(data);
+    if (_preparationPageBuilder != null) {
+      content = _preparationPageBuilder!.call(data);
     } else {
       content = Container();
     }
 
-    emit(OperationLayerBodyShow(content));
+    emit(OperationLayerBodyPreparation(content));
+  }
+
+  void showResult(T data) {
+    late Widget content;
+
+    if (_resultBuilder != null) {
+      content = _resultBuilder!.call(data);
+    } else {
+      content = Container();
+    }
+
+    emit(OperationLayerBodyResult(content));
   }
 }
