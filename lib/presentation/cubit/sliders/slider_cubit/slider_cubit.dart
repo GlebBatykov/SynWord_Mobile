@@ -14,6 +14,16 @@ class SliderCubit extends Cubit<SliderState> {
   final StreamController<double> _onHorizontalDragEndController =
       StreamController.broadcast();
 
+  final StreamController _onOpacityAnimationEndController =
+      StreamController.broadcast();
+
+  final StreamController _onPositionedAnimationEndController =
+      StreamController.broadcast();
+
+  Size _layerSize;
+
+  Offset _layerOffset;
+
   double _opacity = 1;
 
   SliderCoordinate _coordinate;
@@ -29,8 +39,15 @@ class SliderCubit extends Cubit<SliderState> {
 
   Stream<double> get horizontalDragEnd => _onHorizontalDragEndController.stream;
 
-  SliderCubit(SliderCoordinate coordinate)
+  Stream get onOpacityAnimationEnd => _onOpacityAnimationEndController.stream;
+
+  Stream get onPositionedAnimaionEnd =>
+      _onPositionedAnimationEndController.stream;
+
+  SliderCubit(SliderCoordinate coordinate, Size layerSize, Offset layerOffset)
       : _coordinate = coordinate,
+        _layerSize = layerSize,
+        _layerOffset = layerOffset,
         super(SliderInitial()) {
     _initialize();
   }
@@ -43,8 +60,7 @@ class SliderCubit extends Cubit<SliderState> {
 
   void lock() {
     if (!_isLocked) {
-      emit(SliderLock(_opacity, _coordinate, _duration, _onHorizontalDragUpdate,
-          _onHorizontalDragEnd));
+      _lock();
 
       _isLocked = true;
     }
@@ -52,19 +68,10 @@ class SliderCubit extends Cubit<SliderState> {
 
   void unlock() {
     if (_isLocked) {
-      emit(SliderUnlock(_opacity, _coordinate, _duration,
-          _onHorizontalDragUpdate, _onHorizontalDragEnd));
+      _unlock();
 
       _isLocked = false;
     }
-  }
-
-  void _onHorizontalDragUpdate(Offset delta) {
-    _onHorizontalDragUpdateController.sink.add(delta);
-  }
-
-  void _onHorizontalDragEnd(double primaryVelocity) {
-    _onHorizontalDragEndController.sink.add(primaryVelocity);
   }
 
   void setOpacity(double value) {
@@ -85,18 +92,60 @@ class SliderCubit extends Cubit<SliderState> {
 
   void update() {
     if (_isLocked) {
-      emit(SliderLock(_opacity, _coordinate, _duration, _onHorizontalDragUpdate,
-          _onHorizontalDragEnd));
+      _lock();
     } else {
-      emit(SliderUnlock(_opacity, _coordinate, _duration,
-          _onHorizontalDragUpdate, _onHorizontalDragEnd));
+      _unlock();
     }
+  }
+
+  void _lock() {
+    emit(SliderLock(
+        _layerSize,
+        _layerOffset,
+        _opacity,
+        _coordinate,
+        _duration,
+        _onHorizontalDragUpdate,
+        _onHorizontalDragEnd,
+        _onOpactityAnimationEnd,
+        _onPositionedAnimationEnd));
+  }
+
+  void _unlock() {
+    emit(SliderUnlock(
+        _layerSize,
+        _layerOffset,
+        _opacity,
+        _coordinate,
+        _duration,
+        _onHorizontalDragUpdate,
+        _onHorizontalDragEnd,
+        _onOpactityAnimationEnd,
+        _onPositionedAnimationEnd));
+  }
+
+  void _onHorizontalDragUpdate(Offset delta) {
+    _onHorizontalDragUpdateController.sink.add(delta);
+  }
+
+  void _onHorizontalDragEnd(double primaryVelocity) {
+    _onHorizontalDragEndController.sink.add(primaryVelocity);
+  }
+
+  void _onOpactityAnimationEnd() {
+    _onOpacityAnimationEndController.sink.add(null);
+  }
+
+  void _onPositionedAnimationEnd() {
+    _onPositionedAnimationEndController.sink.add(null);
   }
 
   @override
   Future<void> close() async {
     await _onHorizontalDragUpdateController.close();
     await _onHorizontalDragEndController.close();
+    await _onOpacityAnimationEndController.close();
+    await _onPositionedAnimationEndController.close();
 
     return super.close();
   }

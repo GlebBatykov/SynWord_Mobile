@@ -6,6 +6,10 @@ abstract class SliderState {}
 class SliderInitial extends SliderState {}
 
 abstract class SliderShow extends SliderState {
+  final Size layerSize;
+
+  final Offset layerOffset;
+
   final double opacity;
 
   final SliderCoordinate coordinate;
@@ -16,16 +20,44 @@ abstract class SliderShow extends SliderState {
 
   final void Function(double) onHorizontalDragEnd;
 
-  SliderShow(this.opacity, this.coordinate, this.duration,
-      this.onHorizontalDragUpdate, this.onHorizontalDragEnd);
+  final void Function() onOpacityAnimationEnd;
+
+  final void Function() onPositionedAnimationEnd;
+
+  SliderShow(
+      this.layerSize,
+      this.layerOffset,
+      this.opacity,
+      this.coordinate,
+      this.duration,
+      this.onHorizontalDragUpdate,
+      this.onHorizontalDragEnd,
+      this.onOpacityAnimationEnd,
+      this.onPositionedAnimationEnd);
 }
 
 class SliderUnlock extends SliderShow {
-  SliderUnlock(super.opacity, super.coordinate, super.duration,
-      super.onHorizontalDragUpdate, super.onHorizontalDragEnd);
+  SliderUnlock(
+      super.layerSize,
+      super.layerOffset,
+      super.opacity,
+      super.coordinate,
+      super.duration,
+      super.onHorizontalDragUpdate,
+      super.onHorizontalDragEnd,
+      super.onOpacityAnimationEnd,
+      super.onPositionedAnimationEnd);
 }
 
 class SliderLock extends SliderShow {
-  SliderLock(super.opacity, super.coordinate, super.duration,
-      super.onHorizontalDragUpdate, super.onHorizontalDragEnd);
+  SliderLock(
+      super.layerSize,
+      super.layerOffset,
+      super.opacity,
+      super.coordinate,
+      super.duration,
+      super.onHorizontalDragUpdate,
+      super.onHorizontalDragEnd,
+      super.onOpacityAnimationEnd,
+      super.onPositionedAnimationEnd);
 }

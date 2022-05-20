@@ -14,8 +14,6 @@ import '../text_input_layer/text_input_layer_cubit.dart';
 part 'layers_canvas_state.dart';
 
 class LayersCanvasCubit extends Cubit<LayersCanvasState> {
-  final double _headerHeight = LayerProperties.headerHeight - 12;
-
   late final double _minHeight;
 
   final Size _size;
@@ -39,7 +37,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   }
 
   void _initialize() {
-    _minHeight = _headerHeight * 2;
+    _minHeight = LayerProperties.headerContactHeight * 2;
 
     //addCheckLayer();
 
@@ -120,12 +118,15 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   }
 
   Offset _getNewLayerOffset() {
-    return Offset(0, (_layersCubits.length + 1) * _headerHeight);
+    return Offset(
+        0, (_layersCubits.length + 1) * LayerProperties.headerContactHeight);
   }
 
   Size _getNewLayerSize() {
-    return Size(_size.width,
-        _size.height - ((_layersCubits.length + 1) * _headerHeight));
+    return Size(
+        _size.width,
+        _size.height -
+            ((_layersCubits.length + 1) * LayerProperties.headerContactHeight));
   }
 
   void _removeLayer(OperationLayerCubit layerCubit) {
@@ -191,9 +192,10 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     late double border;
 
     if (layerIndex == 0) {
-      border = _headerHeight;
+      border = LayerProperties.headerContactHeight;
     } else {
-      border = _layersCubits[layerIndex - 1].offset.dy + _headerHeight;
+      border = _layersCubits[layerIndex - 1].offset.dy +
+          LayerProperties.headerContactHeight;
     }
 
     return border;
@@ -206,12 +208,13 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
     if (layerIndex == _layersCubits.length - 1) {
       border = _size.height -
-          _headerHeight -
+          LayerProperties.headerContactHeight -
           (BodyProperties.appbarHeight -
               LayerProperties.marginTop -
               LayerProperties.marginBottom);
     } else {
-      border = _layersCubits[layerIndex + 1].offset.dy - _headerHeight;
+      border = _layersCubits[layerIndex + 1].offset.dy -
+          LayerProperties.headerContactHeight;
     }
 
     return border;

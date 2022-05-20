@@ -21,7 +21,7 @@ class RephraseLayerCubit extends OperationLayerCubit<
         resultBuilder: _buildResult,
         preparationPageBuilder: _buildPreparationPage);
 
-    work();
+    load();
 
     _show();
   }
