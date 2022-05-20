@@ -12,9 +12,11 @@ class OperationLayerBody extends StatelessWidget {
     return BlocBuilder<OperationLayerBodyCubit, OperationLayerBodyState>(
         builder: (context, state) {
       if (state is OperationLayerBodyLoad) {
-        return const LoadScreen(
+        return const Center(
+            child: SingleChildScrollView(
+                child: LoadScreen(
           subtitle: 'The average waiting time is 15 seconds',
-        );
+        )));
       } else if (state is OperationLayerBodyResult) {
         return state.content;
       } else if (state is OperationLayerBodyPreparation) {

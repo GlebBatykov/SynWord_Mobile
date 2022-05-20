@@ -13,7 +13,11 @@ class PremiumPageBodyItem extends StatelessWidget {
         child: Row(children: [
           Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: Image.asset(PremiumPageAsset.point)),
+              child: Image.asset(
+                PremiumPageAsset.point,
+                width: 10,
+                height: 10,
+              )),
           Text(title, style: const TextStyle(fontSize: 13))
         ]));
   }

@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../../cubit/sliders/slider_cubit/slider_cubit.dart';
 import 'slider_error_icon.dart';
+import 'slider_properties.dart';
 
 class RightSlider extends StatelessWidget {
   const RightSlider({Key? key}) : super(key: key);
@@ -19,17 +20,22 @@ class RightSlider extends StatelessWidget {
           bottom: coordinate.bottom,
           top: coordinate.top,
           right: coordinate.right,
-          duration: const Duration(),
+          duration: state.duration,
           child: Align(
             alignment: Alignment.bottomRight,
             child: AnimatedOpacity(
               opacity: state.opacity,
-              duration: const Duration(),
+              duration: state.duration,
               child: GestureDetector(
-                onTap: () {},
+                onHorizontalDragUpdate: (details) {
+                  state.onHorizontalDragUpdate(details.delta);
+                },
+                onHorizontalDragEnd: (details) {
+                  state.onHorizontalDragEnd(details.primaryVelocity ?? 0);
+                },
                 child: Container(
                     height: 302,
-                    width: 60,
+                    width: SliderProperties.sliderWidth,
                     decoration: BoxDecoration(
                       boxShadow: const [
                         BoxShadow(

@@ -59,7 +59,8 @@ class PremiumpageBodyGoldSection extends StatelessWidget {
                       children: [
                         Padding(
                             padding: const EdgeInsets.only(right: 8),
-                            child: Image.asset(PremiumPageAsset.point)),
+                            child: Image.asset(PremiumPageAsset.point,
+                                width: 10, height: 10)),
                         const Text('50', style: TextStyle(fontSize: 13)),
                         Padding(
                             padding: const EdgeInsets.only(left: 3, right: 3),

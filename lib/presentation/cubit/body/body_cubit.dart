@@ -17,7 +17,7 @@ class BodyCubit extends Cubit<BodyState> {
 
   late final LayersCanvasCubit _canvasCubit;
 
-  final SlidersCubit _slidersCubit = SlidersCubit();
+  late final SlidersCubit _slidersCubit;
 
   BodyCubit(Size size)
       : _size = size,
@@ -36,6 +36,8 @@ class BodyCubit extends Cubit<BodyState> {
 
     _canvasCubit.editingChanges.listen(_handleEditingChanges);
 
+    _slidersCubit = SlidersCubit(_size);
+
     emit(BodyShow(_canvasCubit, _slidersCubit));
   }
 
@@ -50,7 +52,8 @@ class BodyCubit extends Cubit<BodyState> {
   void _handleBodyChanges(int textLength, bool isEditing) {
     if (!isEditing) {
       if (textLength == 0) {
-        _slidersCubit.unlockSliders();
+        _slidersCubit.setLockSliders(false);
+        _slidersCubit.showUnlockSliders();
       } else {
         _checkLengthBorders(textLength);
       }
@@ -61,9 +64,11 @@ class BodyCubit extends Cubit<BodyState> {
 
   void _checkLengthBorders(int textLength) {
     if (textLength <= _textLengthBorders.min) {
-      _slidersCubit.lockSliders();
+      _slidersCubit.setLockSliders(true);
+      _slidersCubit.showLockSliders();
     } else {
-      _slidersCubit.unlockSliders();
+      _slidersCubit.setLockSliders(false);
+      _slidersCubit.showUnlockSliders();
     }
   }
 }

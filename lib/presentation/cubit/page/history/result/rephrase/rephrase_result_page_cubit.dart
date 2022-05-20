@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:clipboard/clipboard.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 

@@ -3,7 +3,6 @@ import 'package:synword/presentation/ui/layer/layer_properties.dart';
 
 import '../../../model/layer/operation_layer/check/check_layer_body_content_data.dart';
 import '../../check_result_links/check_result_links.dart';
-import '../../custom_scrollbar.dart';
 import '../../wave_bar/wave_bar.dart';
 
 class CheckLayerBody extends StatelessWidget {

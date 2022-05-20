@@ -20,7 +20,7 @@ import '../../../model/page/history/result/rephrase/rephrased_word.dart';
 import '../../../ui/layer/operation_layer/check_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_cubit_copy_button.dart';
-import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_preparation.dart';
+import '../../../ui/layer/operation_layer/rephrase/preparation/rephrase_layer_preparation.dart';
 import '../../../ui/layer/operation_layer/second_check_layer_body.dart';
 
 part 'body/operation_layer_body_cubit.dart';

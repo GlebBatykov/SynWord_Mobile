@@ -24,4 +24,6 @@ abstract class IconAsset {
   static const backButton = 'assets/images/icons/back-button.png';
 
   static const account = 'assets/images/icons/account.png';
+
+  static const wallet = 'assets/images/icons/wallet.png';
 }

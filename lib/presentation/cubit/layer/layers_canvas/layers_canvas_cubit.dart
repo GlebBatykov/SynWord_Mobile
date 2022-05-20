@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:synword/presentation/ui/body/body_properties.dart';
 
+import '../../../model/layer/operation_layer/rephrase/rephrase_layer_body_preparation_data.dart';
 import '../../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../../model/layer/text_input_layer/text_change_details.dart';
 import '../../../ui/layer/layer_properties.dart';
@@ -13,7 +14,7 @@ import '../text_input_layer/text_input_layer_cubit.dart';
 part 'layers_canvas_state.dart';
 
 class LayersCanvasCubit extends Cubit<LayersCanvasState> {
-  final double _headerHeight = LayerProperties.headerHeight - 7;
+  final double _headerHeight = LayerProperties.headerHeight - 12;
 
   late final double _minHeight;
 
@@ -42,7 +43,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
     //addCheckLayer();
 
-    addRephraseLayer();
+    //addRephraseLayer();
 
     //addSecondCheckLayer();
 
@@ -112,7 +113,8 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
       _handleVerticalDragEnd(layerCubit, event);
     });
 
-    layerCubit.work();
+    layerCubit.showPreparationPage(
+        RephraseLayerBodyPreparationData(layerCubit as RephraseLayerCubit));
 
     _addLayer(layerCubit);
   }
