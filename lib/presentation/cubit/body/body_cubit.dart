@@ -10,6 +10,8 @@ import '../sliders/sliders_cubit/sliders_cubit.dart';
 
 part 'body_state.dart';
 
+enum CalledLayer { check, secondCheck, rephrase }
+
 class BodyCubit extends Cubit<BodyState> {
   final Size _size;
 
@@ -18,6 +20,10 @@ class BodyCubit extends Cubit<BodyState> {
   late final LayersCanvasCubit _canvasCubit;
 
   late final SlidersCubit _slidersCubit;
+
+  CalledLayer _leftSliderCalledLayer = CalledLayer.check;
+
+  CalledLayer _rightSliderCalledLayer = CalledLayer.rephrase;
 
   BodyCubit(Size size)
       : _size = size,
@@ -37,6 +43,14 @@ class BodyCubit extends Cubit<BodyState> {
     _canvasCubit.editingChanges.listen(_handleEditingChanges);
 
     _slidersCubit = SlidersCubit(_size);
+
+    _slidersCubit.leftSliderAnimationEnd.listen((_) {
+      _handleLeftSliderAnimationEnd();
+    });
+
+    _slidersCubit.rightSliderAnimationEnd.listen((_) {
+      _handleRightSliderAnimationEnd();
+    });
 
     emit(BodyShow(_canvasCubit, _slidersCubit));
   }
@@ -69,6 +83,33 @@ class BodyCubit extends Cubit<BodyState> {
     } else {
       _slidersCubit.setLockSliders(false);
       _slidersCubit.showUnlockSliders();
+    }
+  }
+
+  void _handleLeftSliderAnimationEnd() {
+    _addCalledLayer(_leftSliderCalledLayer);
+
+    _slidersCubit.disableLeftSlider();
+  }
+
+  void _handleRightSliderAnimationEnd() {
+    _addCalledLayer(_rightSliderCalledLayer);
+
+    _slidersCubit.disableRightSlider();
+  }
+
+  void _addCalledLayer(CalledLayer layer) {
+    switch (layer) {
+      case CalledLayer.check:
+        _canvasCubit.addCheckLayer();
+
+        break;
+      case CalledLayer.secondCheck:
+        _canvasCubit.addSecondCheckLayer();
+
+        break;
+      case CalledLayer.rephrase:
+        _canvasCubit.addRephraseLayer();
     }
   }
 }

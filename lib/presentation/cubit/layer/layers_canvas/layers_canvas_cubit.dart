@@ -114,6 +114,9 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     layerCubit.showPreparationPage(
         RephraseLayerBodyPreparationData(layerCubit as RephraseLayerCubit));
 
+    layerCubit
+        .showPreparationPage(RephraseLayerBodyPreparationData(layerCubit));
+
     _addLayer(layerCubit);
   }
 
@@ -149,6 +152,8 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     }
 
     _layersCubits.add(layerCubit);
+
+    _show();
   }
 
   void _animateLayersToTop() {

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../cubit/sliders/slider_cubit/slider_cubit.dart';
-import '../layer/animated_layer/rephrase/rephrase_animated_layer.dart';
+import '../layer/animated_layer/rephrase_animated_layer.dart';
 import 'slider_error_icon.dart';
 import 'slider_properties.dart';
 

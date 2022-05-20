@@ -20,9 +20,9 @@ class SliderCubit extends Cubit<SliderState> {
   final StreamController _onPositionedAnimationEndController =
       StreamController.broadcast();
 
-  Size _layerSize;
+  final Size _layerSize;
 
-  Offset _layerOffset;
+  final Offset _layerOffset;
 
   double _opacity = 1;
 

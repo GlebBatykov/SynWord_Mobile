@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../ui/layer/layer_properties.dart';
-import '../../../load_screen.dart';
-import '../../layer_header.dart';
-import '../../operation_layer/rephrase/rephrase_layer_cubit_copy_button.dart';
+import '../layer_properties.dart';
+import '../../load_screen.dart';
+import '../layer_header.dart';
+import '../operation_layer/rephrase/rephrase_layer_cubit_copy_button.dart';
 
 class RephraseAnimatedLayer extends StatelessWidget {
   final Size size;
@@ -13,8 +13,11 @@ class RephraseAnimatedLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size.width - 30,
-      height: size.height - 30,
+      width:
+          size.width - LayerProperties.marginLeft - LayerProperties.marginRight,
+      height: size.height -
+          LayerProperties.marginLeft -
+          LayerProperties.marginRight,
       margin: const EdgeInsets.all(15),
       decoration: BoxDecoration(
           color: Colors.white,

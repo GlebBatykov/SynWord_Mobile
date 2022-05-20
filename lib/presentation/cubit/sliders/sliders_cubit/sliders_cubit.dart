@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,11 @@ class SlidersCubit extends Cubit<SlidersState> {
   static const double _leftSliderInitialLeftCoordinate = -36;
 
   static const double _rightSliderInitialRightCoordinate = -36;
+
+  final StreamController _leftSliderAnimationEnd = StreamController.broadcast();
+
+  final StreamController _rightSliderAnimationEnd =
+      StreamController.broadcast();
 
   late final double _sliderEndBorder;
 
@@ -30,6 +37,10 @@ class SlidersCubit extends Cubit<SlidersState> {
   bool _isRightSliderLocked = true;
 
   bool _isAnimationActive = false;
+
+  Stream get leftSliderAnimationEnd => _leftSliderAnimationEnd.stream;
+
+  Stream get rightSliderAnimationEnd => _rightSliderAnimationEnd.stream;
 
   SlidersCubit(Size size)
       : _size = size,
@@ -94,10 +105,12 @@ class SlidersCubit extends Cubit<SlidersState> {
         var opacity = _calculateNewLeftSliderOpacity(coordinate);
 
         _leftSliderCubit.setCoordinate(coordinate);
-
         _leftSliderCubit.setOpacity(opacity);
 
+        _rightSliderCubit.setOpacity(opacity);
+
         _leftSliderCubit.update();
+        _rightSliderCubit.update();
       }
     }
   }
@@ -134,17 +147,22 @@ class SlidersCubit extends Cubit<SlidersState> {
       var coordinate = _createEndLeftSliderCoordinate();
 
       _leftSliderCubit.setCoordinate(coordinate);
-
       _leftSliderCubit.setAnimationDuration();
-
       _leftSliderCubit.setOpacity(0);
 
+      _rightSliderCubit.setAnimationDuration();
+      _rightSliderCubit.setOpacity(0);
+
       _leftSliderCubit.update();
+      _rightSliderCubit.update();
 
       await Future.wait([
         _leftSliderCubit.onOpacityAnimationEnd.first,
-        _leftSliderCubit.onPositionedAnimaionEnd.first
+        _leftSliderCubit.onPositionedAnimaionEnd.first,
+        _rightSliderCubit.onOpacityAnimationEnd.first
       ]);
+
+      _leftSliderAnimationEnd.sink.add(null);
 
       _isAnimationActive = false;
     }
@@ -167,10 +185,12 @@ class SlidersCubit extends Cubit<SlidersState> {
         var opacity = _calculateNewRightSliderOpacity(coordinate);
 
         _rightSliderCubit.setCoordinate(coordinate);
-
         _rightSliderCubit.setOpacity(opacity);
 
+        _leftSliderCubit.setOpacity(opacity);
+
         _rightSliderCubit.update();
+        _leftSliderCubit.update();
       }
     }
   }
@@ -207,17 +227,22 @@ class SlidersCubit extends Cubit<SlidersState> {
       var coordinate = _createEndRightSliderCoordinate();
 
       _rightSliderCubit.setCoordinate(coordinate);
-
       _rightSliderCubit.setAnimationDuration();
-
       _rightSliderCubit.setOpacity(0);
 
+      _leftSliderCubit.setAnimationDuration();
+      _leftSliderCubit.setOpacity(0);
+
       _rightSliderCubit.update();
+      _leftSliderCubit.update();
 
       await Future.wait([
         _rightSliderCubit.onOpacityAnimationEnd.first,
-        _rightSliderCubit.onPositionedAnimaionEnd.first
+        _rightSliderCubit.onPositionedAnimaionEnd.first,
+        _leftSliderCubit.onOpacityAnimationEnd.first
       ]);
+
+      _rightSliderAnimationEnd.sink.add(null);
 
       _isAnimationActive = false;
     }
@@ -305,11 +330,20 @@ class SlidersCubit extends Cubit<SlidersState> {
 
   void setLockSliders(bool value) {
     setLockRightSlider(value);
+
     setLockLeftSlider(value);
   }
 
   void _show() {
     emit(SlidersShow(_leftSliderCubit, _rightSliderCubit, _isLeftSliderEnabled,
         _isRightSliderEnabled));
+  }
+
+  @override
+  Future<void> close() async {
+    await _leftSliderAnimationEnd.close();
+    await _rightSliderAnimationEnd.close();
+
+    return super.close();
   }
 }
