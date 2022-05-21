@@ -75,10 +75,10 @@ class SlidersCubit extends Cubit<SlidersState> {
 
     var size = _getInitialLayerSize();
 
-    _leftSliderCubit = SliderCubit(
-        SliderCoordinate(left: _leftSliderInitialLeftCoordinate, bottom: 50),
-        size,
-        offset);
+    var coordinate = _getLeftSliderInitialCoordinate();
+
+    _leftSliderCubit =
+        SliderCubit(AnimatedLayerType.check, coordinate, size, offset);
   }
 
   void _initializeRightSliderCubit() {
@@ -86,10 +86,19 @@ class SlidersCubit extends Cubit<SlidersState> {
 
     var size = _getInitialLayerSize();
 
-    _rightSliderCubit = SliderCubit(
-        SliderCoordinate(right: _rightSliderInitialRightCoordinate, bottom: 50),
-        size,
-        offset);
+    var coordinate = _getRightSliderInitialCoordinate();
+
+    _rightSliderCubit =
+        SliderCubit(AnimatedLayerType.rephrase, coordinate, size, offset);
+  }
+
+  SliderCoordinate _getLeftSliderInitialCoordinate() {
+    return SliderCoordinate(left: _leftSliderInitialLeftCoordinate, bottom: 50);
+  }
+
+  SliderCoordinate _getRightSliderInitialCoordinate() {
+    return SliderCoordinate(
+        right: _rightSliderInitialRightCoordinate, bottom: 50);
   }
 
   Size _getInitialLayerSize() {
@@ -142,29 +151,39 @@ class SlidersCubit extends Cubit<SlidersState> {
 
   void _handleLeftSliderHorizontalDragEnd(double _) async {
     if (_isLeftSliderLocked && !_isAnimationActive) {
-      _isAnimationActive = true;
+      if (_leftSliderCubit.coordinate.left < _sliderEndBorder) {
+        _isAnimationActive = true;
 
-      var coordinate = _createEndLeftSliderCoordinate();
+        var coordinate = _createEndLeftSliderCoordinate();
 
-      _leftSliderCubit.setCoordinate(coordinate);
-      _leftSliderCubit.setAnimationDuration();
-      _leftSliderCubit.setOpacity(0);
+        _leftSliderCubit.setCoordinate(coordinate);
+        _leftSliderCubit.setAnimationDuration();
+        _leftSliderCubit.setOpacity(0);
 
-      _rightSliderCubit.setAnimationDuration();
-      _rightSliderCubit.setOpacity(0);
+        _rightSliderCubit.setAnimationDuration();
+        _rightSliderCubit.setOpacity(0);
 
-      _leftSliderCubit.update();
-      _rightSliderCubit.update();
+        _leftSliderCubit.update();
+        _rightSliderCubit.update();
 
-      await Future.wait([
-        _leftSliderCubit.onOpacityAnimationEnd.first,
-        _leftSliderCubit.onPositionedAnimaionEnd.first,
-        _rightSliderCubit.onOpacityAnimationEnd.first
-      ]);
+        await Future.wait([
+          _leftSliderCubit.onOpacityAnimationEnd.first,
+          _leftSliderCubit.onPositionedAnimaionEnd.first,
+          _rightSliderCubit.onOpacityAnimationEnd.first
+        ]);
 
-      _leftSliderAnimationEnd.sink.add(null);
+        _leftSliderCubit.setMoveDuration();
+        _rightSliderCubit.setMoveDuration();
 
-      _isAnimationActive = false;
+        _leftSliderCubit.update();
+        _rightSliderCubit.update();
+
+        _leftSliderAnimationEnd.sink.add(null);
+
+        _isAnimationActive = false;
+      } else {
+        _leftSliderAnimationEnd.sink.add(null);
+      }
     }
   }
 
@@ -222,29 +241,39 @@ class SlidersCubit extends Cubit<SlidersState> {
 
   void _handleRightSliderHorizontalDragEnd(double _) async {
     if (_isRightSliderLocked && !_isAnimationActive) {
-      _isAnimationActive = true;
+      if (_rightSliderCubit.coordinate.right < _sliderEndBorder) {
+        _isAnimationActive = true;
 
-      var coordinate = _createEndRightSliderCoordinate();
+        var coordinate = _createEndRightSliderCoordinate();
 
-      _rightSliderCubit.setCoordinate(coordinate);
-      _rightSliderCubit.setAnimationDuration();
-      _rightSliderCubit.setOpacity(0);
+        _rightSliderCubit.setCoordinate(coordinate);
+        _rightSliderCubit.setAnimationDuration();
+        _rightSliderCubit.setOpacity(0);
 
-      _leftSliderCubit.setAnimationDuration();
-      _leftSliderCubit.setOpacity(0);
+        _leftSliderCubit.setAnimationDuration();
+        _leftSliderCubit.setOpacity(0);
 
-      _rightSliderCubit.update();
-      _leftSliderCubit.update();
+        _rightSliderCubit.update();
+        _leftSliderCubit.update();
 
-      await Future.wait([
-        _rightSliderCubit.onOpacityAnimationEnd.first,
-        _rightSliderCubit.onPositionedAnimaionEnd.first,
-        _leftSliderCubit.onOpacityAnimationEnd.first
-      ]);
+        await Future.wait([
+          _rightSliderCubit.onOpacityAnimationEnd.first,
+          _rightSliderCubit.onPositionedAnimaionEnd.first,
+          _leftSliderCubit.onOpacityAnimationEnd.first
+        ]);
 
-      _rightSliderAnimationEnd.sink.add(null);
+        _leftSliderCubit.setMoveDuration();
+        _rightSliderCubit.setMoveDuration();
 
-      _isAnimationActive = false;
+        _leftSliderCubit.update();
+        _rightSliderCubit.update();
+
+        _rightSliderAnimationEnd.sink.add(null);
+
+        _isAnimationActive = false;
+      } else {
+        _rightSliderAnimationEnd.sink.add(null);
+      }
     }
   }
 
@@ -332,6 +361,76 @@ class SlidersCubit extends Cubit<SlidersState> {
     setLockRightSlider(value);
 
     setLockLeftSlider(value);
+  }
+
+  void setLeftSliderAnimatedLayerType(AnimatedLayerType layerType) {
+    _leftSliderCubit.setAnimatedLayerType(layerType);
+  }
+
+  void setRightSliderAnimatedLayerType(AnimatedLayerType layerType) {
+    _rightSliderCubit.setAnimatedLayerType(layerType);
+  }
+
+  void setLayerOffset(Offset offset) {
+    _leftSliderCubit.setLayerOffset(offset);
+    _rightSliderCubit.setLayerOffset(offset);
+  }
+
+  void setLayerSize(Size size) {
+    _leftSliderCubit.setLayerSize(size);
+    _rightSliderCubit.setLayerSize(size);
+  }
+
+  Future<void> setDefaultCoordinate() async {
+    _isAnimationActive = true;
+
+    var leftCoordinate = _getLeftSliderInitialCoordinate();
+
+    var rightCoordinat = _getRightSliderInitialCoordinate();
+
+    _leftSliderCubit.setCoordinate(leftCoordinate);
+    _rightSliderCubit.setCoordinate(rightCoordinat);
+
+    _leftSliderCubit.update();
+    _rightSliderCubit.update();
+
+    await Future.wait([
+      _leftSliderCubit.onPositionedAnimaionEnd.first,
+      _rightSliderCubit.onPositionedAnimaionEnd.first
+    ]);
+
+    _isAnimationActive = false;
+  }
+
+  Future<void> setDefaultOpacity() async {
+    _isAnimationActive = true;
+
+    _leftSliderCubit.setAnimationDuration();
+    _rightSliderCubit.setAnimationDuration();
+
+    _leftSliderCubit.setOpacity(1);
+    _rightSliderCubit.setOpacity(1);
+
+    _leftSliderCubit.update();
+    _rightSliderCubit.update();
+
+    await Future.wait([
+      _leftSliderCubit.onOpacityAnimationEnd.first,
+      _rightSliderCubit.onOpacityAnimationEnd.first
+    ]);
+
+    _leftSliderCubit.setMoveDuration();
+    _rightSliderCubit.setMoveDuration();
+
+    _leftSliderCubit.update();
+    _rightSliderCubit.update();
+
+    _isAnimationActive = false;
+  }
+
+  void updateSliders() {
+    _leftSliderCubit.update();
+    _rightSliderCubit.update();
   }
 
   void _show() {

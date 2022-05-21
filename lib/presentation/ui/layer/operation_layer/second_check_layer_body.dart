@@ -14,6 +14,8 @@ class SecondCheckLayerBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = data.layerSize;
 
+    var topMargin = 12.0, bottomMargin = 15.0;
+
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (notification) {
         notification.disallowIndicator();
@@ -26,8 +28,10 @@ class SecondCheckLayerBody extends StatelessWidget {
           height: size.height -
               LayerProperties.headerHeight -
               LayerProperties.marginTop -
-              LayerProperties.marginBottom,
-          margin: const EdgeInsets.only(top: 12, bottom: 15),
+              LayerProperties.marginBottom -
+              topMargin -
+              bottomMargin,
+          margin: EdgeInsets.only(top: topMargin, bottom: bottomMargin),
           child: Column(
             children: [
               const Text('The uniqueness of your text is equal to',

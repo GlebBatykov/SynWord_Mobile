@@ -7,6 +7,8 @@ import '../../../model/sliders/slider_coordinate.dart';
 
 part 'slider_state.dart';
 
+enum AnimatedLayerType { check, rephrase }
+
 class SliderCubit extends Cubit<SliderState> {
   final StreamController<Offset> _onHorizontalDragUpdateController =
       StreamController.broadcast();
@@ -20,9 +22,9 @@ class SliderCubit extends Cubit<SliderState> {
   final StreamController _onPositionedAnimationEndController =
       StreamController.broadcast();
 
-  final Size _layerSize;
+  Size _layerSize;
 
-  final Offset _layerOffset;
+  Offset _layerOffset;
 
   double _opacity = 1;
 
@@ -31,6 +33,8 @@ class SliderCubit extends Cubit<SliderState> {
   bool _isLocked = true;
 
   late Duration _duration;
+
+  AnimatedLayerType _layerType;
 
   SliderCoordinate get coordinate => _coordinate;
 
@@ -44,8 +48,10 @@ class SliderCubit extends Cubit<SliderState> {
   Stream get onPositionedAnimaionEnd =>
       _onPositionedAnimationEndController.stream;
 
-  SliderCubit(SliderCoordinate coordinate, Size layerSize, Offset layerOffset)
-      : _coordinate = coordinate,
+  SliderCubit(AnimatedLayerType layerType, SliderCoordinate coordinate,
+      Size layerSize, Offset layerOffset)
+      : _layerType = layerType,
+        _coordinate = coordinate,
         _layerSize = layerSize,
         _layerOffset = layerOffset,
         super(SliderInitial()) {
@@ -90,6 +96,18 @@ class SliderCubit extends Cubit<SliderState> {
     _duration = const Duration(milliseconds: 300);
   }
 
+  void setAnimatedLayerType(AnimatedLayerType layerType) {
+    _layerType = layerType;
+  }
+
+  void setLayerOffset(Offset offset) {
+    _layerOffset = offset;
+  }
+
+  void setLayerSize(Size size) {
+    _layerSize = size;
+  }
+
   void update() {
     if (_isLocked) {
       _lock();
@@ -100,6 +118,7 @@ class SliderCubit extends Cubit<SliderState> {
 
   void _lock() {
     emit(SliderLock(
+        _layerType,
         _layerSize,
         _layerOffset,
         _opacity,
@@ -113,6 +132,7 @@ class SliderCubit extends Cubit<SliderState> {
 
   void _unlock() {
     emit(SliderUnlock(
+        _layerType,
         _layerSize,
         _layerOffset,
         _opacity,

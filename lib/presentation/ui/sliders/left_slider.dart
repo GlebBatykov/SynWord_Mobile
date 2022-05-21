@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../cubit/sliders/slider_cubit/slider_cubit.dart';
+import '../layer/animated_layer/check_animated_layer.dart';
 import '../layer/animated_layer/rephrase_animated_layer.dart';
 import 'slider_error_icon.dart';
 import 'slider_properties.dart';
@@ -78,7 +79,9 @@ class LeftSlider extends StatelessWidget {
               curve: Curves.easeOut,
               child: Align(
                 alignment: Alignment.center,
-                child: RephraseAnimatedLayer(size: state.layerSize),
+                child: state.layerType == AnimatedLayerType.rephrase
+                    ? RephraseAnimatedLayer(size: state.layerSize)
+                    : CheckAnimatedLayer(size: state.layerSize),
               ))
         ]);
       } else {

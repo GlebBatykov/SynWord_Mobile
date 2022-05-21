@@ -6,6 +6,8 @@ abstract class SliderState {}
 class SliderInitial extends SliderState {}
 
 abstract class SliderShow extends SliderState {
+  final AnimatedLayerType layerType;
+
   final Size layerSize;
 
   final Offset layerOffset;
@@ -25,6 +27,7 @@ abstract class SliderShow extends SliderState {
   final void Function() onPositionedAnimationEnd;
 
   SliderShow(
+      this.layerType,
       this.layerSize,
       this.layerOffset,
       this.opacity,
@@ -38,6 +41,7 @@ abstract class SliderShow extends SliderState {
 
 class SliderUnlock extends SliderShow {
   SliderUnlock(
+      super.layerType,
       super.layerSize,
       super.layerOffset,
       super.opacity,
@@ -51,6 +55,7 @@ class SliderUnlock extends SliderShow {
 
 class SliderLock extends SliderShow {
   SliderLock(
+      super.layerType,
       super.layerSize,
       super.layerOffset,
       super.opacity,

@@ -2,19 +2,23 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:synword/presentation/ui/body/body_properties.dart';
 
 import '../../../model/layer/operation_layer/rephrase/rephrase_layer_body_preparation_data.dart';
 import '../../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../../model/layer/text_input_layer/text_change_details.dart';
+import '../../../ui/body/body_properties.dart';
 import '../../../ui/layer/layer_properties.dart';
 import '../operation_layer/operation_layer.dart';
 import '../text_input_layer/text_input_layer_cubit.dart';
 
 part 'layers_canvas_state.dart';
 
+enum OperationLayerType { check, secondCheck, rephrase }
+
 class LayersCanvasCubit extends Cubit<LayersCanvasState> {
-  late final double _minHeight;
+  static const double _minHeight = LayerProperties.headerContactHeight * 2;
+
+  final StreamController _removeLayerController = StreamController.broadcast();
 
   final Size _size;
 
@@ -24,10 +28,24 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
   bool _isAnimationActive = false;
 
+  Stream get removeLayer => _removeLayerController.stream;
+
   Stream<TextChangeDetails> get textChanges => _inputLayerCubit.textChanges;
 
   Stream<EditingChangeDetails> get editingChanges =>
       _inputLayerCubit.editingChanges;
+
+  List<OperationLayerType> get currentLayers => _layersCubits.map((e) {
+        if (e is RephraseLayerCubit) {
+          return OperationLayerType.rephrase;
+        } else if (e is CheckLayerCubit) {
+          return OperationLayerType.check;
+        } else {
+          return OperationLayerType.secondCheck;
+        }
+      }).toList();
+
+  int get operationLayersLength => _layersCubits.length;
 
   LayersCanvasCubit(Size size, TextInputLayerCubit inputLayerCubit)
       : _size = size,
@@ -37,8 +55,6 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   }
 
   void _initialize() {
-    _minHeight = LayerProperties.headerContactHeight * 2;
-
     //addCheckLayer();
 
     //addRephraseLayer();
@@ -55,7 +71,9 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
     late OperationLayerCubit layerCubit;
 
-    layerCubit = CheckLayerCubit(offset, size);
+    layerCubit = CheckLayerCubit(offset, size, onClose: () {
+      _removeLayer(layerCubit);
+    });
 
     layerCubit.verticalDragUpdate.listen((event) {
       _handleVerticalDragUpdate(layerCubit, event);
@@ -77,7 +95,9 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
     late OperationLayerCubit layerCubit;
 
-    layerCubit = SecondCheckLayerCubit(offset, size);
+    layerCubit = SecondCheckLayerCubit(offset, size, onClose: () {
+      _removeLayer(layerCubit);
+    });
 
     layerCubit.verticalDragUpdate.listen((event) {
       _handleVerticalDragUpdate(layerCubit, event);
@@ -114,9 +134,6 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     layerCubit.showPreparationPage(
         RephraseLayerBodyPreparationData(layerCubit as RephraseLayerCubit));
 
-    layerCubit
-        .showPreparationPage(RephraseLayerBodyPreparationData(layerCubit));
-
     _addLayer(layerCubit);
   }
 
@@ -141,6 +158,8 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
       _layersCubits.last.toForeground();
     }
 
+    _removeLayerController.sink.add(null);
+
     _show();
   }
 
@@ -156,7 +175,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     _show();
   }
 
-  void _animateLayersToTop() {
+  Future<void> animateLayersToTop() async {
     for (var layerCubit in _layersCubits) {
       var border = _getTopBorder(layerCubit);
 
@@ -307,6 +326,8 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
   @override
   Future<void> close() async {
+    await _removeLayerController.close();
+
     for (var cubit in _layersCubits) {
       await cubit.close();
     }

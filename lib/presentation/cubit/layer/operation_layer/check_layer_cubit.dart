@@ -2,7 +2,8 @@ part of 'operation_layer.dart';
 
 class CheckLayerCubit extends OperationLayerCubit<CheckLayerBodyContentData,
     LayerBodyPreparationData> {
-  CheckLayerCubit(Offset offset, Size size) : super(offset, size);
+  CheckLayerCubit(Offset offset, Size size, {super.onClose})
+      : super(offset, size);
 
   @override
   void _initialize() {

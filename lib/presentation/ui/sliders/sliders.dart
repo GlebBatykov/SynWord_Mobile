@@ -15,12 +15,14 @@ class Sliders extends StatelessWidget {
       if (state is SlidersShow) {
         return Stack(
           children: [
-            if (state.isLeftSliderEnabled)
-              BlocProvider<SliderCubit>.value(
-                  value: state.leftSliderCubit, child: const LeftSlider()),
-            if (state.isRightSliderEnabled)
-              BlocProvider<SliderCubit>.value(
-                  value: state.rightSliderCubit, child: const RightSlider())
+            Opacity(
+                opacity: state.isLeftSliderEnabled ? 1 : 0,
+                child: BlocProvider<SliderCubit>.value(
+                    value: state.leftSliderCubit, child: const LeftSlider())),
+            Opacity(
+                opacity: state.isRightSliderEnabled ? 1 : 0,
+                child: BlocProvider<SliderCubit>.value(
+                    value: state.rightSliderCubit, child: const RightSlider()))
           ],
         );
       } else {
