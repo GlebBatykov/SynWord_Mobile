@@ -32,12 +32,21 @@ class OperationLayerHeaderForeground extends OperationLayerHeaderState {
 }
 
 class OperationLayerHeaderBackground extends OperationLayerHeaderState {
+  final List<Widget> actions;
+
+  final bool isActionsVisible;
+
   final Color color;
 
   final void Function(DragUpdateDetails) onVerticalDragUpdate;
 
   final void Function(DragEndDetails) onVerticalDragEnd;
 
-  const OperationLayerHeaderBackground(super.title, this.color,
-      this.onVerticalDragUpdate, this.onVerticalDragEnd);
+  const OperationLayerHeaderBackground(
+      super.title,
+      this.actions,
+      this.isActionsVisible,
+      this.color,
+      this.onVerticalDragUpdate,
+      this.onVerticalDragEnd);
 }

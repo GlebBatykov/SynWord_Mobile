@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poseidon/poseidon.dart';
 
 import '../../asset/icon_asset.dart';
+import '../dialog/rephrase/rephrase_dialog.dart';
 import '../dialog/upload_file_dialog.dart';
 
 class Appbar extends StatelessWidget {

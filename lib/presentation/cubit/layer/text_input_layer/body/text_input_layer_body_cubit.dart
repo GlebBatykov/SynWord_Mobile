@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:synword/domain/use_case/clipboard_paste/clipboard_paste_use_case.dart';
 
 import '../../../../../domain/use_case/clipboard_copy/clipboard_copy_use_case.dart';
+import '../../../../../domain/use_case/clipboard_paste/clipboard_paste_use_case.dart';
 import '../../../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../../../model/layer/text_input_layer/text_change_details.dart';
 
@@ -26,6 +26,8 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
   final FocusNode _focusNode = FocusNode();
 
   bool _isEmpty = false;
+
+  double _arrowsOpacity = 1;
 
   Stream<TextChangeDetails> get textChanges => _textChangeController.stream;
 
@@ -58,7 +60,10 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
       _focusNode.unfocus();
 
-      emit(TextInputLayerBodyEmpty(_editingController, _focusNode));
+      _arrowsOpacity = 1;
+
+      emit(TextInputLayerBodyEmpty(
+          _editingController, _focusNode, _arrowsOpacity));
 
       _isEmpty = true;
     }
@@ -74,7 +79,10 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
   void toNotEmpty() {
     if (_isEmpty) {
-      emit(TextInputLayerBodyNotEmpty(_editingController, _focusNode));
+      _arrowsOpacity = 0;
+
+      emit(TextInputLayerBodyNotEmpty(
+          _editingController, _focusNode, _arrowsOpacity));
 
       _isEmpty = false;
     }

@@ -291,23 +291,25 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   void _animateTo(OperationLayerCubit layerCubit, Offset offset) async {
     _isAnimationActive = true;
 
-    layerCubit.setAnimationDuration();
+    if (layerCubit.offset.dy != offset.dy) {
+      layerCubit.setAnimationDuration();
 
-    layerCubit.update();
+      layerCubit.update();
 
-    var size = _getNewSize(layerCubit, offset);
+      var size = _getNewSize(layerCubit, offset);
 
-    layerCubit.setSize(size);
+      layerCubit.setSize(size);
 
-    layerCubit.setOffset(offset);
+      layerCubit.setOffset(offset);
 
-    layerCubit.update();
+      layerCubit.update();
 
-    await layerCubit.onAnimationEnd.first;
+      await layerCubit.onAnimationEnd.first;
 
-    layerCubit.setMoveDuration();
+      layerCubit.setMoveDuration();
 
-    layerCubit.update();
+      layerCubit.update();
+    }
 
     _isAnimationActive = false;
   }

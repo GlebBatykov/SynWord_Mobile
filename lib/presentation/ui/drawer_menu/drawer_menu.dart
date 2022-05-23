@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poseidon/poseidon.dart';
-import 'package:synword/presentation/ui/dialog/language_selection/language_selection_dialog.dart';
 
 import '../../asset/menu_asset.dart';
+import '../../cubit/dialog/language_selection/language_selection_dialog_cubit.dart';
 import '../../navigation/navigation_routes.dart';
+import '../dialog/language_selection/language_selection_dialog.dart';
 import '../page/pages_properties.dart';
 import 'drawer_menu_item.dart';
 
@@ -51,8 +53,9 @@ class DrawerMenu extends StatelessWidget {
                   imagePadding: const EdgeInsets.only(top: 6),
                   title: 'Language',
                   onPress: () {
-                    Poseidon.instance.callDialog(
-                        (context) => const LanguageSelectionDialog());
+                    Poseidon.instance.callDialog((context) => BlocProvider(
+                        create: (context) => LanguageSelectionDialogCubit(),
+                        child: const LanguageSelectionDialog()));
                   },
                   padding: const EdgeInsets.only(top: 42)),
               DrawerMenuItem(

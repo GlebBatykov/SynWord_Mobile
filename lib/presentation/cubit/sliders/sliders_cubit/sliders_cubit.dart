@@ -15,9 +15,16 @@ class SlidersCubit extends Cubit<SlidersState> {
 
   static const double _rightSliderInitialRightCoordinate = -36;
 
-  final StreamController _leftSliderAnimationEnd = StreamController.broadcast();
+  final StreamController _leftSliderAnimationEndController =
+      StreamController.broadcast();
 
-  final StreamController _rightSliderAnimationEnd =
+  final StreamController _rightSliderAnimationEndController =
+      StreamController.broadcast();
+
+  final StreamController<bool> _leftSliderMovingChangeController =
+      StreamController.broadcast();
+
+  final StreamController<bool> _rightSliderMovingChangeController =
       StreamController.broadcast();
 
   late final double _sliderEndBorder;
@@ -36,11 +43,22 @@ class SlidersCubit extends Cubit<SlidersState> {
 
   bool _isRightSliderLocked = true;
 
+  bool _isLeftSliderMoving = false;
+
+  bool _isRightSliderMoving = false;
+
   bool _isAnimationActive = false;
 
-  Stream get leftSliderAnimationEnd => _leftSliderAnimationEnd.stream;
+  Stream get leftSliderAnimationEnd => _leftSliderAnimationEndController.stream;
 
-  Stream get rightSliderAnimationEnd => _rightSliderAnimationEnd.stream;
+  Stream get rightSliderAnimationEnd =>
+      _rightSliderAnimationEndController.stream;
+
+  Stream<bool> get leftSliderMovingChange =>
+      _leftSliderMovingChangeController.stream;
+
+  Stream<bool> get rightSliderMovingChange =>
+      _rightSliderMovingChangeController.stream;
 
   SlidersCubit(Size size)
       : _size = size,
@@ -121,6 +139,12 @@ class SlidersCubit extends Cubit<SlidersState> {
         _leftSliderCubit.update();
         _rightSliderCubit.update();
       }
+
+      if (!_isLeftSliderMoving) {
+        _isLeftSliderMoving = true;
+
+        _leftSliderMovingChangeController.sink.add(true);
+      }
     }
   }
 
@@ -151,6 +175,10 @@ class SlidersCubit extends Cubit<SlidersState> {
 
   void _handleLeftSliderHorizontalDragEnd(double _) async {
     if (_isLeftSliderLocked && !_isAnimationActive) {
+      if (!_isLeftSliderMoving) {
+        _rightSliderMovingChangeController.sink.add(true);
+      }
+
       if (_leftSliderCubit.coordinate.left < _sliderEndBorder) {
         _isAnimationActive = true;
 
@@ -178,12 +206,16 @@ class SlidersCubit extends Cubit<SlidersState> {
         _leftSliderCubit.update();
         _rightSliderCubit.update();
 
-        _leftSliderAnimationEnd.sink.add(null);
+        _leftSliderAnimationEndController.sink.add(null);
 
         _isAnimationActive = false;
       } else {
-        _leftSliderAnimationEnd.sink.add(null);
+        _leftSliderAnimationEndController.sink.add(null);
       }
+
+      _isLeftSliderMoving = false;
+
+      _leftSliderMovingChangeController.sink.add(false);
     }
   }
 
@@ -210,6 +242,12 @@ class SlidersCubit extends Cubit<SlidersState> {
 
         _rightSliderCubit.update();
         _leftSliderCubit.update();
+      }
+
+      if (!_isRightSliderMoving) {
+        _isRightSliderMoving = true;
+
+        _rightSliderMovingChangeController.sink.add(true);
       }
     }
   }
@@ -241,6 +279,10 @@ class SlidersCubit extends Cubit<SlidersState> {
 
   void _handleRightSliderHorizontalDragEnd(double _) async {
     if (_isRightSliderLocked && !_isAnimationActive) {
+      if (!_isRightSliderMoving) {
+        _rightSliderMovingChangeController.sink.add(true);
+      }
+
       if (_rightSliderCubit.coordinate.right < _sliderEndBorder) {
         _isAnimationActive = true;
 
@@ -268,12 +310,16 @@ class SlidersCubit extends Cubit<SlidersState> {
         _leftSliderCubit.update();
         _rightSliderCubit.update();
 
-        _rightSliderAnimationEnd.sink.add(null);
+        _rightSliderAnimationEndController.sink.add(null);
 
         _isAnimationActive = false;
       } else {
-        _rightSliderAnimationEnd.sink.add(null);
+        _rightSliderAnimationEndController.sink.add(null);
       }
+
+      _isRightSliderMoving = false;
+
+      _rightSliderMovingChangeController.sink.add(false);
     }
   }
 
@@ -440,8 +486,8 @@ class SlidersCubit extends Cubit<SlidersState> {
 
   @override
   Future<void> close() async {
-    await _leftSliderAnimationEnd.close();
-    await _rightSliderAnimationEnd.close();
+    await _leftSliderAnimationEndController.close();
+    await _rightSliderAnimationEndController.close();
 
     return super.close();
   }

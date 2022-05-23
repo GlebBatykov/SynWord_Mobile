@@ -40,14 +40,36 @@ class OperationLayerHeader extends StatelessWidget {
                 topLeft: Radius.circular(25), topRight: Radius.circular(25)),
             child: Container(
               color: state.color,
-              child: Center(
-                child: Text(state.title,
-                    style: const TextStyle(
-                        fontFamily: 'Audrey',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontStyle: FontStyle.normal,
-                        color: Colors.black)),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 20),
+                        width: constraints.maxWidth * 0.2,
+                        child: state.isActionsVisible
+                            ? Row(
+                                children: state.actions,
+                              )
+                            : Container(),
+                      ),
+                      Expanded(
+                          child: Center(
+                        child: Text(state.title,
+                            style: const TextStyle(
+                                fontFamily: 'Audrey',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                fontStyle: FontStyle.normal,
+                                color: Colors.black)),
+                      )),
+                      Container(
+                          padding: const EdgeInsets.only(right: 25),
+                          alignment: Alignment.centerRight,
+                          width: constraints.maxWidth * 0.20)
+                    ],
+                  );
+                },
               ),
             ),
           ),

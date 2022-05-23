@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword/presentation/asset/icon_asset.dart';
-import 'package:synword/presentation/ui/layer/operation_layer/rephrase/preparation/rephrase_layer_preparation_section_item.dart';
-import 'package:synword/presentation/ui/material_container.dart';
 
+import '../../../../../asset/icon_asset.dart';
 import '../../../../../asset/premium_page_asset.dart';
 import '../../../../../model/layer/operation_layer/rephrase/rephrase_layer_body_preparation_data.dart';
+import '../../../../material_container.dart';
+import 'rephrase_layer_preparation_section_item.dart';
 
 class RephraseLayerPreparation extends StatelessWidget {
   final RephraseLayerBodyPreparationData data;

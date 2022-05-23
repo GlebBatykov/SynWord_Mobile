@@ -1,13 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../model/dialog/language_selection/item_language.dart';
+
 part 'language_selection_dialog_item_state.dart';
 
 class LanguageSelectionDialogItemCubit
     extends Cubit<LanguageSelectionDialogItemState> {
   final int index;
 
-  final String _title;
+  final ItemLanguage language;
 
   final String _countryAssetPath;
 
@@ -16,18 +18,17 @@ class LanguageSelectionDialogItemCubit
   bool _isSelected = false;
 
   LanguageSelectionDialogItemCubit(
-      this.index, String title, String countryAssetPath,
+      this.index, this.language, String countryAssetPath,
       {EdgeInsets? padding})
-      : _title = title,
-        _countryAssetPath = countryAssetPath,
+      : _countryAssetPath = countryAssetPath,
         _padding = padding,
         super(LanguageSelectionDialogItemUnselect(
-            title, countryAssetPath, padding));
+            language.title, countryAssetPath, padding));
 
   void select() {
     if (!_isSelected) {
       emit(LanguageSelectionDialogItemSelect(
-          _title, _countryAssetPath, _padding));
+          language.title, _countryAssetPath, _padding));
 
       _isSelected = true;
     }
@@ -36,7 +37,7 @@ class LanguageSelectionDialogItemCubit
   void unselect() {
     if (_isSelected) {
       emit(LanguageSelectionDialogItemUnselect(
-          _title, _countryAssetPath, _padding));
+          language.title, _countryAssetPath, _padding));
 
       _isSelected = false;
     }

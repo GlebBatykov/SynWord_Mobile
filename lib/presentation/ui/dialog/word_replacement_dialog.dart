@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:synword/presentation/ui/custom_scrollbar.dart';
 
-import '../../../cubit/dialog/rephrased_text/word_replacement/word_replacement_dialog_cubit.dart';
+import '../../cubit/dialog/rephrased_text/word_replacement/word_replacement_dialog_cubit.dart';
 
 class WordReplacementDialog extends StatelessWidget {
   const WordReplacementDialog({Key? key}) : super(key: key);

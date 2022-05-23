@@ -14,32 +14,22 @@ class TextInputLayerBodyShow extends TextInputLayerBodyState {
 }
 
 abstract class TextInputLayerBodyForeground extends TextInputLayerBodyShow {
+  final double arrowsOpacity;
+
   TextInputLayerBodyForeground(
-      TextEditingController editingController, FocusNode focusNode)
-      : super(editingController, focusNode);
+      super.editingController, super.focusNode, this.arrowsOpacity);
 }
 
 class TextInputLayerBodyEmpty extends TextInputLayerBodyForeground {
   TextInputLayerBodyEmpty(
-      TextEditingController editingController, FocusNode focusNode)
-      : super(editingController, focusNode);
+      super.editingController, super.focusNode, super.arrowsOpacity);
 }
 
 class TextInputLayerBodyNotEmpty extends TextInputLayerBodyForeground {
   TextInputLayerBodyNotEmpty(
-      TextEditingController editingController, FocusNode focusNode)
-      : super(editingController, focusNode);
-}
-
-class TextInpuLayerBodyNotEmptyShow extends TextInputLayerBodyForeground {
-  TextInpuLayerBodyNotEmptyShow(
-      TextEditingController editingController, FocusNode focusNode)
-      : super(editingController, focusNode);
+      super.editingController, super.focusNode, super.arrowsOpacity);
 }
 
 class TextInputLayerBodyBackground extends TextInputLayerBodyShow {
-  TextInputLayerBodyBackground(
-    TextEditingController editingController,
-    FocusNode focusNode,
-  ) : super(editingController, focusNode);
+  TextInputLayerBodyBackground(super.editingController, super.focusNode);
 }

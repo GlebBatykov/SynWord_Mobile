@@ -21,29 +21,26 @@ class LanguageSelectionDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => LanguageSelectionDialogCubit(),
-        child: Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: Container(
-            height: 170,
-            width: 234,
-            padding:
-                const EdgeInsets.only(left: 27, right: 34, top: 44, bottom: 44),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(15)),
-            child: BlocBuilder<LanguageSelectionDialogCubit,
-                LanguageSelectionDialogState>(builder: (context, state) {
-              if (state is LanguageSelectionDialogShow) {
-                return Column(
-                  children: _buildItems(state.itemCubits),
-                );
-              } else {
-                return Container();
-              }
-            }),
-          ),
-        ));
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Container(
+        height: 170,
+        width: 234,
+        padding:
+            const EdgeInsets.only(left: 27, right: 34, top: 44, bottom: 44),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(15)),
+        child: BlocBuilder<LanguageSelectionDialogCubit,
+            LanguageSelectionDialogState>(builder: (context, state) {
+          if (state is LanguageSelectionDialogShow) {
+            return Column(
+              children: _buildItems(state.itemCubits),
+            );
+          } else {
+            return Container();
+          }
+        }),
+      ),
+    );
   }
 }

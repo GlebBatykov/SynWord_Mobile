@@ -46,8 +46,8 @@ class OperationLayerHeaderCubit extends Cubit<OperationLayerHeaderState> {
   }
 
   void toBackground() {
-    emit(OperationLayerHeaderBackground(
-        _title, _color, _onVerticalDragUpdate, _onVerticalDragEnd));
+    emit(OperationLayerHeaderBackground(_title, _actions, _isActionsVisible,
+        _color, _onVerticalDragUpdate, _onVerticalDragEnd));
   }
 
   void _onVerticalDragUpdate(DragUpdateDetails details) {

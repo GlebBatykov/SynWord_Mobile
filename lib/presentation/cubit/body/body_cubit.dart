@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:synword/presentation/cubit/sliders/slider_cubit/slider_cubit.dart';
 
 import '../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../model/layer/text_input_layer/length_borders.dart';
@@ -8,6 +7,7 @@ import '../../model/layer/text_input_layer/text_change_details.dart';
 import '../../ui/layer/layer_properties.dart';
 import '../layer/layers_canvas/layers_canvas_cubit.dart';
 import '../layer/text_input_layer/text_input_layer_cubit.dart';
+import '../sliders/slider_cubit/slider_cubit.dart';
 import '../sliders/sliders_cubit/sliders_cubit.dart';
 
 part 'body_state.dart';
@@ -52,8 +52,20 @@ class BodyCubit extends Cubit<BodyState> {
       _handleLeftSliderAnimationEnd();
     });
 
+    _slidersCubit.leftSliderMovingChange.listen((value) async {
+      if (value) {
+        await _canvasCubit.animateLayersToTop();
+      }
+    });
+
     _slidersCubit.rightSliderAnimationEnd.listen((_) {
       _handleRightSliderAnimationEnd();
+    });
+
+    _slidersCubit.rightSliderMovingChange.listen((value) async {
+      if (value) {
+        await _canvasCubit.animateLayersToTop();
+      }
     });
 
     emit(BodyShow(_canvasCubit, _slidersCubit));

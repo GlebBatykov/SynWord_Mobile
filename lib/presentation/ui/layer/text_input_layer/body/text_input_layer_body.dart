@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synword/presentation/asset/sliders_asset.dart';
 
 import '../../../../cubit/layer/text_input_layer/body/text_input_layer_body_cubit.dart';
 import '../../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
@@ -86,7 +87,55 @@ class TextInputLayerBody extends StatelessWidget {
                         await bodyCubit.paste();
                       },
                     ),
-                  )
+                  ),
+                AnimatedOpacity(
+                  duration: const Duration(milliseconds: 600),
+                  opacity: state.arrowsOpacity,
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                          right: 50,
+                          bottom: 150,
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Image.asset(SlidersAsset.leftArrow,
+                                    width: 47.62, height: 50),
+                                const Padding(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: Text('Rephrase',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontFamily: 'Audrey')))
+                              ],
+                            ),
+                          )),
+                      Positioned.fill(
+                          left: 50,
+                          bottom: 150,
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Image.asset(SlidersAsset.rightArrow,
+                                        width: 47.62, height: 50)),
+                                const Padding(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: Text('Plagiarism check',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontFamily: 'Audrey')))
+                              ],
+                            ),
+                          ))
+                    ],
+                  ),
+                )
               ]);
             } else {
               return Container(

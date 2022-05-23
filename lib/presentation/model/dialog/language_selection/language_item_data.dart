@@ -1,7 +1,9 @@
+import 'item_language.dart';
+
 class LanguageItemData {
-  final String title;
+  final ItemLanguage language;
 
   final String countryAssetPath;
 
-  LanguageItemData(this.title, this.countryAssetPath);
+  LanguageItemData(this.language, this.countryAssetPath);
 }
