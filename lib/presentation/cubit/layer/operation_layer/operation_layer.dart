@@ -9,14 +9,14 @@ import 'package:synword/domain/use_case/clipboard_copy/clipboard_copy_use_case.d
 import 'package:synword/presentation/cubit/rephrased_text/rephrased_text_cubit.dart';
 import 'package:synword/presentation/model/layer/operation_layer/rephrase/rephrase_layer_body_preparation_data.dart';
 
+import '../../../../domain/model/rephrase/rephrased_word.dart';
 import '../../../model/layer/body/layer_body_content_data.dart';
 import '../../../model/layer/body/layer_body_preparation_data.dart';
 import '../../../model/layer/operation_layer/animation_end_details.dart';
 import '../../../model/layer/operation_layer/check/check_layer_body_content_data.dart';
 import '../../../model/layer/operation_layer/check/second_check_layer_body_content_data.dart';
 import '../../../model/layer/operation_layer/rephrase/rephrase_layer_body_content_data.dart';
-import '../../../model/page/history/result/check/check_result_link.dart';
-import '../../../model/page/history/result/rephrase/rephrased_word.dart';
+import '../../../../domain/model/check/check_result_link.dart';
 import '../../../ui/layer/operation_layer/check_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_cubit_copy_button.dart';

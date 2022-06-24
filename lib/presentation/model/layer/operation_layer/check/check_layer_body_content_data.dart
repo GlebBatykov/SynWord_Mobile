@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../page/history/result/check/check_result_link.dart';
+import '../../../../../domain/model/check/check_result_link.dart';
 import '../../body/layer_body_content_data.dart';
 
 class CheckLayerBodyContentData extends OperationLayerBodyContentData {

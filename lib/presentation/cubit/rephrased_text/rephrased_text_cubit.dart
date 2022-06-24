@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:poseidon/poseidon.dart';
 
-import '../../model/page/history/result/rephrase/rephrased_word.dart';
+import '../../../domain/model/rephrase/rephrased_word.dart';
 import '../../ui/dialog/word_replacement_dialog.dart';
 import '../dialog/rephrased_text/word_replacement/word_replacement_dialog_cubit.dart';
 

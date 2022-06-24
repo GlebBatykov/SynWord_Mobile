@@ -1,5 +1,4 @@
-import 'package:synword/presentation/model/page/history/result/rephrase/rephrased_word.dart';
-
+import '../../../../../../domain/model/rephrase/rephrased_word.dart';
 import '../../result_info.dart';
 
 class RephraseResultInfo extends ResultInfo {

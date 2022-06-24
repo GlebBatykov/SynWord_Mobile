@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:synword/presentation/model/page/history/result/rephrase/rephrased_word.dart';
 
+import '../../../../domain/model/rephrase/rephrased_word.dart';
 import '../../../model/page/history/result/check/check_result_info.dart';
 import '../../../model/page/history/result/rephrase/rephrase_result_info.dart';
-import '../../../model/page/history/result/check/check_result_link.dart';
+import '../../../../domain/model/check/check_result_link.dart';
 import '../../../model/page/history/result_info.dart';
 import 'body/item/history_page_body_result_item_cubit.dart';
 

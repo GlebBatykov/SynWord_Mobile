@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:synword/presentation/model/page/history/result/check/check_result_link.dart';
+import 'package:synword/domain/model/check/check_result_link.dart';
 
 import '../../../../../model/page/history/result/check/check_result_info.dart';
 

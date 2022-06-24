@@ -1,6 +1,6 @@
 import 'request.dart';
 
-abstract class AuthorizedRequest extends Request {
+class AuthorizedRequest extends Request {
   final String token;
 
   AuthorizedRequest({required this.token});

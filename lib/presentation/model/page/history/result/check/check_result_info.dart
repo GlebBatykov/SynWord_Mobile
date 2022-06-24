@@ -1,4 +1,4 @@
-import 'package:synword/presentation/model/page/history/result/check/check_result_link.dart';
+import 'package:synword/domain/model/check/check_result_link.dart';
 
 import '../../result_info.dart';
 

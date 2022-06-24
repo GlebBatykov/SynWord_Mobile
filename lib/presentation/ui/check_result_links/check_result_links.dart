@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../model/page/history/result/check/check_result_link.dart';
+import '../../../domain/model/check/check_result_link.dart';
 import '../custom_scrollbar.dart';
 import 'checked_link.dart';
 

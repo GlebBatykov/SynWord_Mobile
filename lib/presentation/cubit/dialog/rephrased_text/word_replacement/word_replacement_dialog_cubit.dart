@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:poseidon/poseidon.dart';
 
-import '../../../../model/page/history/result/rephrase/rephrased_word.dart';
+import '../../../../../domain/model/rephrase/rephrased_word.dart';
 
 part 'word_replacement_dialog_state.dart';
 
