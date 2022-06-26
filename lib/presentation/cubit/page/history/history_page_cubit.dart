@@ -29,7 +29,7 @@ class HistoryPageCubit extends Cubit<HistoryPageState> {
         15,
         (index) => CheckResultLink(
             'https://stackoverflow.com/questions/49638499/how-to-make-scrollable-text-in-flutter',
-            Random().nextInt(101)))
+            Random().nextInt(101).toDouble()))
       ..sort((a, b) => b.percentages.compareTo(a.percentages));
 
     _results.addAll([

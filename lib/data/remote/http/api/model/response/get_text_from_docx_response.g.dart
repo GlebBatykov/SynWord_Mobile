@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_check_result_link.dart';
+part of 'get_text_from_docx_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ApiCheckResultLink _$ApiCheckResultLinkFromJson(Map<String, dynamic> json) =>
-    ApiCheckResultLink(
-      json['url'] as String,
-      (json['percent'] as num).toDouble(),
+GetTextFromDocxResponse _$GetTextFromDocxResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetTextFromDocxResponse(
+      json['text'] as String,
     );

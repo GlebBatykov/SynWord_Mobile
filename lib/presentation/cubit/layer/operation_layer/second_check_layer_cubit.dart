@@ -28,7 +28,7 @@ class SecondCheckLayerCubit extends OperationLayerCubit<
         15,
         (index) => CheckResultLink(
             'https://stackoverflow.com/questions/49638499/how-to-make-scrollable-text-in-flutter',
-            Random().nextInt(101)))
+            Random().nextInt(101).toDouble()))
       ..sort((a, b) => b.percentages.compareTo(a.percentages));
 
     showResult(SecondCheckLayerBodyContentData(_size, 0.4, 0.6, links));

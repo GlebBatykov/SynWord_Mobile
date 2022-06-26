@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:synword/presentation/asset/sliders_asset.dart';
 
+import '../../../../asset/sliders_asset.dart';
 import '../../../../cubit/layer/text_input_layer/body/text_input_layer_body_cubit.dart';
 import '../../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
 import '../../../../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
@@ -23,6 +23,8 @@ class TextInputLayerBody extends StatelessWidget {
         bloc: bodyCubit,
         builder: (context, state) {
           if (state is TextInputLayerBodyShow) {
+            var scrollController = ScrollController();
+
             if (state is TextInputLayerBodyForeground) {
               EdgeInsets margin;
 
@@ -31,8 +33,6 @@ class TextInputLayerBody extends StatelessWidget {
               } else {
                 margin = const EdgeInsets.only(left: 16, right: 16, bottom: 16);
               }
-
-              var scrollController = ScrollController();
 
               return Stack(children: [
                 MediaQuery.removePadding(
@@ -138,16 +138,20 @@ class TextInputLayerBody extends StatelessWidget {
                 )
               ]);
             } else {
-              return Container(
+              return CustomScrollbar(
+                  child: Container(
                 margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                 child: TextFormField(
-                  controller: state.editingController,
-                  expands: true,
-                  maxLines: null,
-                  minLines: null,
-                  readOnly: true,
-                ),
-              );
+                    scrollController: scrollController,
+                    controller: state.editingController,
+                    expands: true,
+                    maxLines: null,
+                    minLines: null,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                    )),
+              ));
             }
           } else {
             return Container();

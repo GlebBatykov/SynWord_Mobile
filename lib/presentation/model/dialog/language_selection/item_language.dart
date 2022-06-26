@@ -1,10 +1,14 @@
+import 'package:synword/domain/model/enum/rephrase_language.dart';
+
 enum ItemLanguage {
-  russian('English', 'ENG'),
-  english('Russian', 'RUS');
+  russian('English', 'ENG', RephraseLanguage.eng),
+  english('Russian', 'RUS', RephraseLanguage.rus);
 
   final String title;
 
   final String shortTitle;
 
-  const ItemLanguage(this.title, this.shortTitle);
+  final RephraseLanguage rephraseLanguage;
+
+  const ItemLanguage(this.title, this.shortTitle, this.rephraseLanguage);
 }

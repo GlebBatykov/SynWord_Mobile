@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:poseidon/poseidon.dart';
-import 'package:synword/presentation/cubit/button/language_select/language_select_button_cubit.dart';
 
 import '../../../../asset/icon_asset.dart';
+import '../../../../cubit/button/language_select/language_select_button_cubit.dart';
 import '../../../../cubit/layer/text_input_layer/body/text_input_layer_body_cubit.dart';
 import '../../../../cubit/layer/text_input_layer/header/text_input_layer_header_cubit.dart';
 import '../../../../cubit/layer/text_input_layer/text_input_layer_cubit.dart';
+import '../../../../model/layer/text_input_layer/length_borders.dart';
 import '../../../button/language_select_button.dart';
-import '../../../dialog/language_selection/language_selection_dialog.dart';
 import '../../layer_close_button.dart';
 import '../../layer_properties.dart';
 import 'text_input_layer_header_copy_button.dart';
 
 class TextInputLayerHeader extends StatelessWidget {
   const TextInputLayerHeader({Key? key}) : super(key: key);
+
+  bool _isCorrectTextLength(int length, LengthBorders borders) {
+    return !(length < borders.min || length > borders.max);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +48,13 @@ class TextInputLayerHeader extends StatelessWidget {
                             TextSpan(
                                 text: state.textLength.toString(),
                                 style: TextStyle(
-                                    color: state.textLength <=
-                                            state.lengthBorders.min
+                                    color: !_isCorrectTextLength(
+                                            state.textLength,
+                                            state.lengthBorders)
                                         ? HexColor('#D6401F')
                                         : Colors.black)),
-                            const TextSpan(text: '/20000')
+                            TextSpan(
+                                text: '/${state.lengthBorders.max.toString()}')
                           ])),
                       const SizedBox(width: 8),
                       Image.asset(

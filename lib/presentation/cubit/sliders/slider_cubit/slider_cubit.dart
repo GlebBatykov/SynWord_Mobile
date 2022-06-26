@@ -48,6 +48,8 @@ class SliderCubit extends Cubit<SliderState> {
   Stream get onPositionedAnimaionEnd =>
       _onPositionedAnimationEndController.stream;
 
+  double get opacity => _opacity;
+
   SliderCubit(AnimatedLayerType layerType, SliderCoordinate coordinate,
       Size layerSize, Offset layerOffset)
       : _layerType = layerType,

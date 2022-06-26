@@ -3,7 +3,7 @@ import 'check_result_link.dart';
 class CheckResult {
   final String text;
 
-  final int percentages;
+  final double percentages;
 
   final List<CheckResultLink> links;
 

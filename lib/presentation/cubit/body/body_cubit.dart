@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../domain/model/enum/rephrase_language.dart';
 import '../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../model/layer/text_input_layer/length_borders.dart';
 import '../../model/layer/text_input_layer/text_change_details.dart';
@@ -25,6 +26,10 @@ class BodyCubit extends Cubit<BodyState> {
 
   OperationLayerType _rightSliderCalledLayer = OperationLayerType.rephrase;
 
+  String get text => _canvasCubit.text;
+
+  RephraseLanguage get rephraseLanguage => _canvasCubit.rephraseLanguage;
+
   BodyCubit(Size size)
       : _size = size,
         super(BodyInitial()) {
@@ -32,7 +37,7 @@ class BodyCubit extends Cubit<BodyState> {
   }
 
   void _initialize() {
-    _textLengthBorders = LengthBorders(100, 10000);
+    _initializeTextLengthBorders();
 
     var inputLayerCubit = TextInputLayerCubit(_textLengthBorders, _size);
 
@@ -71,6 +76,10 @@ class BodyCubit extends Cubit<BodyState> {
     emit(BodyShow(_canvasCubit, _slidersCubit));
   }
 
+  void _initializeTextLengthBorders() {
+    _textLengthBorders = LengthBorders(100, 20000);
+  }
+
   void _handleTextChange(TextChangeDetails details) {
     _handleBodyChanges(details.length, details.isEditing);
   }
@@ -93,7 +102,8 @@ class BodyCubit extends Cubit<BodyState> {
   }
 
   void _checkLengthBorders(int textLength) {
-    if (textLength <= _textLengthBorders.min) {
+    if (textLength < _textLengthBorders.min ||
+        textLength > _textLengthBorders.max) {
       _slidersCubit.setLockSliders(true);
       _slidersCubit.showLockSliders();
     } else {

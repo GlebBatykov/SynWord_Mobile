@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../domain/model/enum/rephrase_language.dart';
 import '../../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../../model/layer/text_input_layer/length_borders.dart';
 import '../../../model/layer/text_input_layer/text_change_details.dart';
@@ -21,6 +22,10 @@ class TextInputLayerCubit extends Cubit<TextInputLayerState> {
   Stream<TextChangeDetails> get textChanges => _bodyCubit.textChanges;
 
   Stream<EditingChangeDetails> get editingChanges => _bodyCubit.editingChanges;
+
+  String get text => _bodyCubit.text;
+
+  RephraseLanguage get rephraseLanguage => _headerCubit.rephraseLanguage;
 
   TextInputLayerCubit(LengthBorders textLengthBorders, Size size)
       : _textLengthBorders = textLengthBorders,

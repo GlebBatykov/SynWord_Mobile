@@ -11,7 +11,7 @@ class RephraseTextService {
     var options = Options(headers: request.getHeaders());
 
     var response = await dio.post('${ApiSetting.address}//rephrase',
-        options: options, data: request.getBody());
+        options: options, data: FormData.fromMap(request.getBody()));
 
     return RephraseTextResponse.fromJson(response.data);
   }

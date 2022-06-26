@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poseidon/poseidon.dart';
+import 'package:synword/presentation/cubit/dialog/upload_file/cubit/upload_file_dialog_cubit.dart';
 
 import '../../asset/icon_asset.dart';
 import '../dialog/rephrase/rephrase_dialog.dart';
@@ -43,7 +45,9 @@ class Appbar extends StatelessWidget {
         InkWell(
           onTap: () {
             Poseidon.instance.callDialog((context) {
-              return const UploadFileDialog();
+              return BlocProvider<UploadFileDialogCubit>(
+                  create: (context) => UploadFileDialogCubit(),
+                  child: const UploadFileDialog());
             });
           },
           child: Container(

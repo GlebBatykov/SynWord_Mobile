@@ -10,7 +10,7 @@ class GetTokenByUserIdService {
     var dio = Dio();
 
     var response = await dio.post('${ApiSetting.address}/guestAuthenticate',
-        data: request.getBody());
+        data: FormData.fromMap(request.getBody()));
 
     return GetTokenByUserIdResponse.fromJson(response.data);
   }

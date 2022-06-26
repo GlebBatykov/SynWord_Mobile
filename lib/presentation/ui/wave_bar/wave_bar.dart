@@ -6,7 +6,9 @@ import 'wave_ball/wave_ball.dart';
 class WaveBar extends StatelessWidget {
   final double progress;
 
-  const WaveBar({Key? key, required this.progress}) : super(key: key);
+  const WaveBar({Key? key, required double progress})
+      : progress = progress / 100,
+        super(key: key);
 
   List<Color> _getColors() {
     late List<Color> colors;

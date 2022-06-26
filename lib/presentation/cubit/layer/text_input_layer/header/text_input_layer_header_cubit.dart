@@ -1,12 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:synword/domain/model/enum/rephrase_language.dart';
 
 import '../../../../model/layer/text_input_layer/length_borders.dart';
+import '../../../button/language_select/language_select_button_cubit.dart';
 
 part 'text_input_layer_header_state.dart';
 
 class TextInputLayerHeaderCubit extends Cubit<TextInputLayerHeaderState> {
   final LengthBorders _lengthBorders;
+
+  late final LanguageSelectButtonCubit _selectButtonCubit;
 
   int _textLength = 0;
 
@@ -14,9 +18,23 @@ class TextInputLayerHeaderCubit extends Cubit<TextInputLayerHeaderState> {
 
   bool _isEditing = false;
 
+  late RephraseLanguage _rephraseLanguage;
+
+  RephraseLanguage get rephraseLanguage => _rephraseLanguage;
+
   TextInputLayerHeaderCubit(LengthBorders lengthBorders)
       : _lengthBorders = lengthBorders,
         super(TextInputLayerHeaderInitial()) {
+    _initialize();
+  }
+
+  void _initialize() {
+    _selectButtonCubit = LanguageSelectButtonCubit(onSelect: (item) {
+      _rephraseLanguage = item.rephraseLanguage;
+    });
+
+    _rephraseLanguage = _selectButtonCubit.current.rephraseLanguage;
+
     toEmpty();
   }
 

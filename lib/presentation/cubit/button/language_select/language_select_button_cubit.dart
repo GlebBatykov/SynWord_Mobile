@@ -13,6 +13,8 @@ class LanguageSelectButtonCubit extends Cubit<LanguageSelectButtonState> {
 
   late String _title;
 
+  ItemLanguage get current => _selectionDialogCubit.selected;
+
   LanguageSelectButtonCubit({void Function(ItemLanguage)? onSelect})
       : _onSelect = onSelect,
         super(LanguageSelectButtonInitial()) {

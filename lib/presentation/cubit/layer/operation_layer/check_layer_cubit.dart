@@ -23,14 +23,12 @@ class CheckLayerCubit extends OperationLayerCubit<CheckLayerBodyContentData,
       CheckLayerBody(data: data);
 
   @override
-  void work() {
-    var links = List.generate(
-        15,
-        (index) => CheckResultLink(
-            'https://stackoverflow.com/questions/49638499/how-to-make-scrollable-text-in-flutter',
-            Random().nextInt(101)))
-      ..sort((a, b) => b.percentages.compareTo(a.percentages));
+  void work() async {
+    var text = GetIt.instance<BodyCubit>().text;
 
-    showResult(CheckLayerBodyContentData(_size, 0.6, links));
+    var result = await GetIt.instance<CheckRemoteRepository>().checkText(text);
+
+    showResult(
+        CheckLayerBodyContentData(_size, result.percentages, result.links));
   }
 }

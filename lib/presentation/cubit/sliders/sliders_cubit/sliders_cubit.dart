@@ -125,7 +125,7 @@ class SlidersCubit extends Cubit<SlidersState> {
   }
 
   void _handleLeftSliderHorizontalDragUpdate(Offset delta) {
-    if (_isLeftSliderLocked && !_isAnimationActive) {
+    if (!_isLeftSliderLocked && !_isAnimationActive) {
       if (delta.dx > 0 && _leftSliderCubit.coordinate.left < _sliderEndBorder) {
         var coordinate = _createNewLeftSliderCoordinate(delta);
 
@@ -174,7 +174,7 @@ class SlidersCubit extends Cubit<SlidersState> {
   }
 
   void _handleLeftSliderHorizontalDragEnd(double _) async {
-    if (_isLeftSliderLocked && !_isAnimationActive) {
+    if (!_isLeftSliderLocked && !_isAnimationActive) {
       if (!_isLeftSliderMoving) {
         _rightSliderMovingChangeController.sink.add(true);
       }
@@ -228,7 +228,7 @@ class SlidersCubit extends Cubit<SlidersState> {
   }
 
   void _handleRightSliderHorizontalDragUpdate(Offset delta) {
-    if (_isRightSliderLocked && !_isAnimationActive) {
+    if (!_isRightSliderLocked && !_isAnimationActive) {
       if (delta.dx < 0 &&
           _rightSliderCubit.coordinate.right < _sliderEndBorder) {
         var coordinate = _createNewRightSliderCoordinate(delta);
@@ -278,7 +278,7 @@ class SlidersCubit extends Cubit<SlidersState> {
   }
 
   void _handleRightSliderHorizontalDragEnd(double _) async {
-    if (_isRightSliderLocked && !_isAnimationActive) {
+    if (!_isRightSliderLocked && !_isAnimationActive) {
       if (!_isRightSliderMoving) {
         _rightSliderMovingChangeController.sink.add(true);
       }
@@ -451,25 +451,28 @@ class SlidersCubit extends Cubit<SlidersState> {
   Future<void> setDefaultOpacity() async {
     _isAnimationActive = true;
 
-    _leftSliderCubit.setAnimationDuration();
-    _rightSliderCubit.setAnimationDuration();
+    var sliders = <SliderCubit>[];
 
-    _leftSliderCubit.setOpacity(1);
-    _rightSliderCubit.setOpacity(1);
+    if (_leftSliderCubit.opacity != 1) {
+      sliders.add(_leftSliderCubit);
+    }
 
-    _leftSliderCubit.update();
-    _rightSliderCubit.update();
+    if (_rightSliderCubit.opacity != 1) {
+      sliders.add(_rightSliderCubit);
+    }
 
-    await Future.wait([
-      _leftSliderCubit.onOpacityAnimationEnd.first,
-      _rightSliderCubit.onOpacityAnimationEnd.first
-    ]);
+    for (var slider in sliders) {
+      slider.setAnimationDuration();
+      slider.setOpacity(1);
+      slider.update();
+    }
 
-    _leftSliderCubit.setMoveDuration();
-    _rightSliderCubit.setMoveDuration();
+    await Future.wait(sliders.map((e) => e.onOpacityAnimationEnd.first));
 
-    _leftSliderCubit.update();
-    _rightSliderCubit.update();
+    for (var slider in sliders) {
+      slider.setMoveDuration();
+      slider.update();
+    }
 
     _isAnimationActive = false;
   }

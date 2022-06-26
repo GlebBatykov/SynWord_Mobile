@@ -10,8 +10,8 @@ class CheckTextService {
 
     var options = Options(headers: request.getHeaders());
 
-    var response = await dio.post('${ApiSetting.address}//plagiarismCheck',
-        options: options, data: request.getBody());
+    var response = await dio.post('${ApiSetting.address}/plagiarismCheck',
+        options: options, data: FormData.fromMap(request.getBody()));
 
     return CheckTextResponse.fromJson(response.data);
   }

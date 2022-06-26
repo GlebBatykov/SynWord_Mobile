@@ -33,6 +33,8 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
   Stream<int> get pasteText => _pasteTextController.stream;
 
+  String get text => _editingController.text;
+
   Stream<EditingChangeDetails> get editingChanges =>
       _editingChangeController.stream;
 

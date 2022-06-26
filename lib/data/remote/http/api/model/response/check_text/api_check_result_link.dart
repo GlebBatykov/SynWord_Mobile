@@ -6,9 +6,9 @@ part 'api_check_result_link.g.dart';
 class ApiCheckResultLink {
   final String url;
 
-  final int percentages;
+  final double percent;
 
-  ApiCheckResultLink(this.url, this.percentages);
+  ApiCheckResultLink(this.url, this.percent);
 
   factory ApiCheckResultLink.fromJson(Map<String, dynamic> json) =>
       _$ApiCheckResultLinkFromJson(json);

@@ -1,7 +1,7 @@
 class CheckResultLink {
   final String url;
 
-  final int percentages;
+  final double percentages;
 
   CheckResultLink(this.url, this.percentages);
 }

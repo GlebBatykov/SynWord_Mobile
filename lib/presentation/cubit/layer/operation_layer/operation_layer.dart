@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:synword/domain/repository/remote/check_remote_repository.dart';
+import 'package:synword/domain/repository/remote/rephrase_remote_repository.dart';
 import 'package:synword/domain/use_case/clipboard_copy/clipboard_copy_use_case.dart';
+import 'package:synword/presentation/cubit/body/body_cubit.dart';
 import 'package:synword/presentation/cubit/rephrased_text/rephrased_text_cubit.dart';
 import 'package:synword/presentation/model/layer/operation_layer/rephrase/rephrase_layer_body_preparation_data.dart';
 

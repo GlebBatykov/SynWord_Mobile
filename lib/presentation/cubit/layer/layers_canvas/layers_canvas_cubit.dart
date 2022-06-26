@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:synword/domain/model/enum/rephrase_language.dart';
 
 import '../../../model/layer/operation_layer/rephrase/rephrase_layer_body_preparation_data.dart';
 import '../../../model/layer/text_input_layer/editing_change_details.dart';
@@ -35,6 +36,10 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   Stream<EditingChangeDetails> get editingChanges =>
       _inputLayerCubit.editingChanges;
 
+  String get text => _inputLayerCubit.text;
+
+  RephraseLanguage get rephraseLanguage => _inputLayerCubit.rephraseLanguage;
+
   List<OperationLayerType> get currentLayers => _layersCubits.map((e) {
         if (e is RephraseLayerCubit) {
           return OperationLayerType.rephrase;
@@ -55,12 +60,6 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   }
 
   void _initialize() {
-    //addCheckLayer();
-
-    //addRephraseLayer();
-
-    //addSecondCheckLayer();
-
     _show();
   }
 

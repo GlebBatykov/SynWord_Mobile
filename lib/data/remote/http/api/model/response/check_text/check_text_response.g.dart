@@ -9,7 +9,7 @@ part of 'check_text_response.dart';
 CheckTextResponse _$CheckTextResponseFromJson(Map<String, dynamic> json) =>
     CheckTextResponse(
       json['text'] as String,
-      json['percent'] as int,
+      (json['percent'] as num).toDouble(),
       (json['matches'] as List<dynamic>)
           .map((e) => ApiCheckResultLink.fromJson(e as Map<String, dynamic>))
           .toList(),

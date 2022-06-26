@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:mapper_box/mapper_box.dart';
-import 'package:synword/domain/model/user.dart';
 
+import '../../../../domain/model/user.dart';
 import '../../../../domain/repository/local/user_local_repository.dart';
 import '../../../../objectbox.g.dart';
 import 'model/object_box_user.dart';

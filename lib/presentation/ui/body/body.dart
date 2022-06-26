@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../cubit/body/body_cubit.dart';
 import '../appbar/appbar.dart';
@@ -10,6 +11,22 @@ import 'body_properties.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
+
+  BodyCubit _getBodyCubit(Size size) {
+    late BodyCubit bodyCubit;
+
+    var isRegistered = GetIt.instance.isRegistered<BodyCubit>();
+
+    if (!isRegistered) {
+      bodyCubit = BodyCubit(size);
+
+      GetIt.instance.registerSingleton<BodyCubit>(bodyCubit);
+    } else {
+      bodyCubit = GetIt.instance<BodyCubit>();
+    }
+
+    return bodyCubit;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +39,15 @@ class Body extends StatelessWidget {
 
         var bodySize = Size(constraints.maxWidth, bodyHeight);
 
+        var bodyCubit = _getBodyCubit(bodySize);
+
         return Column(
           children: [
             SizedBox(height: appbarHeight, child: const Appbar()),
             SizedBox(
               height: constraints.maxHeight - appbarHeight,
               child: BlocBuilder<BodyCubit, BodyState>(
-                  bloc: BodyCubit(bodySize),
+                  bloc: bodyCubit,
                   builder: (context, state) {
                     if (state is BodyShow) {
                       return Stack(

@@ -8,7 +8,7 @@ part 'check_text_response.g.dart';
 class CheckTextResponse {
   final String text;
 
-  final int percent;
+  final double percent;
 
   final List<ApiCheckResultLink> matches;
 

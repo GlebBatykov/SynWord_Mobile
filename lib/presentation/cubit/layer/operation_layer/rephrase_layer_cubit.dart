@@ -37,13 +37,18 @@ class RephraseLayerCubit extends OperationLayerCubit<
       RephraseLayerPreparation(data: data);
 
   @override
-  void work() {
-    var text =
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisis volutpat est velit egestas. Ut consequat semper viverra nam libero. Morbi tristique senectus et netus. Tristique senectus et netus et malesuada fames ac. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Urna nec tincidunt praesent semper. Sit amet mauris commodo quis imperdiet massa tincidunt nunc. Tristique senectus et netus et. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Purus semper eget duis at. Gravida arcu ac tortor dignissim convallis aenean et tortor. Pulvinar mattis nunc sed blandit libero volutpat sed. Et malesuada fames ac turpis. Aliquet enim tortor at auctor.';
+  void work() async {
+    var bodyCubit = GetIt.instance<BodyCubit>();
 
-    _rephrasedTextCubit = RephrasedTextCubit(text, [
-      RephrasedWord('ipsum', 6, 10, ['apple', 'word', 'man', 'second', 'first'])
-    ]);
+    var text = bodyCubit.text;
+
+    var rephraseLanguage = bodyCubit.rephraseLanguage;
+
+    var result = await GetIt.instance<RephraseRemoteRepository>()
+        .rephraseText(text, rephraseLanguage);
+
+    _rephrasedTextCubit =
+        RephrasedTextCubit(result.rephrasedText, result.rephrasedWords);
 
     showResult(RephraseLayerBodyContentData(_rephrasedTextCubit));
   }

@@ -1,5 +1,4 @@
 import 'package:mapper_box/mapper_box.dart';
-import 'package:synword/data/remote/http/api/model/response/get_history_response.dart';
 
 import '../../domain/model/check/check_result.dart';
 import '../../domain/model/check/check_result_link.dart';
@@ -13,6 +12,7 @@ import '../local/database/objectbox/model/object_box_token.dart';
 import '../local/database/objectbox/model/object_box_user.dart';
 import '../remote/http/api/model/response/check_text/api_check_result_link.dart';
 import '../remote/http/api/model/response/check_text/check_text_response.dart';
+import '../remote/http/api/model/response/get_history_response.dart';
 import '../remote/http/api/model/response/get_price_list/price_item.dart';
 import '../remote/http/api/model/response/rephrase_text/api_rephrased_word.dart';
 import '../remote/http/api/model/response/rephrase_text/rephrase_text_response.dart';
@@ -61,7 +61,7 @@ class MapperBoxConfiguration {
                 .toList()));
 
     mapperBox.register<ApiCheckResultLink, CheckResultLink>(
-        (object) => CheckResultLink(object.url, object.percentages));
+        (object) => CheckResultLink(object.url, object.percent));
 
     mapperBox.register<CheckTextResponse, CheckResult>((object) => CheckResult(
         object.text,

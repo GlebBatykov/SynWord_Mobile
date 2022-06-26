@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../asset/history_page_asset.dart';
 import '../button/image_button.dart';
@@ -7,17 +8,23 @@ import '../button/image_button.dart';
 class CheckedLink extends StatelessWidget {
   final String url;
 
-  final int percentages;
+  final double percentages;
 
   const CheckedLink({Key? key, required this.url, required this.percentages})
       : super(key: key);
 
-  Color _buildPercentagesColor(int percentages) {
+  Color _buildPercentagesColor(double percentages) {
     return percentages >= 70
         ? HexColor('#EB0C0C')
         : percentages >= 40
             ? HexColor('#FFD600')
             : HexColor('#9EFF00');
+  }
+
+  void _openUrl() async {
+    var uri = Uri.parse(url);
+
+    await launchUrl(uri);
   }
 
   @override
@@ -28,7 +35,7 @@ class CheckedLink extends StatelessWidget {
         children: [
           Flexible(
               child: Container(
-                  alignment: Alignment.center,
+                  alignment: Alignment.centerLeft,
                   height: 40,
                   child: Text(url,
                       textAlign: TextAlign.center,
@@ -59,12 +66,12 @@ class CheckedLink extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20)),
                         child: Center(
-                            child: Text(percentages.toString(),
+                            child: Text(percentages.toInt().toString(),
                                 style: const TextStyle(fontSize: 9))),
                       ),
                     ),
                     ImageButton(
-                        onTap: () {},
+                        onTap: _openUrl,
                         assetPath: HistoryPageAsset.show,
                         width: 35,
                         height: 35,
