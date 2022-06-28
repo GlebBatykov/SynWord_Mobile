@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:synword/presentation/ui/custom_scrollbar.dart';
-import 'package:synword/presentation/ui/page/history/body/history_page_body_result_item.dart';
 
-import '../../../../cubit/page/history/history_page_cubit.dart';
+import '../../../../cubit/page/history/body/history_page_cubit.dart';
+import '../../../custom_scrollbar.dart';
 import '../../page_body.dart';
+import 'history_page_body_result_item.dart';
 
 class HistoryPageBody extends StatelessWidget {
   const HistoryPageBody({Key? key}) : super(key: key);
@@ -76,7 +76,7 @@ class HistoryPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HistoryPageCubit, HistoryPageState>(
+    return BlocBuilder<HistoryPageBodyCubit, HistoryPageBodyState>(
         builder: (context, state) {
       if (state is HistoryPageSignIn) {
         return _buildSignInState();

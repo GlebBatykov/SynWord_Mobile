@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poseidon/poseidon.dart';
 
 import '../cubit/page/coin/coin_page_cubit.dart';
-import '../cubit/page/history/history_page_cubit.dart';
+import '../cubit/page/history/body/history_page_cubit.dart';
 import '../cubit/page/history/result/check/check_result_page_cubit.dart';
 import '../cubit/page/history/result/rephrase/rephrase_result_page_cubit.dart';
 import '../cubit/page/premium/premium_page_cubit.dart';
@@ -40,7 +40,7 @@ class NavigationBuilder {
           builder: (context, argument) {
             return MaterialPageRoute(
                 builder: (context) => BlocProvider(
-                    create: (context) => HistoryPageCubit(),
+                    create: (context) => HistoryPageBodyCubit(),
                     child: const HistoryPage()));
           }),
       PoseidonRoute<CheckResultPageArguments>(

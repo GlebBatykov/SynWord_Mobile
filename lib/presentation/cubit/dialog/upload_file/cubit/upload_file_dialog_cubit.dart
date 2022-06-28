@@ -2,7 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
-import 'package:synword/domain/repository/remote/text_from_docx_remote_repository.dart';
+
+import '../../../../../domain/repository/remote/text_from_docx_remote_repository.dart';
 
 part 'upload_file_dialog_state.dart';
 

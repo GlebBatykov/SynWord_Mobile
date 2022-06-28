@@ -10,8 +10,8 @@ class GetHistoryService {
 
     var options = Options();
 
-    var response = await dio.post('${ApiSetting.address}/clientAppVersion',
-        options: options);
+    var response =
+        await dio.post('${ApiSetting.address}/getHistory', options: options);
 
     return GetHistoryResponse.fromJson(response.data);
   }
