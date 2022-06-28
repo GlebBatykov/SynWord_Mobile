@@ -1,6 +1,6 @@
 import 'package:mapper_box/mapper_box.dart';
 
-import '../../../../domain/model/check/check_result.dart';
+import '../../../../domain/model/result/check/check_result.dart';
 import '../../../../domain/repository/remote/check_remote_repository.dart';
 import '../../../../domain/use_case/get_token_use_case.dart';
 import 'model/request/check_text_request.dart';

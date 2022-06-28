@@ -38,7 +38,7 @@ class TextInputLayerCubit extends Cubit<TextInputLayerState> {
     _headerCubit = TextInputLayerHeaderCubit(_textLengthBorders);
     _bodyCubit = TextInputLayerBodyCubit();
 
-    _bodyCubit.pasteText.listen(_handlePastText);
+    _bodyCubit.pasteTextStream.listen(_handlePastText);
 
     emit(TextInputLayerShow(_size, _headerCubit, _bodyCubit));
   }
@@ -74,5 +74,9 @@ class TextInputLayerCubit extends Cubit<TextInputLayerState> {
   void toForeground() {
     _headerCubit.toForeground();
     _bodyCubit.toForeground();
+  }
+
+  void pasteText(String text) {
+    _bodyCubit.pasteText(text);
   }
 }

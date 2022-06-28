@@ -1,15 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'check_text/check_text_response.dart';
-import 'rephrase_text/rephrase_text_response.dart';
+import 'check/api_check_history.dart';
+import 'rephrase/api_rephrase_history.dart';
 
 part 'get_history_response.g.dart';
 
 @JsonSerializable(createToJson: false)
 class GetHistoryResponse {
-  final List<RephraseTextResponse> rephraseHistories;
+  final List<ApiRephraseHistory> rephraseHistories;
 
-  final List<CheckTextResponse> plagiarismCheckHistories;
+  final List<ApiCheckHistory> plagiarismCheckHistories;
 
   GetHistoryResponse(this.rephraseHistories, this.plagiarismCheckHistories);
 

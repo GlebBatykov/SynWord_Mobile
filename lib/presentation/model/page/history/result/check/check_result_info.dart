@@ -1,11 +1,11 @@
-import 'package:synword/domain/model/check/check_result_link.dart';
+import '../../../../../../domain/model/result/check/check_result_check_result_link.dart';
 
 import '../../result_info.dart';
 
 class CheckResultInfo extends ResultInfo {
   final int percentages;
 
-  final List<CheckResultLink> links;
+  final List<CheckResultCheckResultLink> links;
 
-  CheckResultInfo(String text, this.percentages, this.links) : super(text);
+  CheckResultInfo(super.text, this.percentages, this.links);
 }

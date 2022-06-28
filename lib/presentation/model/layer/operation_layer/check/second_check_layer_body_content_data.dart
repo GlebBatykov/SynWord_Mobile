@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../domain/model/check/check_result_link.dart';
+import '../../../../../domain/model/result/check/check_result_check_result_link.dart';
 import '../../body/layer_body_content_data.dart';
 
 class SecondCheckLayerBodyContentData extends OperationLayerBodyContentData {
@@ -10,7 +10,7 @@ class SecondCheckLayerBodyContentData extends OperationLayerBodyContentData {
 
   final double newProgress;
 
-  final List<CheckResultLink> links;
+  final List<CheckResultCheckResultLink> links;
 
   SecondCheckLayerBodyContentData(
       this.layerSize, this.sourceProgress, this.newProgress, this.links);

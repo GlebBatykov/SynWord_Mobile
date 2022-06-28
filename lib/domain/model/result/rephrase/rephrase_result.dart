@@ -1,9 +1,9 @@
-import 'rephrased_word.dart';
+import 'rephrase_result_rephrased_word.dart';
 
 class RephraseResult {
   final String rephrasedText;
 
-  final List<RephrasedWord> rephrasedWords;
+  final List<RephraseResultRephrasedWord> rephrasedWords;
 
   RephraseResult(this.rephrasedText, this.rephrasedWords);
 }

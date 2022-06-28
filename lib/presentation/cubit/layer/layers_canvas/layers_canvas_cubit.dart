@@ -52,6 +52,8 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
   int get operationLayersLength => _layersCubits.length;
 
+  bool get isOperationLayersNotShow => _layersCubits.isEmpty;
+
   LayersCanvasCubit(Size size, TextInputLayerCubit inputLayerCubit)
       : _size = size,
         _inputLayerCubit = inputLayerCubit,
@@ -323,6 +325,10 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
   void _show() {
     emit(LayersCanvasShow(_size, _inputLayerCubit, _layersCubits));
+  }
+
+  void pasteText(String text) {
+    _inputLayerCubit.pasteText(text);
   }
 
   @override

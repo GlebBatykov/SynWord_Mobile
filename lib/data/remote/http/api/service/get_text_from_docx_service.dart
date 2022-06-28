@@ -11,8 +11,8 @@ class GetTextFromDocxService {
 
     var options = Options(headers: request.getHeaders());
 
-    var response = await dio.post('${ApiSetting.address}//getTextFromDocx',
-        data: request.getBody(), options: options);
+    var response = await dio.post('${ApiSetting.address}/getTextFromDocx',
+        data: FormData.fromMap(request.getBody()), options: options);
 
     return GetTextFromDocxResponse.fromJson(response.data);
   }

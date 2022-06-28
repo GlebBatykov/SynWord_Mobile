@@ -1,10 +1,12 @@
+import 'package:dio/dio.dart';
+
 import 'authorized_request.dart';
 
 class GetTextFromDocxRequest extends AuthorizedRequest {
-  final String binary;
+  final MultipartFile file;
 
-  GetTextFromDocxRequest({required this.binary, required super.token});
+  GetTextFromDocxRequest({required this.file, required super.token});
 
   @override
-  Map<String, dynamic> getBody() => {'File': binary};
+  Map<String, dynamic> getBody() => {'File': file};
 }

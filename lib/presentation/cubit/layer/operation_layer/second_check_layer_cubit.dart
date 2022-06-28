@@ -26,7 +26,7 @@ class SecondCheckLayerCubit extends OperationLayerCubit<
   void work() {
     var links = List.generate(
         15,
-        (index) => CheckResultLink(
+        (index) => CheckResultCheckResultLink(
             'https://stackoverflow.com/questions/49638499/how-to-make-scrollable-text-in-flutter',
             Random().nextInt(101).toDouble()))
       ..sort((a, b) => b.percentages.compareTo(a.percentages));

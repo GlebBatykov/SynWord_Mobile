@@ -1,5 +1,5 @@
-import 'dart:typed_data';
+import 'package:dio/dio.dart';
 
 abstract class TextFromDocxRemoteRepository {
-  Future<String> getTextFromDocx(Uint8List bytes);
+  Future<String> getTextFromDocx(MultipartFile file);
 }

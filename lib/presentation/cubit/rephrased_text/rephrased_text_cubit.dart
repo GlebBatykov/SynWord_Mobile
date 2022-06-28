@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:poseidon/poseidon.dart';
 
-import '../../../domain/model/rephrase/rephrased_word.dart';
+import '../../../domain/model/result/rephrase/rephrase_result_rephrased_word.dart';
 import '../../ui/dialog/word_replacement_dialog.dart';
 import '../dialog/rephrased_text/word_replacement/word_replacement_dialog_cubit.dart';
 
@@ -12,11 +12,12 @@ part 'rephrased_text_state.dart';
 class RephrasedTextCubit extends Cubit<RephrasedTextState> {
   String _text;
 
-  final List<RephrasedWord> _rephrasedWords;
+  final List<RephraseResultRephrasedWord> _rephrasedWords;
 
   String get text => _text;
 
-  RephrasedTextCubit(String text, List<RephrasedWord> rephrasedWords)
+  RephrasedTextCubit(
+      String text, List<RephraseResultRephrasedWord> rephrasedWords)
       : _text = text,
         _rephrasedWords = rephrasedWords,
         super(RephrasedTextInitial()) {
@@ -38,7 +39,7 @@ class RephrasedTextCubit extends Cubit<RephrasedTextState> {
           TextSpan(text: text, style: const TextStyle(color: Colors.black)));
     }
 
-    void addRephrasedSpan(RephrasedWord word) {
+    void addRephrasedSpan(RephraseResultRephrasedWord word) {
       textSpans.add(WidgetSpan(
           child: GestureDetector(
         onTap: _onTap(word),
@@ -84,7 +85,7 @@ class RephrasedTextCubit extends Cubit<RephrasedTextState> {
     return textSpans;
   }
 
-  void Function() _onTap(RephrasedWord word) {
+  void Function() _onTap(RephraseResultRephrasedWord word) {
     return () {
       Poseidon.instance.callDialog((context) => BlocProvider(
           create: (context) =>
@@ -93,7 +94,7 @@ class RephrasedTextCubit extends Cubit<RephrasedTextState> {
     };
   }
 
-  void _onSelectSynonym(RephrasedWord word, int index) {
+  void _onSelectSynonym(RephraseResultRephrasedWord word, int index) {
     var synonym = word.synonyms[index];
 
     _text = _text.replaceRange(word.startIndex, word.endIndex + 1, synonym);

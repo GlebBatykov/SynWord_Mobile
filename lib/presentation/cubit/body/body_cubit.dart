@@ -30,6 +30,8 @@ class BodyCubit extends Cubit<BodyState> {
 
   RephraseLanguage get rephraseLanguage => _canvasCubit.rephraseLanguage;
 
+  bool get isOperationLayersNotShow => _canvasCubit.isOperationLayersNotShow;
+
   BodyCubit(Size size)
       : _size = size,
         super(BodyInitial()) {
@@ -208,5 +210,9 @@ class BodyCubit extends Cubit<BodyState> {
         _size.height -
             ((_canvasCubit.operationLayersLength + 1) *
                 LayerProperties.headerContactHeight));
+  }
+
+  void pasteText(String text) {
+    _canvasCubit.pasteText(text);
   }
 }

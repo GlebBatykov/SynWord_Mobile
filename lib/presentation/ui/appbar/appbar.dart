@@ -4,7 +4,6 @@ import 'package:poseidon/poseidon.dart';
 import 'package:synword/presentation/cubit/dialog/upload_file/cubit/upload_file_dialog_cubit.dart';
 
 import '../../asset/icon_asset.dart';
-import '../dialog/rephrase/rephrase_dialog.dart';
 import '../dialog/upload_file_dialog.dart';
 
 class Appbar extends StatelessWidget {

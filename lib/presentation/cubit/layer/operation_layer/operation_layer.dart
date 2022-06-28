@@ -18,7 +18,7 @@ import '../../../model/layer/operation_layer/animation_end_details.dart';
 import '../../../model/layer/operation_layer/check/check_layer_body_content_data.dart';
 import '../../../model/layer/operation_layer/check/second_check_layer_body_content_data.dart';
 import '../../../model/layer/operation_layer/rephrase/rephrase_layer_body_content_data.dart';
-import '../../../../domain/model/check/check_result_link.dart';
+import '../../../../domain/model/result/check/check_result_check_result_link.dart';
 import '../../../ui/layer/operation_layer/check_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_body.dart';
 import '../../../ui/layer/operation_layer/rephrase/rephrase_layer_cubit_copy_button.dart';

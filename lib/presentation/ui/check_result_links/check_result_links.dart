@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/model/check/check_result_link.dart';
+import '../../../domain/model/result/check/check_result_check_result_link.dart';
 import '../custom_scrollbar.dart';
 import 'checked_link.dart';
 
 class CheckResultLinks extends StatelessWidget {
-  final List<CheckResultLink> links;
+  final List<CheckResultCheckResultLink> links;
 
   final double scrollbarCrossAxisMargin;
 

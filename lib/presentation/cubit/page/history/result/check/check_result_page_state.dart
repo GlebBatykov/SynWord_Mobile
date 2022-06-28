@@ -10,7 +10,7 @@ class CheckResultPageShow extends CheckResultPageState {
 
   final String text;
 
-  final List<CheckResultLink> links;
+  final List<CheckResultCheckResultLink> links;
 
   CheckResultPageShow(this.percentages, this.text, this.links);
 }

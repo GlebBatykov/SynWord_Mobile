@@ -1,4 +1,4 @@
-import '../../model/check/check_result.dart';
+import '../../model/result/check/check_result.dart';
 
 abstract class CheckRemoteRepository {
   Future<CheckResult> checkText(String text);

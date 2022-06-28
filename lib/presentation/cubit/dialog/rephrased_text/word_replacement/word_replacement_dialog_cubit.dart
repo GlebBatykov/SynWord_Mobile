@@ -2,17 +2,17 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:poseidon/poseidon.dart';
 
-import '../../../../../domain/model/rephrase/rephrased_word.dart';
+import '../../../../../domain/model/result/rephrase/rephrase_result_rephrased_word.dart';
 
 part 'word_replacement_dialog_state.dart';
 
 class WordReplacementDialogCubit extends Cubit<WordReplacementDialogState> {
-  final RephrasedWord _word;
+  final RephraseResultRephrasedWord _word;
 
-  final void Function(RephrasedWord, int) _onSelect;
+  final void Function(RephraseResultRephrasedWord, int) _onSelect;
 
-  WordReplacementDialogCubit(
-      RephrasedWord word, void Function(RephrasedWord, int) onSelect)
+  WordReplacementDialogCubit(RephraseResultRephrasedWord word,
+      void Function(RephraseResultRephrasedWord, int) onSelect)
       : _word = word,
         _onSelect = onSelect,
         super(WordReplacementDialogInitial()) {

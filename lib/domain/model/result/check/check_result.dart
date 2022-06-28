@@ -1,11 +1,11 @@
-import 'check_result_link.dart';
+import 'check_result_check_result_link.dart';
 
 class CheckResult {
   final String text;
 
   final double percentages;
 
-  final List<CheckResultLink> links;
+  final List<CheckResultCheckResultLink> links;
 
   CheckResult(this.text, this.percentages, this.links);
 }
