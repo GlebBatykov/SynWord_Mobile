@@ -11,7 +11,7 @@ import '../../domain/model/price.dart';
 import '../../domain/model/result/rephrase/rephrase_result.dart';
 import '../../domain/model/result/rephrase/rephrase_result_rephrased_word.dart';
 import '../../domain/model/token.dart';
-import '../../domain/model/user.dart';
+import '../../domain/model/user/user.dart';
 import '../../presentation/model/page/history/result/check/check_result_info.dart';
 import '../../presentation/model/page/history/result/rephrase/rephrase_result_info.dart';
 import '../local/database/objectbox/model/object_box_token.dart';
@@ -41,12 +41,10 @@ class MapperBoxConfiguration {
           ? mapperBox.map<ObjectBoxToken, Token?>(object.token.target!)
           : null;
 
-      return User(
-          id: object.userId, token: token, accessToken: object.accessToken);
+      return User(id: object.userId, token: token);
     });
     mapperBox.register<User, ObjectBoxUser>((object) {
-      var objectBoxUser =
-          ObjectBoxUser(userId: object.id, accessToken: object.accessToken);
+      var objectBoxUser = ObjectBoxUser(userId: object.id);
 
       if (object.token != null) {
         objectBoxUser.token.target =

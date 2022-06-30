@@ -1,7 +1,8 @@
 import 'package:get_it/get_it.dart';
+import 'package:synword/domain/repository/remote/sing_in_remote_repository.dart';
 
 import '../model/token.dart';
-import '../model/user.dart';
+import '../model/user/user.dart';
 import '../repository/local/user_local_repository.dart';
 import '../repository/remote/user_remote_repository.dart';
 
@@ -31,9 +32,14 @@ class GetTokenUseCase {
   Future<Token> _getTokenFromRemote() async {
     late Token token;
 
-    if (_user.accessToken != null) {
-      token =
-          await _userRemoteRepository.getTokenByGoogleToken(_user.accessToken!);
+    var signInRemoteRepository =
+        await GetIt.instance.getAsync<SignInRemoteRepository>();
+
+    var userAuthorizationData = signInRemoteRepository.getAuthorizationData();
+
+    if (userAuthorizationData != null) {
+      token = await _userRemoteRepository
+          .getTokenByGoogleToken(userAuthorizationData.accessToken);
     } else {
       if (_user.id == null) {
         var id = await _userRemoteRepository.registerUser();

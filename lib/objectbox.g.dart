@@ -41,12 +41,7 @@ final _entities = <ModelEntity>[
             type: 11,
             flags: 520,
             indexId: const IdUid(1, 6970047395987467947),
-            relationTarget: 'ObjectBoxToken'),
-        ModelProperty(
-            id: const IdUid(4, 1045648510981454082),
-            name: 'accessToken',
-            type: 9,
-            flags: 0)
+            relationTarget: 'ObjectBoxToken')
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -97,7 +92,11 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [7163745484534489156],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [3812969659023192963, 8969398750685921378],
+      retiredPropertyUids: const [
+        3812969659023192963,
+        8969398750685921378,
+        1045648510981454082
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -115,14 +114,10 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (ObjectBoxUser object, fb.Builder fbb) {
           final userIdOffset =
               object.userId == null ? null : fbb.writeString(object.userId!);
-          final accessTokenOffset = object.accessToken == null
-              ? null
-              : fbb.writeString(object.accessToken!);
           fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, userIdOffset);
           fbb.addInt64(2, object.token.targetId);
-          fbb.addOffset(3, accessTokenOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -133,9 +128,7 @@ ModelDefinition getObjectBoxModel() {
           final object = ObjectBoxUser(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
               userId: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 6),
-              accessToken: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 10));
+                  .vTableGetNullable(buffer, rootOffset, 6));
           object.token.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
           object.token.attach(store);
@@ -187,10 +180,6 @@ class ObjectBoxUser_ {
   /// see [ObjectBoxUser.token]
   static final token = QueryRelationToOne<ObjectBoxUser, ObjectBoxToken>(
       _entities[0].properties[2]);
-
-  /// see [ObjectBoxUser.accessToken]
-  static final accessToken =
-      QueryStringProperty<ObjectBoxUser>(_entities[0].properties[3]);
 }
 
 /// [ObjectBoxToken] entity fields to define ObjectBox queries.

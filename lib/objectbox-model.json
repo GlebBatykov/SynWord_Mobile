@@ -26,11 +26,6 @@
           "flags": 520,
           "indexId": "1:6970047395987467947",
           "relationTarget": "ObjectBoxToken"
-        },
-        {
-          "id": "4:1045648510981454082",
-          "name": "accessToken",
-          "type": 9
         }
       ],
       "relations": []
@@ -67,7 +62,8 @@
   "retiredIndexUids": [],
   "retiredPropertyUids": [
     3812969659023192963,
-    8969398750685921378
+    8969398750685921378,
+    1045648510981454082
   ],
   "retiredRelationUids": [],
   "version": 1

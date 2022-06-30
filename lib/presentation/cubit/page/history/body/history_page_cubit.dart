@@ -14,8 +14,6 @@ import 'item/history_page_body_result_item_cubit.dart';
 part 'history_page_state.dart';
 
 class HistoryPageBodyCubit extends Cubit<HistoryPageBodyState> {
-  final List<ResultInfo> _results = [];
-
   final List<HistoryPageBodyResultItemCubit> _itemsCubits = [];
 
   HistoryPageBodyCubit() : super(HistoryPageInitial()) {

@@ -1,4 +1,4 @@
-import '../../model/user.dart';
+import '../../model/user/user.dart';
 
 abstract class UserLocalRepository {
   User getUser();

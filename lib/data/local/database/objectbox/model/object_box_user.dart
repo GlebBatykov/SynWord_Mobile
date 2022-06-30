@@ -10,7 +10,5 @@ class ObjectBoxUser {
 
   ToOne<ObjectBoxToken> token = ToOne<ObjectBoxToken>();
 
-  String? accessToken;
-
-  ObjectBoxUser({this.id = 0, this.userId, this.accessToken});
+  ObjectBoxUser({this.id = 0, this.userId});
 }
