@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:synword/domain/model/enum/rephrase_language.dart';
 
-import '../../../model/layer/operation_layer/rephrase/rephrase_layer_body_preparation_data.dart';
+import '../../../../domain/model/enum/rephrase_language.dart';
+import '../../../../domain/model/result/check/check_result.dart';
 import '../../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../../model/layer/text_input_layer/text_change_details.dart';
 import '../../../ui/body/body_properties.dart';
@@ -19,6 +19,12 @@ enum OperationLayerType { check, secondCheck, rephrase }
 class LayersCanvasCubit extends Cubit<LayersCanvasState> {
   static const double _minHeight = LayerProperties.headerContactHeight * 2;
 
+  final StreamController _workDoneLayerController =
+      StreamController.broadcast();
+
+  final Map<OperationLayerCubit, StreamSubscription> _workDoneSubscriptions =
+      {};
+
   final StreamController _removeLayerController = StreamController.broadcast();
 
   final Size _size;
@@ -31,12 +37,34 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
   Stream get removeLayer => _removeLayerController.stream;
 
+  Stream get workDoneLayer => _workDoneLayerController.stream;
+
   Stream<TextChangeDetails> get textChanges => _inputLayerCubit.textChanges;
 
   Stream<EditingChangeDetails> get editingChanges =>
       _inputLayerCubit.editingChanges;
 
   String get text => _inputLayerCubit.text;
+
+  CheckResult? get initialTextCheckResult {
+    var checkLayersCubits = _layersCubits.whereType<CheckLayerCubit>();
+
+    if (checkLayersCubits.isNotEmpty) {
+      return checkLayersCubits.first.result;
+    } else {
+      return null;
+    }
+  }
+
+  String? get rephrasedText {
+    var rephrasedLayersCubits = _layersCubits.whereType<RephraseLayerCubit>();
+
+    if (rephrasedLayersCubits.isNotEmpty) {
+      return rephrasedLayersCubits.first.rephrasedText;
+    } else {
+      return null;
+    }
+  }
 
   RephraseLanguage get rephraseLanguage => _inputLayerCubit.rephraseLanguage;
 
@@ -73,7 +101,14 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     late OperationLayerCubit layerCubit;
 
     layerCubit = CheckLayerCubit(offset, size, onClose: () {
+      _workDoneSubscriptions[layerCubit]!.cancel();
+      _workDoneSubscriptions.remove(layerCubit);
+
       _removeLayer(layerCubit);
+    });
+
+    _workDoneSubscriptions[layerCubit] = layerCubit.workDone.listen((_) {
+      _workDoneLayerController.sink.add(null);
     });
 
     layerCubit.verticalDragUpdate.listen((event) {
@@ -97,7 +132,14 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     late OperationLayerCubit layerCubit;
 
     layerCubit = SecondCheckLayerCubit(offset, size, onClose: () {
+      _workDoneSubscriptions[layerCubit]!.cancel();
+      _workDoneSubscriptions.remove(layerCubit);
+
       _removeLayer(layerCubit);
+    });
+
+    _workDoneSubscriptions[layerCubit] = layerCubit.workDone.listen((_) {
+      _workDoneLayerController.sink.add(null);
     });
 
     layerCubit.verticalDragUpdate.listen((event) {
@@ -113,7 +155,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     _addLayer(layerCubit);
   }
 
-  void addRephraseLayer() {
+  Future<void> addRephraseLayer() async {
     var offset = _getNewLayerOffset();
 
     var size = _getNewLayerSize();
@@ -121,7 +163,14 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
     late OperationLayerCubit layerCubit;
 
     layerCubit = RephraseLayerCubit(offset, size, onClose: () {
+      _workDoneSubscriptions[layerCubit]!.cancel();
+      _workDoneSubscriptions.remove(layerCubit);
+
       _removeLayer(layerCubit);
+    });
+
+    _workDoneSubscriptions[layerCubit] = layerCubit.workDone.listen((_) {
+      _workDoneLayerController.sink.add(null);
     });
 
     layerCubit.verticalDragUpdate.listen((event) {
@@ -132,8 +181,7 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
       _handleVerticalDragEnd(layerCubit, event);
     });
 
-    layerCubit.showPreparationPage(
-        RephraseLayerBodyPreparationData(layerCubit as RephraseLayerCubit));
+    await layerCubit.initialize();
 
     _addLayer(layerCubit);
   }

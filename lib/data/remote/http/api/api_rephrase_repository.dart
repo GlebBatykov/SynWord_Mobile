@@ -1,10 +1,13 @@
 import 'package:mapper_box/mapper_box.dart';
 
 import '../../../../domain/model/enum/rephrase_language.dart';
+import '../../../../domain/model/result/rephrase/enhanced_rephrase_result.dart';
 import '../../../../domain/model/result/rephrase/rephrase_result.dart';
 import '../../../../domain/repository/remote/rephrase_remote_repository.dart';
 import '../../../../domain/use_case/get_token_use_case.dart';
+import 'model/request/enhanced_rephrase_text_request.dart';
 import 'model/request/rephrase_text_request.dart';
+import 'model/response/rephrase_text/enhanced_rephrase_text_response.dart';
 import 'model/response/rephrase_text/rephrase_text_response.dart';
 import 'service/rephrase_text_service.dart';
 
@@ -21,5 +24,17 @@ class ApiRephraseRepository extends RephraseRemoteRepository {
 
     return MapperBox.instanse
         .map<RephraseTextResponse, RephraseResult>(response);
+  }
+
+  @override
+  Future<EnhancedRephraseResult> enhancedRephraseText(String text) async {
+    var token = await GetTokenUseCase().getToken();
+
+    var request = EnhancedRephraseTextRequest(text: text, token: token.token);
+
+    var response = await RephraseTextService().enhancedRephraseText(request);
+
+    return MapperBox.instanse
+        .map<EnhancedRephraseTextResponse, EnhancedRephraseResult>(response);
   }
 }

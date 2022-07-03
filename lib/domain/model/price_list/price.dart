@@ -1,7 +1,7 @@
 class Price {
   final String name;
 
-  final double value;
+  final int value;
 
   Price(this.name, this.value);
 }

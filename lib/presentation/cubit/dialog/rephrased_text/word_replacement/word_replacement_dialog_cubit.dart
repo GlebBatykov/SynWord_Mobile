@@ -9,12 +9,17 @@ part 'word_replacement_dialog_state.dart';
 class WordReplacementDialogCubit extends Cubit<WordReplacementDialogState> {
   final RephraseResultRephrasedWord _word;
 
-  final void Function(RephraseResultRephrasedWord, int) _onSelect;
+  final void Function(RephraseResultRephrasedWord, int) _onSelectSynonym;
 
-  WordReplacementDialogCubit(RephraseResultRephrasedWord word,
-      void Function(RephraseResultRephrasedWord, int) onSelect)
+  final void Function(RephraseResultRephrasedWord) _onSelectSource;
+
+  WordReplacementDialogCubit(
+      RephraseResultRephrasedWord word,
+      void Function(RephraseResultRephrasedWord, int) onSelectSynonym,
+      void Function(RephraseResultRephrasedWord) onSelectSource)
       : _word = word,
-        _onSelect = onSelect,
+        _onSelectSynonym = onSelectSynonym,
+        _onSelectSource = onSelectSource,
         super(WordReplacementDialogInitial()) {
     _initialize();
   }
@@ -24,7 +29,13 @@ class WordReplacementDialogCubit extends Cubit<WordReplacementDialogState> {
   }
 
   void selectSynonym(int index) {
-    _onSelect(_word, index);
+    _onSelectSynonym(_word, index);
+
+    Poseidon.instance.pop();
+  }
+
+  void selectSource() {
+    _onSelectSource(_word);
 
     Poseidon.instance.pop();
   }

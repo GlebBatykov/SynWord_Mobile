@@ -2,6 +2,10 @@ part of 'operation_layer.dart';
 
 class CheckLayerCubit extends OperationLayerCubit<CheckLayerBodyContentData,
     LayerBodyPreparationData> {
+  CheckResult? _result;
+
+  CheckResult? get result => _result;
+
   CheckLayerCubit(Offset offset, Size size, {super.onClose})
       : super(offset, size);
 
@@ -26,9 +30,11 @@ class CheckLayerCubit extends OperationLayerCubit<CheckLayerBodyContentData,
   void work() async {
     var text = GetIt.instance<BodyCubit>().text;
 
-    var result = await GetIt.instance<CheckRemoteRepository>().checkText(text);
+    _result = await GetIt.instance<CheckRemoteRepository>().checkText(text);
 
     showResult(
-        CheckLayerBodyContentData(_size, result.percentages, result.links));
+        CheckLayerBodyContentData(_size, _result!.percentages, _result!.links));
+
+    await super.work();
   }
 }

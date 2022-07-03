@@ -6,10 +6,10 @@ part 'price_item.g.dart';
 class PriceItem {
   final String itemName;
 
-  final double price;
+  final int price;
 
   PriceItem(this.itemName, this.price);
 
   factory PriceItem.fromJson(Map<String, dynamic> json) =>
-    _$PriceItemFromJson(json);
+      _$PriceItemFromJson(json);
 }

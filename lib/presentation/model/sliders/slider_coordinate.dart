@@ -12,4 +12,23 @@ class SliderCoordinate {
         right = right ?? 0,
         bottom = bottom ?? 0,
         top = top ?? 0;
+
+  @override
+  bool operator ==(other) {
+    if (other is SliderCoordinate) {
+      return left == other.left &&
+          right == other.right &&
+          bottom == other.bottom &&
+          top == other.top;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  int get hashCode {
+    var hashCode = super.hashCode;
+
+    return hashCode;
+  }
 }

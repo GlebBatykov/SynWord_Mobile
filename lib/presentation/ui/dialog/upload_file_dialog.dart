@@ -17,7 +17,14 @@ class UploadFileDialog extends StatelessWidget {
         height: 273,
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(15)),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                  offset: const Offset(0, 5),
+                  color: Colors.black.withOpacity(0.6),
+                  blurRadius: 15)
+            ]),
         child: BlocBuilder<UploadFileDialogCubit, UploadFileDialogState>(
             builder: (context, state) {
           if (state is UploadFileDialogShow) {

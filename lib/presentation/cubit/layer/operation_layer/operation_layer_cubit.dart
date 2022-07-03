@@ -5,6 +5,8 @@ abstract class OperationLayerCubit<T extends OperationLayerBodyContentData,
   final StreamController<AnimationEndDetails> _onAnimationEndController =
       StreamController.broadcast();
 
+  final StreamController _workDoneController = StreamController.broadcast();
+
   final void Function()? _onClose;
 
   late final OperationLayerHeaderCubit _headerCubit;
@@ -28,6 +30,8 @@ abstract class OperationLayerCubit<T extends OperationLayerBodyContentData,
   Stream<AnimationEndDetails> get onAnimationEnd =>
       _onAnimationEndController.stream;
 
+  Stream get workDone => _workDoneController.stream;
+
   OperationLayerCubit(Offset offset, Size size, {void Function()? onClose})
       : _offset = offset,
         _size = size,
@@ -39,7 +43,11 @@ abstract class OperationLayerCubit<T extends OperationLayerBodyContentData,
 
   void _initialize();
 
-  FutureOr<void> work();
+  FutureOr<void> initialize() {}
+
+  FutureOr<void> work() async {
+    _workDoneController.sink.add(null);
+  }
 
   void showResult(T data) {
     _bodyCubit.showResult(data);
@@ -93,6 +101,7 @@ abstract class OperationLayerCubit<T extends OperationLayerBodyContentData,
   @override
   Future<void> close() async {
     await _onAnimationEndController.close();
+    await _workDoneController.close();
 
     return super.close();
   }

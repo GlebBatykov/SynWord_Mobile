@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../domain/repository/local/user_local_repository.dart';
+import '../../../../../domain/repository/remote/sing_in_remote_repository.dart';
 
 part 'account_dialog_state.dart';
 
@@ -23,8 +23,8 @@ class AccountDialogCubit extends Cubit<AccountDialogState> {
   }
 
   void _onTap() async {
-    var userLocalRepository = GetIt.instance<UserLocalRepository>();
+    var signInRemoteRepository = GetIt.instance<SignInRemoteRepository>();
 
-    var user = userLocalRepository.getUser();
+    await signInRemoteRepository.logout();
   }
 }

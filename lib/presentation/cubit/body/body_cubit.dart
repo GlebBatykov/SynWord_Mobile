@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:synword/domain/model/result/check/check_result.dart';
 
 import '../../../domain/model/enum/rephrase_language.dart';
 import '../../model/layer/text_input_layer/editing_change_details.dart';
@@ -28,6 +29,11 @@ class BodyCubit extends Cubit<BodyState> {
 
   String get text => _canvasCubit.text;
 
+  String? get rephrasedText => _canvasCubit.rephrasedText;
+
+  CheckResult? get initialTextCheckResult =>
+      _canvasCubit.initialTextCheckResult;
+
   RephraseLanguage get rephraseLanguage => _canvasCubit.rephraseLanguage;
 
   bool get isOperationLayersNotShow => _canvasCubit.isOperationLayersNotShow;
@@ -44,6 +50,10 @@ class BodyCubit extends Cubit<BodyState> {
     var inputLayerCubit = TextInputLayerCubit(_textLengthBorders, _size);
 
     _canvasCubit = LayersCanvasCubit(_size, inputLayerCubit);
+
+    _canvasCubit.workDoneLayer.listen((_) {
+      _handleWorkDoneLayer();
+    });
 
     _canvasCubit.textChanges.listen(_handleTextChange);
 
@@ -114,23 +124,27 @@ class BodyCubit extends Cubit<BodyState> {
     }
   }
 
+  void _handleWorkDoneLayer() {
+    _setSliders();
+  }
+
   void _handleRemoveLayer() {
-    _updateSliders();
+    _setSliders();
   }
 
-  void _handleLeftSliderAnimationEnd() {
-    _addCalledLayer(_leftSliderCalledLayer);
-
-    _updateSliders();
-  }
-
-  void _handleRightSliderAnimationEnd() {
-    _addCalledLayer(_rightSliderCalledLayer);
+  void _handleLeftSliderAnimationEnd() async {
+    await _addCalledLayer(_leftSliderCalledLayer);
 
     _updateSliders();
   }
 
-  void _addCalledLayer(OperationLayerType layer) {
+  void _handleRightSliderAnimationEnd() async {
+    await _addCalledLayer(_rightSliderCalledLayer);
+
+    _updateSliders();
+  }
+
+  Future<void> _addCalledLayer(OperationLayerType layer) async {
     switch (layer) {
       case OperationLayerType.check:
         _canvasCubit.addCheckLayer();
@@ -139,11 +153,29 @@ class BodyCubit extends Cubit<BodyState> {
         _canvasCubit.addSecondCheckLayer();
         break;
       case OperationLayerType.rephrase:
-        _canvasCubit.addRephraseLayer();
+        await _canvasCubit.addRephraseLayer();
     }
   }
 
   void _updateSliders() async {
+    _slidersCubit.disableSliders();
+
+    var offset = _getLayerOffset();
+
+    _slidersCubit.setLayerOffset(offset);
+
+    var size = _getLayerSize();
+
+    _slidersCubit.setLayerSize(size);
+
+    _slidersCubit.updateSliders();
+
+    await _slidersCubit.setDefaultCoordinate();
+
+    await _slidersCubit.setDefaultOpacity();
+  }
+
+  void _setSliders() {
     var currentLayers = _canvasCubit.currentLayers;
 
     if (currentLayers.isEmpty) {
@@ -164,7 +196,7 @@ class BodyCubit extends Cubit<BodyState> {
         _slidersCubit.enableRightSlider();
         _slidersCubit.disableLeftSlider();
       } else {
-        _leftSliderCalledLayer = OperationLayerType.check;
+        _leftSliderCalledLayer = OperationLayerType.secondCheck;
 
         _slidersCubit.setLeftSliderAnimatedLayerType(AnimatedLayerType.check);
 
@@ -172,29 +204,21 @@ class BodyCubit extends Cubit<BodyState> {
         _slidersCubit.disableRightSlider();
       }
     } else if (currentLayers.length == 2) {
-      _leftSliderCalledLayer = OperationLayerType.secondCheck;
+      if (currentLayers[1] == OperationLayerType.secondCheck) {
+        _slidersCubit.disableSliders();
+      } else {
+        _leftSliderCalledLayer = OperationLayerType.secondCheck;
 
-      _slidersCubit.setLeftSliderAnimatedLayerType(AnimatedLayerType.check);
+        _slidersCubit.setLeftSliderAnimatedLayerType(AnimatedLayerType.check);
 
-      _slidersCubit.enableLeftSlider();
-      _slidersCubit.disableRightSlider();
+        _slidersCubit.enableLeftSlider();
+        _slidersCubit.disableRightSlider();
+      }
     } else {
       _slidersCubit.disableSliders();
     }
 
-    var offset = _getLayerOffset();
-
-    _slidersCubit.setLayerOffset(offset);
-
-    var size = _getLayerSize();
-
-    _slidersCubit.setLayerSize(size);
-
     _slidersCubit.updateSliders();
-
-    await _slidersCubit.setDefaultCoordinate();
-
-    await _slidersCubit.setDefaultOpacity();
   }
 
   Offset _getLayerOffset() {

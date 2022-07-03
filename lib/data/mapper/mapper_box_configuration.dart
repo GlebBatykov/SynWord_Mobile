@@ -7,7 +7,8 @@ import '../../domain/model/history/rephrase/rephrase_history_rephrased_word.dart
 import '../../domain/model/result/check/check_result.dart';
 import '../../domain/model/result/check/check_result_check_result_link.dart';
 import '../../domain/model/history/history.dart';
-import '../../domain/model/price.dart';
+import '../../domain/model/price_list/price.dart';
+import '../../domain/model/result/rephrase/enhanced_rephrase_result.dart';
 import '../../domain/model/result/rephrase/rephrase_result.dart';
 import '../../domain/model/result/rephrase/rephrase_result_rephrased_word.dart';
 import '../../domain/model/token.dart';
@@ -25,6 +26,7 @@ import '../remote/http/api/model/response/get_history/rephrase/api_rephrase_hist
 import '../remote/http/api/model/response/get_history/rephrase/api_rephrase_history_rephrased_word.dart';
 import '../remote/http/api/model/response/get_price_list/price_item.dart';
 import '../remote/http/api/model/response/rephrase_text/api_rephrased_word.dart';
+import '../remote/http/api/model/response/rephrase_text/enhanced_rephrase_text_response.dart';
 import '../remote/http/api/model/response/rephrase_text/rephrase_text_response.dart';
 
 class MapperBoxConfiguration {
@@ -59,10 +61,10 @@ class MapperBoxConfiguration {
 
     mapperBox.register<ApiRephrasedWord, RephraseResultRephrasedWord>(
         (object) => RephraseResultRephrasedWord(
-            object.sourceText,
+            object.sourceWord,
             object.synonymWordStartIndex,
             object.synonymWordEndIndex,
-            object.synonyms));
+            object.synonyms.map((e) => e.value).toList()));
 
     mapperBox.register<RephraseTextResponse, RephraseResult>((object) =>
         RephraseResult(
@@ -71,6 +73,9 @@ class MapperBoxConfiguration {
                 .map((e) => mapperBox
                     .map<ApiRephrasedWord, RephraseResultRephrasedWord>(e))
                 .toList()));
+
+    mapperBox.register<EnhancedRephraseTextResponse, EnhancedRephraseResult>(
+        (object) => EnhancedRephraseResult(object.rephrasedText));
 
     mapperBox.register<ApiCheckResultLink, CheckResultCheckResultLink>(
         (object) => CheckResultCheckResultLink(object.url, object.percent));

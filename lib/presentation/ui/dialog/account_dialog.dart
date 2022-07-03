@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubit/dialog/account/cubit/account_dialog_cubit.dart';
+import '../button/logout_button.dart';
 
 class AccountDialog extends StatelessWidget {
   const AccountDialog({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class AccountDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
         width: 235,
-        height: 139,
+        height: 159,
         padding: const EdgeInsets.only(top: 26, bottom: 26),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -28,7 +29,16 @@ class AccountDialog extends StatelessWidget {
           if (state is AccountDialogShow) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [],
+              children: [
+                Text(state.username,
+                    style:
+                        const TextStyle(fontSize: 18, fontFamily: 'Cabrion')),
+                Text(
+                  state.email,
+                  style: const TextStyle(fontSize: 16, fontFamily: 'Cabrion'),
+                ),
+                LogoutButton(onTap: state.onTap)
+              ],
             );
           } else {
             return Container();

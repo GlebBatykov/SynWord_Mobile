@@ -139,19 +139,21 @@ class TextInputLayerBody extends StatelessWidget {
               ]);
             } else {
               return CustomScrollbar(
+                  controller: scrollController,
                   child: Container(
-                margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                child: TextFormField(
-                    scrollController: scrollController,
-                    controller: state.editingController,
-                    expands: true,
-                    maxLines: null,
-                    minLines: null,
-                    readOnly: true,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                    )),
-              ));
+                    margin:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                    child: TextFormField(
+                        scrollController: scrollController,
+                        controller: state.editingController,
+                        expands: true,
+                        maxLines: null,
+                        minLines: null,
+                        readOnly: true,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                        )),
+                  ));
             }
           } else {
             return Container();

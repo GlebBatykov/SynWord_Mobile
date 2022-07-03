@@ -36,8 +36,6 @@ class SliderCubit extends Cubit<SliderState> {
 
   AnimatedLayerType _layerType;
 
-  SliderCoordinate get coordinate => _coordinate;
-
   Stream<Offset> get horizontalDragUpdate =>
       _onHorizontalDragUpdateController.stream;
 
@@ -47,6 +45,8 @@ class SliderCubit extends Cubit<SliderState> {
 
   Stream get onPositionedAnimaionEnd =>
       _onPositionedAnimationEndController.stream;
+
+  SliderCoordinate get coordinate => _coordinate;
 
   double get opacity => _opacity;
 

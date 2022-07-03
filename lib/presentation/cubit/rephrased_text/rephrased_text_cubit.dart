@@ -88,8 +88,8 @@ class RephrasedTextCubit extends Cubit<RephrasedTextState> {
   void Function() _onTap(RephraseResultRephrasedWord word) {
     return () {
       Poseidon.instance.callDialog((context) => BlocProvider(
-          create: (context) =>
-              WordReplacementDialogCubit(word, _onSelectSynonym),
+          create: (context) => WordReplacementDialogCubit(
+              word, _onSelectSynonym, _onSelectSource),
           child: const WordReplacementDialog()));
     };
   }
@@ -99,15 +99,42 @@ class RephrasedTextCubit extends Cubit<RephrasedTextState> {
 
     _text = _text.replaceRange(word.startIndex, word.endIndex + 1, synonym);
 
+    var oldEndIndex = word.endIndex;
+
     word.endIndex = word.startIndex + synonym.length - 1;
 
-    word.synonyms.remove(synonym);
+    var difference = oldEndIndex - word.endIndex;
 
-    word.synonyms.add(word.sourceWord);
-
-    word.sourceWord = synonym;
+    _makeDifference(difference, word);
 
     _show();
+  }
+
+  void _onSelectSource(RephraseResultRephrasedWord word) {
+    _text =
+        _text.replaceRange(word.startIndex, word.endIndex + 1, word.sourceWord);
+
+    var oldEndIndex = word.endIndex;
+
+    word.endIndex = word.startIndex + word.sourceWord.length - 1;
+
+    var difference = oldEndIndex - word.endIndex;
+
+    _makeDifference(difference, word);
+
+    _show();
+  }
+
+  void _makeDifference(int difference, RephraseResultRephrasedWord word) {
+    var wordIndex = _rephrasedWords.indexOf(word);
+
+    var subsequent =
+        _rephrasedWords.getRange(wordIndex + 1, _rephrasedWords.length);
+
+    for (var word in subsequent) {
+      word.startIndex -= difference;
+      word.endIndex -= difference;
+    }
   }
 
   void _show() {

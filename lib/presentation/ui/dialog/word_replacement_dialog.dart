@@ -43,14 +43,19 @@ class WordReplacementDialog extends StatelessWidget {
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500)),
                         ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                              left: 2, right: 2, top: 1, bottom: 1),
-                          decoration: BoxDecoration(
-                              color: HexColor('#DDC5A2'),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Text(state.word,
-                              style: const TextStyle(fontSize: 16)),
+                        GestureDetector(
+                          onTap: () {
+                            dialogCubit.selectSource();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(
+                                left: 2, right: 2, top: 1, bottom: 1),
+                            decoration: BoxDecoration(
+                                color: HexColor('#DDC5A2'),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Text(state.word,
+                                style: const TextStyle(fontSize: 16)),
+                          ),
                         ),
                         Container(
                           width: 146,

@@ -48,4 +48,15 @@ class GoogleSignInRepository extends SignInRemoteRepository {
           _googleSignInAuthentication!.accessToken!);
     }
   }
+
+  @override
+  Future<void> logout() async {
+    if (await _googleSignIn.isSignedIn()) {
+      await _googleSignIn.disconnect();
+
+      _googleSignInAccount = null;
+      _googleSignInAuthentication = null;
+      _userAuthorizationData = null;
+    }
+  }
 }

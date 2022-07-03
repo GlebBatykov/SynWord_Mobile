@@ -1,12 +1,11 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'price_item.dart';
+part of 'api_synonym.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PriceItem _$PriceItemFromJson(Map<String, dynamic> json) => PriceItem(
-      json['itemName'] as String,
-      json['price'] as int,
+ApiSynonym _$ApiSynonymFromJson(Map<String, dynamic> json) => ApiSynonym(
+      json['value'] as String,
     );

@@ -51,6 +51,7 @@ dependencies:
   mapper_box: ^1.0.1
   google_sign_in: ^5.3.3
   flutter_signin_button: ^2.0.0
+  package_info_plus: ^1.4.2
 
 dev_dependencies:
   flutter_test:

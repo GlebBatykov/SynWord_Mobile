@@ -1,13 +1,16 @@
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:poseidon/poseidon.dart';
 
+import '../../../../../domain/model/user/user_info.dart';
 import '../../../../../domain/repository/remote/sing_in_remote_repository.dart';
+import '../../../../ui/dialog/account_dialog.dart';
 import '../../../../ui/dialog/sign_in_dialog.dart';
+import '../../../dialog/account/cubit/account_dialog_cubit.dart';
 
 part 'account_button_state.dart';
 
@@ -31,7 +34,7 @@ class AccountButtonCubit extends Cubit<AccountButtonState> {
     if (userAuthorizationData == null) {
       _callSignInDialog();
     } else {
-      _callAccountDialog();
+      _callAccountDialog(userAuthorizationData.info);
     }
   }
 
@@ -52,7 +55,10 @@ class AccountButtonCubit extends Cubit<AccountButtonState> {
     await _signInRemoteRepository.signIn();
   }
 
-  void _callAccountDialog() {
-    //Poseidon.instance.navigate();
+  void _callAccountDialog(UserInfo userInfo) {
+    Poseidon.instance.callDialog((context) => BlocProvider(
+        create: (context) =>
+            AccountDialogCubit(userInfo.username, userInfo.email),
+        child: const AccountDialog()));
   }
 }

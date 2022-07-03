@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:synword/presentation/cubit/layer/operation_layer/operation_layer.dart';
 
 import '../../../../../asset/icon_asset.dart';
 import '../../../../../asset/premium_page_asset.dart';
@@ -58,8 +59,8 @@ class RephraseLayerPreparation extends StatelessWidget {
                         child:
                             RephraseLayerPreparationSectionItem(title: 'Price'),
                       ),
-                      const Text('10',
-                          style: TextStyle(
+                      Text(data.rephasePrice.toString(),
+                          style: const TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w500)),
                       Padding(
                           padding: const EdgeInsets.only(left: 7, right: 3),
@@ -69,6 +70,8 @@ class RephraseLayerPreparation extends StatelessWidget {
                   MaterialContainer(
                     margin: const EdgeInsets.only(top: 24),
                     onTap: () {
+                      data.layerCubit.setRephraseType(RephraseType.synonymizer);
+
                       data.layerCubit.work();
                     },
                     color: HexColor('#DDC5A2'),
@@ -123,8 +126,8 @@ class RephraseLayerPreparation extends StatelessWidget {
                           child: RephraseLayerPreparationSectionItem(
                               title: 'Price'),
                         ),
-                        const Text('10',
-                            style: TextStyle(
+                        Text(data.enhancedRephrasePrice.toString(),
+                            style: const TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.w500)),
                         Padding(
                             padding: const EdgeInsets.only(left: 7, right: 3),
@@ -134,6 +137,8 @@ class RephraseLayerPreparation extends StatelessWidget {
                     MaterialContainer(
                       margin: const EdgeInsets.only(top: 24),
                       onTap: () {
+                        data.layerCubit.setRephraseType(RephraseType.enhanced);
+
                         data.layerCubit.work();
                       },
                       color: HexColor('#c56a56'),
@@ -154,7 +159,8 @@ class RephraseLayerPreparation extends StatelessWidget {
                     Image.asset(IconAsset.wallet, width: 17, height: 17),
                     Container(
                         margin: const EdgeInsets.only(left: 10, right: 6),
-                        child: const Text('10', style: TextStyle())),
+                        child: Text(data.coins.toString(),
+                            style: const TextStyle())),
                     coinsImage
                   ],
                 ))

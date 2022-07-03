@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 
-import '../api_setting.dart';
 import '../model/request/get_token_by_google_token_request.dart';
 import '../model/response/get_token_by_google_token_response.dart';
+import '../setting/api_setting.dart';
 
 class GetTokenByGoogleTokenService {
   Future<GetTokenByGoogleTokenResponse> getToken(
@@ -11,7 +12,9 @@ class GetTokenByGoogleTokenService {
 
     var options = Options(headers: request.getHeaders());
 
-    var response = await dio.post('${ApiSetting.address}/googleAuthenticate',
+    var apiSetting = GetIt.instance<ApiSetting>();
+
+    var response = await dio.post('${apiSetting.address}/googleAuthenticate',
         data: request.getBody(), options: options);
 
     return GetTokenByGoogleTokenResponse.fromJson(response.data);

@@ -10,4 +10,6 @@ abstract class SignInRemoteRepository {
   Future<void> signIn();
 
   UserAuthorizationData? getAuthorizationData();
+
+  Future<void> logout();
 }

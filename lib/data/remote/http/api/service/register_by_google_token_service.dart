@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 
-import '../api_setting.dart';
 import '../model/request/register_by_google_token_request.dart';
+import '../setting/api_setting.dart';
 
 class RegisterByGoogleTokenService {
   Future<void> register(RegisterByGoogleTokenRequest request) async {
@@ -9,7 +10,9 @@ class RegisterByGoogleTokenService {
 
     var options = Options(headers: request.getHeaders());
 
-    await dio.post('${ApiSetting.address}/googleRegister',
+    var apiSetting = GetIt.instance<ApiSetting>();
+
+    await dio.post('${apiSetting.address}/googleRegister',
         data: request.getBody(), options: options);
   }
 }

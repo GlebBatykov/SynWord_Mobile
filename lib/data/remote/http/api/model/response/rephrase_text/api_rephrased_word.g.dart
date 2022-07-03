@@ -8,8 +8,10 @@ part of 'api_rephrased_word.dart';
 
 ApiRephrasedWord _$ApiRephrasedWordFromJson(Map<String, dynamic> json) =>
     ApiRephrasedWord(
-      json['sourceText'] as String,
+      json['sourceWord'] as String,
       json['synonymWordStartIndex'] as int,
       json['synonymWordEndIndex'] as int,
-      (json['synonyms'] as List<dynamic>).map((e) => e as String).toList(),
+      (json['synonyms'] as List<dynamic>)
+          .map((e) => ApiSynonym.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );

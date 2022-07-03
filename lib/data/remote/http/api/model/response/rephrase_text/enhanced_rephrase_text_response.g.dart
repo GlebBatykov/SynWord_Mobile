@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'price_item.dart';
+part of 'enhanced_rephrase_text_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PriceItem _$PriceItemFromJson(Map<String, dynamic> json) => PriceItem(
-      json['itemName'] as String,
-      json['price'] as int,
+EnhancedRephraseTextResponse _$EnhancedRephraseTextResponseFromJson(
+        Map<String, dynamic> json) =>
+    EnhancedRephraseTextResponse(
+      json['rephrasedText'] as String,
     );

@@ -432,18 +432,27 @@ class SlidersCubit extends Cubit<SlidersState> {
 
     var leftCoordinate = _getLeftSliderInitialCoordinate();
 
-    var rightCoordinat = _getRightSliderInitialCoordinate();
+    var rightCoordinate = _getRightSliderInitialCoordinate();
 
-    _leftSliderCubit.setCoordinate(leftCoordinate);
-    _rightSliderCubit.setCoordinate(rightCoordinat);
+    var futures = <Future>[];
 
-    _leftSliderCubit.update();
-    _rightSliderCubit.update();
+    if (_leftSliderCubit.coordinate != leftCoordinate) {
+      _leftSliderCubit.setCoordinate(leftCoordinate);
 
-    await Future.wait([
-      _leftSliderCubit.onPositionedAnimaionEnd.first,
-      _rightSliderCubit.onPositionedAnimaionEnd.first
-    ]);
+      _leftSliderCubit.update();
+
+      futures.add(_leftSliderCubit.onPositionedAnimaionEnd.first);
+    }
+
+    if (_rightSliderCubit.coordinate != rightCoordinate) {
+      _rightSliderCubit.setCoordinate(rightCoordinate);
+
+      _rightSliderCubit.update();
+
+      futures.add(_rightSliderCubit.onPositionedAnimaionEnd.first);
+    }
+
+    await Future.wait(futures);
 
     _isAnimationActive = false;
   }
