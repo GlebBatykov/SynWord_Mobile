@@ -53,6 +53,8 @@ class AccountButtonCubit extends Cubit<AccountButtonState> {
 
   void _signInButtonOnPressed() async {
     await _signInRemoteRepository.signIn();
+
+    Poseidon.instance.pop();
   }
 
   void _callAccountDialog(UserInfo userInfo) {

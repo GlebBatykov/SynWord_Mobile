@@ -1,7 +1,7 @@
 class CheckHistoryCheckResultLink {
   final String url;
 
-  final int percent;
+  final double percent;
 
   CheckHistoryCheckResultLink(this.url, this.percent);
 }

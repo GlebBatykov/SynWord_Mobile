@@ -6,7 +6,7 @@ part 'api_check_history_result_link.g.dart';
 class ApiCheckHistoryResultLink {
   final String url;
 
-  final int percent;
+  final double percent;
 
   ApiCheckHistoryResultLink(this.url, this.percent);
 

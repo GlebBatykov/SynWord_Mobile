@@ -1,14 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_check_history_result_link.dart';
+part of 'api_rephrase_history_synonym.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ApiCheckHistoryResultLink _$ApiCheckHistoryResultLinkFromJson(
+ApiRephraseHistorySynonym _$ApiRephraseHistorySynonymFromJson(
         Map<String, dynamic> json) =>
-    ApiCheckHistoryResultLink(
-      json['url'] as String,
-      (json['percent'] as num).toDouble(),
+    ApiRephraseHistorySynonym(
+      json['value'] as String,
     );

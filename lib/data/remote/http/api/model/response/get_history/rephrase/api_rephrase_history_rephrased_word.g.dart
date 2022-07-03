@@ -12,5 +12,8 @@ ApiRephraseHistoryRephrasedWord _$ApiRephraseHistoryRephrasedWordFromJson(
       json['sourceWord'] as String,
       json['synonymWordStartIndex'] as int,
       json['synonymWordEndIndex'] as int,
-      (json['synonyms'] as List<dynamic>).map((e) => e as String).toList(),
+      (json['synonyms'] as List<dynamic>)
+          .map((e) =>
+              ApiRephraseHistorySynonym.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );

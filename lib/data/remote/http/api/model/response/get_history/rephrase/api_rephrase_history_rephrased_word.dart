@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'api_rephrase_history_synonym.dart';
+
 part 'api_rephrase_history_rephrased_word.g.dart';
 
 @JsonSerializable(createToJson: false)
@@ -10,7 +12,7 @@ class ApiRephraseHistoryRephrasedWord {
 
   final int synonymWordEndIndex;
 
-  final List<String> synonyms;
+  final List<ApiRephraseHistorySynonym> synonyms;
 
   ApiRephraseHistoryRephrasedWord(this.sourceWord, this.synonymWordStartIndex,
       this.synonymWordEndIndex, this.synonyms);

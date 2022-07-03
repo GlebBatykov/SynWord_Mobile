@@ -46,7 +46,7 @@ class MapperBoxConfiguration {
       return User(id: object.userId, token: token);
     });
     mapperBox.register<User, ObjectBoxUser>((object) {
-      var objectBoxUser = ObjectBoxUser(userId: object.id);
+      var objectBoxUser = ObjectBoxUser(id: 1, userId: object.id);
 
       if (object.token != null) {
         objectBoxUser.token.target =
@@ -94,7 +94,7 @@ class MapperBoxConfiguration {
             object.sourceWord,
             object.synonymWordStartIndex,
             object.synonymWordEndIndex,
-            object.synonyms));
+            object.synonyms.map((e) => e.value).toList()));
 
     mapperBox.register<ApiRephraseHistory, RephraseHistory>((object) =>
         RephraseHistory(
@@ -126,6 +126,14 @@ class MapperBoxConfiguration {
             .map((e) => mapperBox.map<ApiCheckHistory, CheckHistory>(e))
             .toList()));
 
+    mapperBox
+        .register<RephraseHistoryRephrasedWord, RephraseResultRephrasedWord>(
+            (object) => RephraseResultRephrasedWord(
+                object.sourceWord,
+                object.synonymWordStartIndex,
+                object.synonymWordEndIndex,
+                object.synonyms));
+
     mapperBox.register<RephraseHistory, RephraseResultInfo>((object) =>
         RephraseResultInfo(
             object.sourceText,
@@ -134,6 +142,9 @@ class MapperBoxConfiguration {
                 .map((e) => mapperBox.map<RephraseHistoryRephrasedWord,
                     RephraseResultRephrasedWord>(e))
                 .toList()));
+
+    mapperBox.register<CheckHistoryCheckResultLink, CheckResultCheckResultLink>(
+        (object) => CheckResultCheckResultLink(object.url, object.percent));
 
     mapperBox.register<CheckHistory, CheckResultInfo>((object) =>
         CheckResultInfo(

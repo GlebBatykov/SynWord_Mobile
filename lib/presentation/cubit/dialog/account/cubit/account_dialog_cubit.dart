@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
+import 'package:poseidon/poseidon.dart';
 
 import '../../../../../domain/repository/remote/sing_in_remote_repository.dart';
 
@@ -26,5 +27,7 @@ class AccountDialogCubit extends Cubit<AccountDialogState> {
     var signInRemoteRepository = GetIt.instance<SignInRemoteRepository>();
 
     await signInRemoteRepository.logout();
+
+    Poseidon.instance.pop();
   }
 }

@@ -26,17 +26,33 @@ class SecondCheckLayerCubit extends OperationLayerCubit<
   void work() async {
     var bodyCubit = GetIt.instance<BodyCubit>();
 
-    var initialCheckResult = bodyCubit.initialTextCheckResult!;
+    var initialCheckResult = bodyCubit.initialTextCheckResult;
 
     var rephrasedText = bodyCubit.rephrasedText!;
 
     var checkRemoteRepository = GetIt.instance<CheckRemoteRepository>();
 
-    var checkResult = await checkRemoteRepository.checkText(rephrasedText);
+    var futures = <Future>[];
+
+    if (initialCheckResult == null) {
+      futures.add(
+          checkRemoteRepository.checkText(bodyCubit.text).then((value) async {
+        initialCheckResult = value;
+      }));
+    }
+
+    late CheckResult checkResult;
+
+    futures
+        .add(checkRemoteRepository.checkText(rephrasedText).then((value) async {
+      checkResult = value;
+    }));
+
+    await Future.wait(futures);
 
     showResult(SecondCheckLayerBodyContentData(
         _size,
-        initialCheckResult.percentages,
+        initialCheckResult!.percentages,
         checkResult.percentages,
         checkResult.links));
 
