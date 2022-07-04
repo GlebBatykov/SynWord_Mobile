@@ -1,13 +1,10 @@
 <img src="docs/images/icon.png" align="right" />
 
-<font size="6">Synword</font>
+# Synword
 
 An application for checking and enhancing the uniqueness of the text.
 
 **[Website](https://synword.com)**
-
-- [Used packages](#used-packages)
-- [Images](#images)
 
 # Used packages
 
