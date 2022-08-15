@@ -1,4 +1,4 @@
-import 'authorized_request.dart';
+import '../authorized_request.dart';
 
 class RegisterByGoogleTokenRequest extends AuthorizedRequest {
   final String accessToken;

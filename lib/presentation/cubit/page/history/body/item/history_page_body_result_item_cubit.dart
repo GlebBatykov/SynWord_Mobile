@@ -23,7 +23,7 @@ class HistoryPageBodyResultItemCubit
       emit(HistoryPageBodyResultItemCheck('Plagiarism check', info.text, () {
         Poseidon.instance.navigate(NavigationRoutes.checkResultPage,
             arguments: CheckResultPageArguments(info));
-      }, info.percentages));
+      }, info.percentages.toInt()));
     } else if (info is RephraseResultInfo) {
       emit(HistoryPageBodyResultItemRephrase('Rephrased', info.text, () {
         Poseidon.instance.navigate(NavigationRoutes.rephraseResultPage,

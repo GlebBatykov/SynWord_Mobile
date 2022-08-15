@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:get_it/get_it.dart';
-import 'package:synword/domain/repository/remote/sing_in_remote_repository.dart';
 
 import '../model/token.dart';
 import '../model/user/user.dart';
+import '../model/user/user_authorization_data.dart';
 import '../repository/local/user_local_repository.dart';
+import '../repository/remote/sing_in_remote_repository.dart';
 import '../repository/remote/user_remote_repository.dart';
 
 class GetTokenUseCase {
@@ -18,28 +21,38 @@ class GetTokenUseCase {
   Future<Token> getToken() async {
     _user = _userLocalRepository.getUser();
 
-    if (_user.token == null || (_user.token != null && !_user.token!.isValid)) {
-      var token = await _getTokenFromRemote();
+    if (_user.authorizationData == null) {
+      var authorizationData = await _getAuthorizationDataFromRemote();
 
-      _user.token = token;
+      _user.authorizationData = authorizationData;
+
+      await _userLocalRepository.save();
+    } else if ((_user.authorizationData != null &&
+        !_user.authorizationData!.accessToken.isValid)) {
+      var authorizationData = await _userRemoteRepository
+          .refreshToken(_user.authorizationData!.refreshToken.token);
+
+      _user.authorizationData = authorizationData;
 
       await _userLocalRepository.save();
     }
 
-    return _user.token!;
+    return _user.authorizationData!.accessToken;
   }
 
-  Future<Token> _getTokenFromRemote() async {
-    late Token token;
+  Future<UserAuthorizationData> _getAuthorizationDataFromRemote() async {
+    late UserAuthorizationData authorizationData;
 
     var signInRemoteRepository =
         await GetIt.instance.getAsync<SignInRemoteRepository>();
 
-    var userAuthorizationData = signInRemoteRepository.getAuthorizationData();
+    var userSignInData = signInRemoteRepository.getAuthorizationData();
 
-    if (userAuthorizationData != null) {
-      token = await _userRemoteRepository
-          .getTokenByGoogleToken(userAuthorizationData.accessToken);
+    if (userSignInData != null) {
+      if (Platform.isAndroid) {
+        authorizationData = await _userRemoteRepository
+            .authorizeByGoogleToken(userSignInData.accessToken);
+      }
     } else {
       if (_user.id == null) {
         var id = await _userRemoteRepository.registerUser();
@@ -49,9 +62,10 @@ class GetTokenUseCase {
         await _userLocalRepository.save();
       }
 
-      token = await _userRemoteRepository.getTokenByUserId(_user.id!);
+      authorizationData =
+          await _userRemoteRepository.authorizeByUserId(_user.id!);
     }
 
-    return token;
+    return authorizationData;
   }
 }

@@ -27,6 +27,8 @@ class TextInputLayerCubit extends Cubit<TextInputLayerState> {
 
   RephraseLanguage get rephraseLanguage => _headerCubit.rephraseLanguage;
 
+  bool get isEditing => _bodyCubit.isEditing;
+
   TextInputLayerCubit(LengthBorders textLengthBorders, Size size)
       : _textLengthBorders = textLengthBorders,
         _size = size,

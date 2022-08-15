@@ -1,4 +1,4 @@
-import 'package:synword/domain/model/user/user_autorization_data.dart';
+import 'package:synword/domain/model/user/user_sign_in_data.dart';
 
 import '../../model/user/user_info.dart';
 
@@ -9,7 +9,7 @@ abstract class SignInRemoteRepository {
 
   Future<void> signIn();
 
-  UserAuthorizationData? getAuthorizationData();
+  UserSignInData? getAuthorizationData();
 
   Future<void> logout();
 }

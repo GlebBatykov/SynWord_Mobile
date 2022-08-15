@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:synword/domain/model/contraints_list/contraints_list.dart';
 
 import '../../../../domain/model/price_list/price_list.dart';
 import '../../../../domain/model/result/check/check_result.dart';

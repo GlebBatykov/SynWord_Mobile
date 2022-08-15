@@ -6,5 +6,7 @@ class FlutterClipboardCopyUseCase extends ClipboardCopyUserCase {
   @override
   Future<void> copy(String text) async {
     await FlutterClipboard.copy(text);
+
+    super.copy(text);
   }
 }

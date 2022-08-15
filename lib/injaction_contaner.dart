@@ -5,7 +5,9 @@ import 'data/local/database/objectbox/user_objectbox_repository.dart';
 import 'data/remote/http/api/api_check_repository.dart';
 import 'data/remote/http/api/api_client_version_repository.dart';
 import 'data/remote/http/api/api_coins_repository.dart';
+import 'data/remote/http/api/api_email_repository.dart';
 import 'data/remote/http/api/api_history_repository.dart';
+import 'data/remote/http/api/api_contraints_list_repository.dart';
 import 'data/remote/http/api/api_price_list_repository.dart';
 import 'data/remote/http/api/api_rephrase_repository.dart';
 import 'data/remote/http/api/api_text_from_docx_repository.dart';
@@ -18,7 +20,9 @@ import 'domain/repository/local/user_local_repository.dart';
 import 'domain/repository/remote/check_remote_repository.dart';
 import 'domain/repository/remote/client_version_remote_repository.dart';
 import 'domain/repository/remote/coins_remote_repository.dart';
+import 'domain/repository/remote/email_remote_repository.dart';
 import 'domain/repository/remote/history_remote_repository.dart';
+import 'domain/repository/remote/contraints_list_remote_repository.dart';
 import 'domain/repository/remote/price_list_remote_repository.dart';
 import 'domain/repository/remote/rephrase_remote_repository.dart';
 import 'domain/repository/remote/sing_in_remote_repository.dart';
@@ -52,6 +56,11 @@ class InjactionContainer {
     });
 
     getIt.registerSingleton<UserRemoteRepository>(UserApiRepository());
+
+    getIt.registerSingleton<EmailRemoteRepository>(ApiEmailRepository());
+
+    getIt.registerSingleton<ContraintsListRemoteRepository>(
+        ApiContraintsListRepository());
 
     getIt
         .registerSingleton<PriceListRemoteRepository>(ApiPriceListRepository());

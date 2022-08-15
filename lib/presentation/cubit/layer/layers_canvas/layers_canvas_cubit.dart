@@ -46,6 +46,8 @@ class LayersCanvasCubit extends Cubit<LayersCanvasState> {
 
   String get text => _inputLayerCubit.text;
 
+  bool get isInitialTextEditing => _inputLayerCubit.isEditing;
+
   CheckResult? get initialTextCheckResult {
     var checkLayersCubits = _layersCubits.whereType<CheckLayerCubit>();
 

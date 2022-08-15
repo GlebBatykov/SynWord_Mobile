@@ -10,7 +10,7 @@ class ApiCheckHistory {
 
   final String text;
 
-  final int percent;
+  final num percent;
 
   final List<ApiCheckHistoryResultLink> matches;
 

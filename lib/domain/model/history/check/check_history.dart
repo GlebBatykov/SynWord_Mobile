@@ -5,7 +5,7 @@ import '../result_history.dart';
 class CheckHistory extends ResultHistory {
   final String text;
 
-  final int percent;
+  final double percent;
 
   final List<CheckHistoryCheckResultLink> matches;
 

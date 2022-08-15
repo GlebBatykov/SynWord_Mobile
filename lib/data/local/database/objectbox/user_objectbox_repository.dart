@@ -25,8 +25,10 @@ class UserObjectboxRepository extends UserLocalRepository {
 
   @override
   Future<void> load() async {
-    if (_box.contains(1)) {
-      var objectBoxUser = _box.get(1)!;
+    var users = _box.getAll();
+
+    if (users.isNotEmpty) {
+      var objectBoxUser = users.first;
 
       _user = _mapperBox.map<ObjectBoxUser, User>(objectBoxUser);
     } else {
@@ -36,7 +38,7 @@ class UserObjectboxRepository extends UserLocalRepository {
 
   @override
   Future<void> save() async {
-    _box.remove(1);
+    _box.removeAll();
 
     var objectBoxUser = _mapperBox.map<User, ObjectBoxUser>(_user);
 

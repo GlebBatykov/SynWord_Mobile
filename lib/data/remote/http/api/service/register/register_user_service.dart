@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import '../model/response/register_user_response.dart';
-import '../setting/api_setting.dart';
+import '../../model/response/register_user_response.dart';
+import '../../setting/api_setting.dart';
 
 class RegisterUserService {
   Future<RegisterUserResponse> register() async {

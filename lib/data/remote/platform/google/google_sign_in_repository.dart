@@ -1,11 +1,11 @@
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../../domain/model/user/user_autorization_data.dart';
+import '../../../../domain/model/user/user_sign_in_data.dart';
 import '../../../../domain/model/user/user_info.dart';
 import '../../../../domain/repository/remote/sing_in_remote_repository.dart';
 
 class GoogleSignInRepository extends SignInRemoteRepository {
-  UserAuthorizationData? _userAuthorizationData;
+  UserSignInData? _userAuthorizationData;
 
   late GoogleSignIn _googleSignIn;
 
@@ -18,7 +18,7 @@ class GoogleSignInRepository extends SignInRemoteRepository {
       .map((event) => UserInfo(event!.displayName!, event.email));
 
   @override
-  UserAuthorizationData? getAuthorizationData() => _userAuthorizationData;
+  UserSignInData? getAuthorizationData() => _userAuthorizationData;
 
   @override
   Future<void> initialize() async {
@@ -42,7 +42,7 @@ class GoogleSignInRepository extends SignInRemoteRepository {
     if (_googleSignInAccount != null) {
       _googleSignInAuthentication = await _googleSignInAccount!.authentication;
 
-      _userAuthorizationData = UserAuthorizationData(
+      _userAuthorizationData = UserSignInData(
           UserInfo(
               _googleSignInAccount!.displayName!, _googleSignInAccount!.email),
           _googleSignInAuthentication!.accessToken!);

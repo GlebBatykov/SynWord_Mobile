@@ -1,6 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
-import 'object_box_token.dart';
+import 'object_box_user_authorization_data.dart';
 
 @Entity()
 class ObjectBoxUser {
@@ -8,7 +8,8 @@ class ObjectBoxUser {
 
   String? userId;
 
-  ToOne<ObjectBoxToken> token = ToOne<ObjectBoxToken>();
+  ToOne<ObjectBoxUserAuthorizationData> authorizationData =
+      ToOne<ObjectBoxUserAuthorizationData>();
 
   ObjectBoxUser({this.id = 0, this.userId});
 }

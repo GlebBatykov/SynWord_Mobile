@@ -3,7 +3,7 @@ import '../../../../../../domain/model/result/check/check_result_check_result_li
 import '../../result_info.dart';
 
 class CheckResultInfo extends ResultInfo {
-  final int percentages;
+  final double percentages;
 
   final List<CheckResultCheckResultLink> links;
 

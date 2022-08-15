@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:synword/domain/use_case/clipboard_copy/clipboard_copy_use_case.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../asset/history_page_asset.dart';
@@ -27,6 +29,10 @@ class CheckedLink extends StatelessWidget {
     await launchUrl(uri);
   }
 
+  void _copyUrl() async {
+    await GetIt.instance<ClipboardCopyUserCase>().copy(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: ((context, constraints) {
@@ -34,15 +40,21 @@ class CheckedLink extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-              child: Container(
-                  alignment: Alignment.centerLeft,
-                  height: 40,
-                  child: Text(url,
-                      textAlign: TextAlign.center,
-                      style:
-                          const TextStyle(decoration: TextDecoration.underline),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis))),
+              child: GestureDetector(
+            onLongPressDown: (details) {
+              _copyUrl();
+            },
+            child: Container(
+                alignment: Alignment.centerLeft,
+                height: 40,
+                child: Text(
+                  url,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(decoration: TextDecoration.underline),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                )),
+          )),
           Container(
               alignment: Alignment.center,
               height: 40,

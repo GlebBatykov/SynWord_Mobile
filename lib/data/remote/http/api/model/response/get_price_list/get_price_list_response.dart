@@ -11,5 +11,5 @@ class GetPriceListResponse {
   GetPriceListResponse(this.prices);
 
   factory GetPriceListResponse.fromJson(Map<String, dynamic> json) =>
-  _$GetPriceListResponseFromJson(json);
+      _$GetPriceListResponseFromJson(json);
 }

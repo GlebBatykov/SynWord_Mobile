@@ -12,6 +12,6 @@ class CheckResultPageCubit extends Cubit<CheckResultPageState> {
   }
 
   void _initialize(CheckResultInfo info) {
-    emit(CheckResultPageShow(info.percentages, info.text, info.links));
+    emit(CheckResultPageShow(info.percentages.toInt(), info.text, info.links));
   }
 }

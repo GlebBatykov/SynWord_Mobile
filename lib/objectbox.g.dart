@@ -13,8 +13,8 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'data/local/database/objectbox/model/object_box_token.dart';
 import 'data/local/database/objectbox/model/object_box_user.dart';
+import 'data/local/database/objectbox/model/object_box_user_authorization_data.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -22,7 +22,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 4461467747026883837),
       name: 'ObjectBoxUser',
-      lastPropertyId: const IdUid(4, 1045648510981454082),
+      lastPropertyId: const IdUid(5, 8633315416824548704),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -36,29 +36,34 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 1508306153113125613),
-            name: 'tokenId',
+            id: const IdUid(5, 8633315416824548704),
+            name: 'authorizationDataId',
             type: 11,
             flags: 520,
-            indexId: const IdUid(1, 6970047395987467947),
-            relationTarget: 'ObjectBoxToken')
+            indexId: const IdUid(2, 1825204885330090749),
+            relationTarget: 'ObjectBoxUserAuthorizationData')
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
   ModelEntity(
-      id: const IdUid(3, 8271335877614481830),
-      name: 'ObjectBoxToken',
-      lastPropertyId: const IdUid(2, 8407047220043060734),
+      id: const IdUid(4, 5580513946193585444),
+      name: 'ObjectBoxUserAuthorizationData',
+      lastPropertyId: const IdUid(3, 5318797060856227150),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 135479034938686090),
+            id: const IdUid(1, 4667319295108619967),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 8407047220043060734),
-            name: 'token',
+            id: const IdUid(2, 7057715297761615136),
+            name: 'accessToken',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 5318797060856227150),
+            name: 'refreshToken',
             type: 9,
             flags: 0)
       ],
@@ -86,16 +91,19 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(3, 8271335877614481830),
-      lastIndexId: const IdUid(1, 6970047395987467947),
+      lastEntityId: const IdUid(4, 5580513946193585444),
+      lastIndexId: const IdUid(2, 1825204885330090749),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [7163745484534489156],
-      retiredIndexUids: const [],
+      retiredEntityUids: const [7163745484534489156, 8271335877614481830],
+      retiredIndexUids: const [6970047395987467947],
       retiredPropertyUids: const [
         3812969659023192963,
         8969398750685921378,
-        1045648510981454082
+        1045648510981454082,
+        135479034938686090,
+        8407047220043060734,
+        1508306153113125613
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -105,7 +113,7 @@ ModelDefinition getObjectBoxModel() {
   final bindings = <Type, EntityDefinition>{
     ObjectBoxUser: EntityDefinition<ObjectBoxUser>(
         model: _entities[0],
-        toOneRelations: (ObjectBoxUser object) => [object.token],
+        toOneRelations: (ObjectBoxUser object) => [object.authorizationData],
         toManyRelations: (ObjectBoxUser object) => {},
         getId: (ObjectBoxUser object) => object.id,
         setId: (ObjectBoxUser object, int id) {
@@ -114,10 +122,10 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (ObjectBoxUser object, fb.Builder fbb) {
           final userIdOffset =
               object.userId == null ? null : fbb.writeString(object.userId!);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, userIdOffset);
-          fbb.addInt64(2, object.token.targetId);
+          fbb.addInt64(4, object.authorizationData.targetId);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -129,25 +137,31 @@ ModelDefinition getObjectBoxModel() {
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
               userId: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 6));
-          object.token.targetId =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
-          object.token.attach(store);
+          object.authorizationData.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          object.authorizationData.attach(store);
           return object;
         }),
-    ObjectBoxToken: EntityDefinition<ObjectBoxToken>(
+    ObjectBoxUserAuthorizationData: EntityDefinition<
+            ObjectBoxUserAuthorizationData>(
         model: _entities[1],
-        toOneRelations: (ObjectBoxToken object) => [],
-        toManyRelations: (ObjectBoxToken object) => {},
-        getId: (ObjectBoxToken object) => object.id,
-        setId: (ObjectBoxToken object, int id) {
+        toOneRelations: (ObjectBoxUserAuthorizationData object) => [],
+        toManyRelations: (ObjectBoxUserAuthorizationData object) => {},
+        getId: (ObjectBoxUserAuthorizationData object) => object.id,
+        setId: (ObjectBoxUserAuthorizationData object, int id) {
           object.id = id;
         },
-        objectToFB: (ObjectBoxToken object, fb.Builder fbb) {
-          final tokenOffset =
-              object.token == null ? null : fbb.writeString(object.token!);
-          fbb.startTable(3);
+        objectToFB: (ObjectBoxUserAuthorizationData object, fb.Builder fbb) {
+          final accessTokenOffset = object.accessToken == null
+              ? null
+              : fbb.writeString(object.accessToken!);
+          final refreshTokenOffset = object.refreshToken == null
+              ? null
+              : fbb.writeString(object.refreshToken!);
+          fbb.startTable(4);
           fbb.addInt64(0, object.id);
-          fbb.addOffset(1, tokenOffset);
+          fbb.addOffset(1, accessTokenOffset);
+          fbb.addOffset(2, refreshTokenOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -155,10 +169,12 @@ ModelDefinition getObjectBoxModel() {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
-          final object = ObjectBoxToken(
+          final object = ObjectBoxUserAuthorizationData(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
-              token: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 6));
+              accessToken: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              refreshToken: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8));
 
           return object;
         })
@@ -177,18 +193,25 @@ class ObjectBoxUser_ {
   static final userId =
       QueryStringProperty<ObjectBoxUser>(_entities[0].properties[1]);
 
-  /// see [ObjectBoxUser.token]
-  static final token = QueryRelationToOne<ObjectBoxUser, ObjectBoxToken>(
-      _entities[0].properties[2]);
+  /// see [ObjectBoxUser.authorizationData]
+  static final authorizationData =
+      QueryRelationToOne<ObjectBoxUser, ObjectBoxUserAuthorizationData>(
+          _entities[0].properties[2]);
 }
 
-/// [ObjectBoxToken] entity fields to define ObjectBox queries.
-class ObjectBoxToken_ {
-  /// see [ObjectBoxToken.id]
-  static final id =
-      QueryIntegerProperty<ObjectBoxToken>(_entities[1].properties[0]);
+/// [ObjectBoxUserAuthorizationData] entity fields to define ObjectBox queries.
+class ObjectBoxUserAuthorizationData_ {
+  /// see [ObjectBoxUserAuthorizationData.id]
+  static final id = QueryIntegerProperty<ObjectBoxUserAuthorizationData>(
+      _entities[1].properties[0]);
 
-  /// see [ObjectBoxToken.token]
-  static final token =
-      QueryStringProperty<ObjectBoxToken>(_entities[1].properties[1]);
+  /// see [ObjectBoxUserAuthorizationData.accessToken]
+  static final accessToken =
+      QueryStringProperty<ObjectBoxUserAuthorizationData>(
+          _entities[1].properties[1]);
+
+  /// see [ObjectBoxUserAuthorizationData.refreshToken]
+  static final refreshToken =
+      QueryStringProperty<ObjectBoxUserAuthorizationData>(
+          _entities[1].properties[2]);
 }

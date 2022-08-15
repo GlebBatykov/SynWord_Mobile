@@ -1,5 +1,7 @@
 import 'package:mapper_box/mapper_box.dart';
 
+import '../../domain/model/contraints_list/contraints_list.dart';
+import '../../domain/model/contraints_list/user_contraints.dart';
 import '../../domain/model/history/check/check_history.dart';
 import '../../domain/model/history/check/check_history_check_result_link.dart';
 import '../../domain/model/history/rephrase/rephrase_history.dart';
@@ -7,24 +9,25 @@ import '../../domain/model/history/rephrase/rephrase_history_rephrased_word.dart
 import '../../domain/model/result/check/check_result.dart';
 import '../../domain/model/result/check/check_result_check_result_link.dart';
 import '../../domain/model/history/history.dart';
-import '../../domain/model/price_list/price.dart';
 import '../../domain/model/result/rephrase/enhanced_rephrase_result.dart';
 import '../../domain/model/result/rephrase/rephrase_result.dart';
 import '../../domain/model/result/rephrase/rephrase_result_rephrased_word.dart';
 import '../../domain/model/token.dart';
 import '../../domain/model/user/user.dart';
+import '../../domain/model/user/user_authorization_data.dart';
 import '../../presentation/model/page/history/result/check/check_result_info.dart';
 import '../../presentation/model/page/history/result/rephrase/rephrase_result_info.dart';
-import '../local/database/objectbox/model/object_box_token.dart';
 import '../local/database/objectbox/model/object_box_user.dart';
+import '../local/database/objectbox/model/object_box_user_authorization_data.dart';
 import '../remote/http/api/model/response/check_text/api_check_result_link.dart';
 import '../remote/http/api/model/response/check_text/check_text_response.dart';
+import '../remote/http/api/model/response/get_contraints_list/get_contraints_list_response.dart';
+import '../remote/http/api/model/response/get_contraints_list/user_contraints_item.dart';
 import '../remote/http/api/model/response/get_history/check/api_check_history.dart';
 import '../remote/http/api/model/response/get_history/check/api_check_history_result_link.dart';
 import '../remote/http/api/model/response/get_history/get_history_response.dart';
 import '../remote/http/api/model/response/get_history/rephrase/api_rephrase_history.dart';
 import '../remote/http/api/model/response/get_history/rephrase/api_rephrase_history_rephrased_word.dart';
-import '../remote/http/api/model/response/get_price_list/price_item.dart';
 import '../remote/http/api/model/response/rephrase_text/api_rephrased_word.dart';
 import '../remote/http/api/model/response/rephrase_text/enhanced_rephrase_text_response.dart';
 import '../remote/http/api/model/response/rephrase_text/rephrase_text_response.dart';
@@ -33,31 +36,47 @@ class MapperBoxConfiguration {
   void configurate() {
     var mapperBox = MapperBox.instanse;
 
-    mapperBox.register<ObjectBoxToken, Token?>(
-        (object) => object.token != null ? Token(object.token!) : null);
-    mapperBox.register<Token, ObjectBoxToken>(
-        (object) => ObjectBoxToken(token: object.token));
+    mapperBox.register<ObjectBoxUserAuthorizationData, UserAuthorizationData?>(
+        (object) => object.accessToken != null || object.refreshToken != null
+            ? UserAuthorizationData(
+                Token(object.accessToken!), Token(object.refreshToken!))
+            : null);
+    mapperBox.register<UserAuthorizationData, ObjectBoxUserAuthorizationData>(
+        (object) => ObjectBoxUserAuthorizationData(
+            accessToken: object.accessToken.token,
+            refreshToken: object.refreshToken.token));
 
     mapperBox.register<ObjectBoxUser, User>((object) {
-      var token = object.token.target != null
-          ? mapperBox.map<ObjectBoxToken, Token?>(object.token.target!)
+      var authorizationData = object.authorizationData.target != null
+          ? mapperBox.map<ObjectBoxUserAuthorizationData,
+              UserAuthorizationData?>(object.authorizationData.target!)
           : null;
 
-      return User(id: object.userId, token: token);
+      return User(id: object.userId, authorizationData: authorizationData);
     });
     mapperBox.register<User, ObjectBoxUser>((object) {
-      var objectBoxUser = ObjectBoxUser(id: 1, userId: object.id);
+      var objectBoxUser = ObjectBoxUser(userId: object.id);
 
-      if (object.token != null) {
-        objectBoxUser.token.target =
-            mapperBox.map<Token, ObjectBoxToken>(object.token!);
+      if (object.authorizationData != null) {
+        objectBoxUser.authorizationData.target = mapperBox.map<
+            UserAuthorizationData,
+            ObjectBoxUserAuthorizationData>(object.authorizationData!);
       }
 
       return objectBoxUser;
     });
 
-    mapperBox.register<PriceItem, Price>(
-        (object) => Price(object.itemName, object.price));
+    mapperBox.register<UserContraintsItem, UserContraints>((object) =>
+        UserContraints(
+            object.plagiarismCheckMaxSymbolLimit,
+            object.rephraseMaxSymbolLimit,
+            object.enhancedRephraseMaxSymbolLimit));
+
+    mapperBox.register<GetContraintsListResponse, ContraintsList>((object) =>
+        ContraintsList(
+            mapperBox.map<UserContraintsItem, UserContraints>(object.guest),
+            mapperBox.map<UserContraintsItem, UserContraints>(object.silver),
+            mapperBox.map<UserContraintsItem, UserContraints>(object.gold)));
 
     mapperBox.register<ApiRephrasedWord, RephraseResultRephrasedWord>(
         (object) => RephraseResultRephrasedWord(
@@ -112,7 +131,7 @@ class MapperBoxConfiguration {
     mapperBox.register<ApiCheckHistory, CheckHistory>((object) => CheckHistory(
         object.id,
         object.text,
-        object.percent,
+        object.percent.toDouble(),
         object.matches
             .map((e) => mapperBox
                 .map<ApiCheckHistoryResultLink, CheckHistoryCheckResultLink>(e))

@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:synword/domain/model/result/check/check_result.dart';
 
 import '../../../domain/model/enum/rephrase_language.dart';
+import '../../../domain/model/result/check/check_result.dart';
 import '../../model/layer/text_input_layer/editing_change_details.dart';
 import '../../model/layer/text_input_layer/length_borders.dart';
 import '../../model/layer/text_input_layer/text_change_details.dart';
@@ -28,6 +28,8 @@ class BodyCubit extends Cubit<BodyState> {
   OperationLayerType _rightSliderCalledLayer = OperationLayerType.rephrase;
 
   String get text => _canvasCubit.text;
+
+  bool get isInitialTextEditing => _canvasCubit.isInitialTextEditing;
 
   String? get rephrasedText => _canvasCubit.rephrasedText;
 
@@ -103,7 +105,7 @@ class BodyCubit extends Cubit<BodyState> {
   void _handleBodyChanges(int textLength, bool isEditing) {
     if (!isEditing) {
       if (textLength == 0) {
-        _slidersCubit.setLockSliders(false);
+        _slidersCubit.setLockSliders(true);
         _slidersCubit.showUnlockSliders();
       } else {
         _checkLengthBorders(textLength);
@@ -160,14 +162,6 @@ class BodyCubit extends Cubit<BodyState> {
   void _updateSliders() async {
     _slidersCubit.disableSliders();
 
-    var offset = _getLayerOffset();
-
-    _slidersCubit.setLayerOffset(offset);
-
-    var size = _getLayerSize();
-
-    _slidersCubit.setLayerSize(size);
-
     _slidersCubit.updateSliders();
 
     await _slidersCubit.setDefaultCoordinate();
@@ -217,6 +211,14 @@ class BodyCubit extends Cubit<BodyState> {
     } else {
       _slidersCubit.disableSliders();
     }
+
+    var size = _getLayerSize();
+
+    _slidersCubit.setLayerSize(size);
+
+    var offset = _getLayerOffset();
+
+    _slidersCubit.setLayerOffset(offset);
 
     _slidersCubit.updateSliders();
   }

@@ -27,6 +27,8 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
   bool _isEmpty = false;
 
+  bool _isBackground = false;
+
   double _arrowsOpacity = 1;
 
   Stream<TextChangeDetails> get textChanges => _textChangeController.stream;
@@ -34,6 +36,8 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
   Stream<int> get pasteTextStream => _pasteTextController.stream;
 
   String get text => _editingController.text;
+
+  bool get isEditing => _focusNode.hasFocus;
 
   Stream<EditingChangeDetails> get editingChanges =>
       _editingChangeController.stream;
@@ -44,13 +48,13 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
 
   void _initialize() {
     _editingController.addListener(() {
-      _textChangeController.sink.add(TextChangeDetails(
-          _editingController.text.length, _focusNode.hasFocus));
+      _textChangeController.sink
+          .add(TextChangeDetails(_editingController.text.length, isEditing));
     });
 
     _focusNode.addListener(() {
-      _editingChangeController.sink.add(EditingChangeDetails(
-          _editingController.text.length, _focusNode.hasFocus));
+      _editingChangeController.sink
+          .add(EditingChangeDetails(_editingController.text.length, isEditing));
     });
 
     toEmpty();
@@ -63,6 +67,9 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
       _focusNode.unfocus();
 
       _arrowsOpacity = 1;
+
+      _editingChangeController.sink
+          .add(EditingChangeDetails(_editingController.text.length, isEditing));
 
       emit(TextInputLayerBodyEmpty(
           _editingController, _focusNode, _arrowsOpacity));
@@ -80,13 +87,14 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
   }
 
   void toNotEmpty() {
-    if (_isEmpty) {
+    if (_isEmpty || _isBackground) {
       _arrowsOpacity = 0;
 
       emit(TextInputLayerBodyNotEmpty(
           _editingController, _focusNode, _arrowsOpacity));
 
       _isEmpty = false;
+      _isBackground = false;
     }
   }
 
@@ -95,6 +103,8 @@ class TextInputLayerBodyCubit extends Cubit<TextInputLayerBodyState> {
       _editingController,
       _focusNode,
     ));
+
+    _isBackground = true;
   }
 
   Future<void> copy() async {

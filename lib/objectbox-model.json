@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "2:4461467747026883837",
-      "lastPropertyId": "4:1045648510981454082",
+      "lastPropertyId": "5:8633315416824548704",
       "name": "ObjectBoxUser",
       "properties": [
         {
@@ -20,50 +20,61 @@
           "type": 9
         },
         {
-          "id": "3:1508306153113125613",
-          "name": "tokenId",
+          "id": "5:8633315416824548704",
+          "name": "authorizationDataId",
           "type": 11,
           "flags": 520,
-          "indexId": "1:6970047395987467947",
-          "relationTarget": "ObjectBoxToken"
+          "indexId": "2:1825204885330090749",
+          "relationTarget": "ObjectBoxUserAuthorizationData"
         }
       ],
       "relations": []
     },
     {
-      "id": "3:8271335877614481830",
-      "lastPropertyId": "2:8407047220043060734",
-      "name": "ObjectBoxToken",
+      "id": "4:5580513946193585444",
+      "lastPropertyId": "3:5318797060856227150",
+      "name": "ObjectBoxUserAuthorizationData",
       "properties": [
         {
-          "id": "1:135479034938686090",
+          "id": "1:4667319295108619967",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:8407047220043060734",
-          "name": "token",
+          "id": "2:7057715297761615136",
+          "name": "accessToken",
+          "type": 9
+        },
+        {
+          "id": "3:5318797060856227150",
+          "name": "refreshToken",
           "type": 9
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "3:8271335877614481830",
-  "lastIndexId": "1:6970047395987467947",
+  "lastEntityId": "4:5580513946193585444",
+  "lastIndexId": "2:1825204885330090749",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [
-    7163745484534489156
+    7163745484534489156,
+    8271335877614481830
   ],
-  "retiredIndexUids": [],
+  "retiredIndexUids": [
+    6970047395987467947
+  ],
   "retiredPropertyUids": [
     3812969659023192963,
     8969398750685921378,
-    1045648510981454082
+    1045648510981454082,
+    135479034938686090,
+    8407047220043060734,
+    1508306153113125613
   ],
   "retiredRelationUids": [],
   "version": 1
