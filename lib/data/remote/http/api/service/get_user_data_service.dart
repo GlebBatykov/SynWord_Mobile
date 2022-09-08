@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import '../model/request/authorized_request.dart';
-import '../model/response/get_coins_response.dart';
+import '../model/response/get_user_data_response.dart';
 import '../setting/api_setting.dart';
 
-class GetCoinsService {
-  Future<GetCoinsResponse> getCoins(AuthorizedRequest request) async {
+class GetUserDataService {
+  Future<GetUserDataResponse> getUserData(AuthorizedRequest request) async {
     var dio = Dio();
 
     var options = Options(headers: request.getHeaders());
@@ -14,8 +14,8 @@ class GetCoinsService {
     var apiSetting = GetIt.instance<ApiSetting>();
 
     var response =
-        await dio.get('${apiSetting.address}/balance', options: options);
+        await dio.get('${apiSetting.address}/getUserData', options: options);
 
-    return GetCoinsResponse.fromJson(response.data);
+    return GetUserDataResponse.fromJson(response.data);
   }
 }

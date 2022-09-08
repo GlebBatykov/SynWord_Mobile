@@ -53,7 +53,10 @@ class RephraseLayerCubit extends OperationLayerCubit<
     _priceList =
         await GetIt.instance<PriceListRemoteRepository>().getPriceList();
 
-    _coins = await GetIt.instance<CoinsRemoteRepository>().getCoins();
+    var userData =
+        await GetIt.instance<UserDataRemoteRepository>().getUserData();
+
+    _coins = userData.balance;
 
     var preparationData = RephraseLayerBodyPreparationData(
         _coins,

@@ -1,4 +1,6 @@
 import 'package:mapper_box/mapper_box.dart';
+import 'package:synword/data/remote/http/api/model/response/get_user_data_response.dart';
+import 'package:synword/domain/model/user/user_data.dart';
 
 import '../../domain/model/contraints_list/contraints_list.dart';
 import '../../domain/model/contraints_list/user_contraints.dart';
@@ -6,6 +8,7 @@ import '../../domain/model/history/check/check_history.dart';
 import '../../domain/model/history/check/check_history_check_result_link.dart';
 import '../../domain/model/history/rephrase/rephrase_history.dart';
 import '../../domain/model/history/rephrase/rephrase_history_rephrased_word.dart';
+import '../../domain/model/price_list/price.dart';
 import '../../domain/model/result/check/check_result.dart';
 import '../../domain/model/result/check/check_result_check_result_link.dart';
 import '../../domain/model/history/history.dart';
@@ -28,6 +31,7 @@ import '../remote/http/api/model/response/get_history/check/api_check_history_re
 import '../remote/http/api/model/response/get_history/get_history_response.dart';
 import '../remote/http/api/model/response/get_history/rephrase/api_rephrase_history.dart';
 import '../remote/http/api/model/response/get_history/rephrase/api_rephrase_history_rephrased_word.dart';
+import '../remote/http/api/model/response/get_price_list/price_item.dart';
 import '../remote/http/api/model/response/rephrase_text/api_rephrased_word.dart';
 import '../remote/http/api/model/response/rephrase_text/enhanced_rephrase_text_response.dart';
 import '../remote/http/api/model/response/rephrase_text/rephrase_text_response.dart';
@@ -173,5 +177,11 @@ class MapperBoxConfiguration {
                 .map((e) => mapperBox.map<CheckHistoryCheckResultLink,
                     CheckResultCheckResultLink>(e))
                 .toList()));
+
+    mapperBox.register<GetUserDataResponse, UserData>(
+        (object) => UserData(object.role, object.balance));
+
+    mapperBox.register<PriceItem, Price>(
+        (object) => Price(object.itemName, object.price));
   }
 }
