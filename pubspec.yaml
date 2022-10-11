@@ -99,55 +99,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/images/first_logo.png
-    - assets/images/second_logo.png
-    - assets/images/icons/hamburger.png
-    - assets/images/icons/upload.png
-    - assets/images/icons/close.png
-    - assets/images/icons/copy.png
-    - assets/images/icons/paste.png
-    - assets/images/icons/error.png
-    - assets/images/icons/info.png
-    - assets/images/icons/pdf.png
-    - assets/images/icons/docx-file.png
-    - assets/images/icons/back-button.png
-    - assets/images/icons/account.png
-    - assets/images/icons/wallet.png
-
-    - assets/images/icons/language-selection-dialog/radio-button-filled.png
-    - assets/images/icons/language-selection-dialog/radio-button-not-filled.png
-    - assets/images/icons/language-selection-dialog/russia.png
-    - assets/images/icons/language-selection-dialog/united-states.png
-
-    - assets/images/icons/rephrase-dialog/language.png
-
-    - assets/images/icons/menu/clock.png
-    - assets/images/icons/menu/feedback.png
-    - assets/images/icons/menu/website.png
-    - assets/images/icons/menu/languages.png
-    - assets/images/icons/menu/premium.png
-    - assets/images/icons/menu/wallet.png
-
-    - assets/images/premium-page/coins.png
-    - assets/images/premium-page/crown.png
-    - assets/images/premium-page/point.png
-    - assets/images/premium-page/correct.png
-
-    - assets/images/coin-page/coins.png
-    - assets/images/coin-page/cart.png
-    - assets/images/coin-page/info.png
-    - assets/images/coin-page/gift-box.png
-    - assets/images/coin-page/premium.png
-
-    - assets/images/history-page/clock.png
-    - assets/images/history-page/note.png
-    - assets/images/history-page/website.png
-    - assets/images/history-page/show.png
-    - assets/images/history-page/copy.png
-    - assets/images/history-page/download-file.png
-
-    - assets/images/sliders/left-arrow.png
-    - assets/images/sliders/right-arrow.png
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
