@@ -59,7 +59,7 @@ class NavigationBuilder {
                     create: (context) =>
                         RephraseResultPageCubit(arguments.info),
                     child: const RephraseResultPage()));
-          })
+          }),
     ]);
   }
 }

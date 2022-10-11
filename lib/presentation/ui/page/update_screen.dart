@@ -11,6 +11,7 @@ class UpdateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: HexColor('#301B28'),
         body: Center(
           child: Container(

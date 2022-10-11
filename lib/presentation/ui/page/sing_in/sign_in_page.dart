@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../../cubit/dialog/sing_in/sign_in_page_cubit.dart';
+import '../../../cubit/dialog/sing_in/sign_in_page_cubit.dart';
 
-class SignInDialog extends StatelessWidget {
-  const SignInDialog({Key? key}) : super(key: key);
+class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   String? _validateLogin(String? text) {
     if (text == null || text.isEmpty) {

@@ -12,6 +12,7 @@ class PremiumPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: HexColor('#301B28'),
+      resizeToAvoidBottomInset: false,
       body: Container(
         margin: PagesProperties.margin,
         child: Column(

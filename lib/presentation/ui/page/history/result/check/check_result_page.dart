@@ -16,6 +16,7 @@ class CheckResultPage extends StatelessWidget {
         builder: (context, state) {
       if (state is CheckResultPageShow) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: HexColor('#301B28'),
           body: Container(
             margin: PagesProperties.margin,
@@ -29,6 +30,7 @@ class CheckResultPage extends StatelessWidget {
         );
       } else {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: HexColor('#301B28'),
         );
       }

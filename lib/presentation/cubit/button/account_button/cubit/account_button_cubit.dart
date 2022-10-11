@@ -11,6 +11,7 @@ import '../../../../../domain/repository/remote/sing_in_remote_repository.dart';
 import '../../../../ui/dialog/account_dialog.dart';
 import '../../../../ui/dialog/sign_in_dialog.dart';
 import '../../../dialog/account/cubit/account_dialog_cubit.dart';
+import '../../../dialog/sing_in/sign_in_page_cubit.dart';
 
 part 'account_button_state.dart';
 
@@ -47,14 +48,9 @@ class AccountButtonCubit extends Cubit<AccountButtonState> {
       button = Buttons.Apple;
     }
 
-    Poseidon.instance.callDialog((context) =>
-        SignInDialog(button: button, onPressed: _signInButtonOnPressed));
-  }
-
-  void _signInButtonOnPressed() async {
-    await _signInRemoteRepository.signIn();
-
-    Poseidon.instance.pop();
+    Poseidon.instance.callDialog((context) => BlocProvider(
+        create: (context) => SignInPageCubit(button),
+        child: const SignInDialog()));
   }
 
   void _callAccountDialog(UserInfo userInfo) {
